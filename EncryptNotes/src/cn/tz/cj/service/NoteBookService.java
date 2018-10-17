@@ -17,11 +17,12 @@ public class NoteBookService implements INoteBookService {
 
     @Override
     public int addNoteBook(String noteBookName) {
-        noteBookName = noteBookName.trim();
-        if(noteBookName == null || noteBookName.equals("")){
-            JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "添加笔记本失败", JOptionPane.WARNING_MESSAGE);
-        }
         int i = 0;
+        if(noteBookName == null || noteBookName.trim().equals("")){
+            JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "添加笔记本失败", JOptionPane.WARNING_MESSAGE);
+            return i;
+        }
+        noteBookName = noteBookName.trim();
         // 需要判断是否已存在同名的
         if(!checkNoteBookExists(noteBookName)){
             i = noteBookDao.insertNoteBook(buildNoteBook(noteBookName));
@@ -33,12 +34,13 @@ public class NoteBookService implements INoteBookService {
 
     @Override
     public int rename(String noteBookName, String newName) {
-        newName = newName.trim();
-        if(newName == null || newName.equals("")){
-            JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "重命名失败", JOptionPane.WARNING_MESSAGE);
-        }
-        // 需要判断是否已存在同名的
         int i = 0;
+        if(newName == null || newName.trim().equals("")){
+            JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "重命名失败", JOptionPane.WARNING_MESSAGE);
+            return i;
+        }
+        newName = newName.trim();
+        // 需要判断是否已存在同名的
         if(!checkNoteBookExists(newName)){
             // 需要修改note中的Notebook
             noteService.updateNoteBookByNote(noteBookName, newName);

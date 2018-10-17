@@ -41,9 +41,9 @@ public class SystemDao extends BaseDao {
         IConfigsService configsService = new ConfigsService();
         UserConfigs userConfigs = configsService.getUserConfigs();
         if(userConfigs != null){
-            String noteSQL = "CREATE TABLE NB_NOTE (notebook varchar(100) NOT NULL,title varchar(1000) NOT NULL,content varchar(2000) NOT NULL,sectionno int NOT NULL)";
-            String noteBookSQL =  "CREATE TABLE NB_NOTEBOOK (email varchar(100) NOT NULL,notebook varchar(100) NOT NULL)";
-            String userSQL = "CREATE TABLE NB_USER (email varchar(100) NOT NULL,pwd varchar(100) NOT NULL);";
+            String noteSQL = "CREATE TABLE NB_NOTE (notebook varchar(200) NOT NULL,title varchar(1000) NOT NULL,content varchar(2000) NOT NULL,sectionno int NOT NULL)";
+            String noteBookSQL =  "CREATE TABLE NB_NOTEBOOK (email varchar(200) NOT NULL,notebook varchar(200) NOT NULL)";
+            String userSQL = "CREATE TABLE NB_USER (email varchar(200) NOT NULL,pwd varchar(200) NOT NULL);";
             EDBType dbType = EDBType.toEDBType(userConfigs.getDbType());
             switch (dbType) {
                 case DB2:

@@ -1,5 +1,8 @@
 package cn.tz.cj.ui;
 
+import cn.tz.cj.service.AuthService;
+import cn.tz.cj.service.intf.IAuthService;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,19 +21,22 @@ public class LoginForm extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        loginBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new MainForm();
-                dispose();
-            }
-        });
         configBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DBConfigsDialog dbConfigsDialog = new DBConfigsDialog();
                 dbConfigsDialog.pack();
                 dbConfigsDialog.setVisible(true);
+            }
+        });
+        loginBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IAuthService authService = new AuthService();
+                if(authService.login(mailTextField.getText(), String.valueOf(pwdPasswordField.getPassword()))){
+                    new MainForm();
+                    dispose();
+                }
             }
         });
     }

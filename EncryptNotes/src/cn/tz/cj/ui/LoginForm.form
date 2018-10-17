@@ -35,7 +35,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="tz_chenjia@qq.com"/>
+            </properties>
           </component>
           <component id="6175d" class="javax.swing.JLabel" binding="pwdLabel">
             <constraints>

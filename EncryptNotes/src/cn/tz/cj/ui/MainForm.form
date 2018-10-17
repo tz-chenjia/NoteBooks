@@ -48,7 +48,10 @@
         <children>
           <component id="ef22e" class="javax.swing.JEditorPane" binding="contentEditorPane">
             <constraints/>
-            <properties/>
+            <properties>
+              <contentType value="text/html"/>
+              <editable value="false"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

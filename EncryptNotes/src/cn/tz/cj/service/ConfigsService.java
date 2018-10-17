@@ -30,7 +30,6 @@ public class ConfigsService implements IConfigsService {
             p.setProperty("db_driverClass", configs.getDbDriverClass());
             p.setProperty("db_userName", configs.getDbUserName());
             p.setProperty("db_password", EncryptUtils.e(configs.getDbPassword(), ConfigsService.class.getName()));
-            p.setProperty("userName", configs.getUserEmail());
             p.store(outputFile, null);
             outputFile.close();
         } catch (Exception ex) {
@@ -63,7 +62,6 @@ public class ConfigsService implements IConfigsService {
             userConfigs.setDbPort(properties.getProperty("db_port"));
             userConfigs.setDbUserName(properties.getProperty("db_userName"));
             userConfigs.setDbPassword(EncryptUtils.d(properties.getProperty("db_password"), ConfigsService.class.getName()));
-            userConfigs.setUserEmail(properties.getProperty("userName"));
             return userConfigs;
         }
     }

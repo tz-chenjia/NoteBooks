@@ -9,7 +9,7 @@ public class NoteDao extends BaseDao {
     public int insertNoteDao(Note note){
         int i = 0;
         if(note != null){
-            List<String> section = section(note.getContent(), 5);
+            List<String> section = section(note.getContent(), 1000);
             for(int j = 0; j < section.size(); j++){
                 String sql = "insert into nb_note  (notebook,title,content,sectionno) values (?,?,?,?)";
                 i = update(sql, new Object[]{note.getNotebook(),note.getTitle(),section.get(j), j});

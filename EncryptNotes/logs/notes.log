@@ -93,4 +93,192 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
   secret-[ERROR] [2018-10-17 17:18:45] main - cn.tz.cj.dao.NoteBookDao.insertNoteBook(NoteBookDao.java:14)
   secret-[ERROR] [2018-10-17 17:18:45] main - cn.tz.cj.service.NoteBookService.addNoteBook(NoteBookService.java:27)
   secret-[ERROR] [2018-10-17 17:18:45] main - Test.main(Test.java:41)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.lang.NullPointerException
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.util.Hashtable.put(Hashtable.java:460)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.util.Properties.setProperty(Properties.java:166)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - cn.tz.cj.service.ConfigsService.saveUserConfigs(ConfigsService.java:33)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - cn.tz.cj.ui.DBConfigsDialog.onOK(DBConfigsDialog.java:70)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - cn.tz.cj.ui.DBConfigsDialog.access$000(DBConfigsDialog.java:12)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - cn.tz.cj.ui.DBConfigsDialog$1.actionPerformed(DBConfigsDialog.java:41)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.processMouseEvent(Component.java:6539)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.processEvent(Component.java:6304)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Container.processEvent(Container.java:2239)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.dispatchEventImpl(Component.java:4889)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Container.dispatchEventImpl(Container.java:2297)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.dispatchEvent(Component.java:4711)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Container.dispatchEventImpl(Container.java:2283)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Window.dispatchEventImpl(Window.java:2746)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.dispatchEvent(Component.java:4711)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue.access$500(EventQueue.java:97)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue$3.run(EventQueue.java:709)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue$3.run(EventQueue.java:703)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.AccessController.doPrivileged(Native Method)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue$4.run(EventQueue.java:733)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue$4.run(EventQueue.java:731)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.AccessController.doPrivileged(Native Method)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:109)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.WaitDispatchSupport$2.run(WaitDispatchSupport.java:190)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.WaitDispatchSupport$4.run(WaitDispatchSupport.java:235)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.WaitDispatchSupport$4.run(WaitDispatchSupport.java:233)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.AccessController.doPrivileged(Native Method)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.WaitDispatchSupport.enter(WaitDispatchSupport.java:233)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Dialog.show(Dialog.java:1084)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.show(Component.java:1671)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.setVisible(Component.java:1623)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Window.setVisible(Window.java:1014)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Dialog.setVisible(Dialog.java:1005)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - cn.tz.cj.ui.LoginForm$1.actionPerformed(LoginForm.java:29)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.processMouseEvent(Component.java:6539)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.processEvent(Component.java:6304)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Container.processEvent(Container.java:2239)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.dispatchEventImpl(Component.java:4889)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Container.dispatchEventImpl(Container.java:2297)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.dispatchEvent(Component.java:4711)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Container.dispatchEventImpl(Container.java:2283)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Window.dispatchEventImpl(Window.java:2746)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.Component.dispatchEvent(Component.java:4711)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue.access$500(EventQueue.java:97)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue$3.run(EventQueue.java:709)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue$3.run(EventQueue.java:703)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.AccessController.doPrivileged(Native Method)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue$4.run(EventQueue.java:733)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue$4.run(EventQueue.java:731)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.AccessController.doPrivileged(Native Method)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+  secret-[ERROR] [2018-10-17 20:05:04] AWT-EventQueue-0 - java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+  secret-[WARN ] [2018-10-17 20:07:17] AWT-EventQueue-0 - Access denied for user 'root'@'localhost' (using password: YES)
+  secret-[WARN ] [2018-10-17 20:07:17] AWT-EventQueue-0 - 数据库不能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:24:15] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:24:15] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:24:15] AWT-EventQueue-0 - 初始化系统表
+  secret-[INFO ] [2018-10-17 20:24:57] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:24:57] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:25:05] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:25:05] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:25:28] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:25:28] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:26:15] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:26:15] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:42:36] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:42:36] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:44:33] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:44:33] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:44:54] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:44:54] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:46:09] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:46:09] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:46:50] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:46:50] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:47:51] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:47:51] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:49:25] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:49:25] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:51:32] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:51:32] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:54:49] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:54:49] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:58:42] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:58:42] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 20:59:57] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 20:59:57] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:00:25] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:00:25] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:07:26] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:07:26] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:10:40] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:10:40] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:12:18] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:12:18] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:13:28] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:13:28] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:15:16] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:15:16] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:15:36] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:15:36] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:19:47] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:19:47] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:20:59] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:20:59] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:23:14] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:23:14] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:36:06] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:36:06] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:37:30] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:37:30] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:42:38] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:42:38] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:43:30] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:43:30] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:44:57] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:44:57] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:45:39] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:45:39] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:46:00] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:46:00] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:47:27] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:47:27] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:51:23] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:51:23] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:53:29] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:53:29] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:53:39] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:53:39] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 21:56:08] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 21:56:08] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:13:37] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:13:37] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:14:32] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:14:32] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:15:21] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:15:21] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:29:03] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:29:03] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:30:06] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:30:06] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:32:01] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:32:01] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:32:55] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:32:55] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:35:03] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:35:03] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:36:39] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:36:39] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:37:38] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:37:38] AWT-EventQueue-0 - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 22:39:04] AWT-EventQueue-0 - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 22:39:04] AWT-EventQueue-0 - 检查系统表是否存在
   

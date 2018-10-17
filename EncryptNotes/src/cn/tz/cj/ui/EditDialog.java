@@ -3,10 +3,19 @@ package cn.tz.cj.ui;
 import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
+import cn.tz.cj.entity.Note;
+import cn.tz.cj.entity.NoteBook;
+import cn.tz.cj.service.NoteBookService;
+import cn.tz.cj.service.NoteService;
+import cn.tz.cj.service.intf.INoteBookService;
+import cn.tz.cj.service.intf.INoteService;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class EditDialog extends JDialog {
 
@@ -15,12 +24,15 @@ public class EditDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JComboBox titleComboBox;
-    private JLabel titleLabel;
+    private JComboBox notebookComboBox;
     private JPanel editJPanel;
+    private JTextField titleTextField;
     private JWebBrowser jWebBrowser;	//浏览器模型
 
-    public EditDialog() {
+    private INoteBookService noteBookService = new NoteBookService();
+    private INoteService noteService = new NoteService();
+
+    public EditDialog(String notebook, String note) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -46,7 +58,8 @@ public class EditDialog extends JDialog {
 
             @Override
             public void windowOpened(WindowEvent e) {
-                initJWebBrowser();
+                initNotebooks(notebook);
+                initJWebBrowser(notebook, note);
             }
         });
 
@@ -59,8 +72,16 @@ public class EditDialog extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        String notebook = notebookComboBox.getSelectedItem().toString();
+        String text = titleTextField.getText();
+
+        String htmlContent = jWebBrowser.getHTMLContent();
+        Document doc = Jsoup.parse(htmlContent);
+        htmlContent = doc.select("div.note-editable").html();
+        int i = noteService.addNote(notebook, text, htmlContent);
+        if(i > 0){
+            dispose();
+        }
     }
 
     private void onCancel() {
@@ -68,7 +89,15 @@ public class EditDialog extends JDialog {
         dispose();
     }
 
-    private void initJWebBrowser(){
+    private void initNotebooks(String notebook){
+        List<NoteBook> noteBooks = noteBookService.getNoteBooks();
+        for(NoteBook nb : noteBooks){
+            notebookComboBox.addItem(nb.getNotebook());
+        }
+        notebookComboBox.setSelectedItem(notebook);
+    }
+
+    private void initJWebBrowser(String notebook, String note){
         jWebBrowser = new JWebBrowser();
         jWebBrowser.navigate(URL);
         jWebBrowser.setPreferredSize(new Dimension(800,400));
@@ -76,11 +105,19 @@ public class EditDialog extends JDialog {
         jWebBrowser.setMenuBarVisible(false);
         jWebBrowser.setButtonBarVisible(false);
         jWebBrowser.setStatusBarVisible(false);
-
         editJPanel.add(jWebBrowser);
+
+        if(note != null){
+            titleTextField.setText(note);
+            Note n = noteService.getNote(notebook, note);
+            String htmlContent = jWebBrowser.getHTMLContent();
+            Document doc = Jsoup.parse(htmlContent);
+            htmlContent = doc.select("div.note-editable").append(n.getContent()).html();
+            jWebBrowser.setHTMLContent(htmlContent);
+        }
     }
 
-    public static void runEditDialog(){
+    public static void runEditDialog(String notebook, String note){
         UIUtils.setPreferredLookAndFeel();
         if(!NativeInterface.isOpen()){
             NativeInterface.initialize();
@@ -89,7 +126,7 @@ public class EditDialog extends JDialog {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    EditDialog editDialog = new EditDialog();
+                    EditDialog editDialog = new EditDialog(notebook, note);
                     editDialog.pack();
                     editDialog.setVisible(true);
                 } catch (Exception e) {

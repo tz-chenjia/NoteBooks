@@ -14,10 +14,11 @@ public class NoteService implements INoteService {
     @Override
     public int addNote(String noteBookName, String title, String content) {
         int i = 0;
-        title = title.trim();
-        if (title == null || title.equals("")) {
+        if (title == null || title.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "笔记标题不能为空！", "添加笔记失败", JOptionPane.WARNING_MESSAGE);
+            return i;
         }
+        title = title.trim();
         // 需要判断标题是否已存在
         if(!checkTitleExists(noteBookName, title)){
             i = noteDao.insertNoteDao(buildNote(noteBookName, title, content));

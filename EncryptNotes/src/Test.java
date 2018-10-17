@@ -66,6 +66,12 @@ public class Test {
         //查找所有笔记本
         //List<NoteBook> noteBooks = noteBookService.getNoteBooks();
         //System.out.println(noteBooks);
+
+        String d = EncryptUtils.e("123456", ConfigsService.class.getName());
+        System.out.println(d);
+
+        System.out.println(EncryptUtils.d(d,ConfigsService.class.getName()));
+
     }
 
 }
