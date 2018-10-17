@@ -1,0 +1,96 @@
+secret-[ERROR] [2018-10-16 18:08:59] main - javax.crypto.BadPaddingException: Given final block not properly padded. Such issues can arise if a bad key is used during decryption.
+  secret-[ERROR] [2018-10-16 18:08:59] main - com.sun.crypto.provider.CipherCore.doFinal(CipherCore.java:991)
+  secret-[ERROR] [2018-10-16 18:08:59] main - com.sun.crypto.provider.CipherCore.doFinal(CipherCore.java:847)
+  secret-[ERROR] [2018-10-16 18:08:59] main - com.sun.crypto.provider.AESCipher.engineDoFinal(AESCipher.java:446)
+  secret-[ERROR] [2018-10-16 18:08:59] main - javax.crypto.Cipher.doFinal(Cipher.java:2164)
+  secret-[ERROR] [2018-10-16 18:08:59] main - cn.tz.cj.tools.EncryptUtils.decrypt(EncryptUtils.java:57)
+  secret-[ERROR] [2018-10-16 18:08:59] main - cn.tz.cj.tools.EncryptUtils.d(EncryptUtils.java:90)
+  secret-[ERROR] [2018-10-16 18:08:59] main - cn.tz.cj.tools.EncryptUtils.main(EncryptUtils.java:101)
+  secret-[INFO ] [2018-10-17 13:44:42] main - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 13:57:30] main - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 14:56:00] main - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 14:56:00] main - 检查表[NB_NOTE]是否存在
+  secret-[INFO ] [2018-10-17 14:56:00] main - [NB_NOTE]表不存在，准备创建
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CREATE TABLE NB_NOTEBOOK (email varchar(100) NOT NULL,notebook varchar(100) NOT ' at line 2
+  secret-[ERROR] [2018-10-17 14:56:00] main - sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  secret-[ERROR] [2018-10-17 14:56:00] main - sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+  secret-[ERROR] [2018-10-17 14:56:00] main - sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+  secret-[ERROR] [2018-10-17 14:56:00] main - java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.Util.getInstance(Util.java:408)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.SQLError.createSQLException(SQLError.java:943)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3973)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3909)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2527)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2680)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2487)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+  secret-[ERROR] [2018-10-17 14:56:00] main - com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+  secret-[ERROR] [2018-10-17 14:56:00] main - cn.tz.cj.dao.BaseDao.update(BaseDao.java:170)
+  secret-[ERROR] [2018-10-17 14:56:00] main - cn.tz.cj.dao.SystemDao.initDBTable(SystemDao.java:64)
+  secret-[ERROR] [2018-10-17 14:56:00] main - cn.tz.cj.service.SystemService.checkDBAndInit(SystemService.java:24)
+  secret-[ERROR] [2018-10-17 14:56:00] main - Test.main(Test.java:33)
+  secret-[INFO ] [2018-10-17 14:58:41] main - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 14:58:41] main - 检查表[NB_NOTE]是否存在
+  secret-[INFO ] [2018-10-17 14:58:41] main - [NB_NOTE]表不存在，准备创建
+  secret-[INFO ] [2018-10-17 14:59:16] main - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 14:59:16] main - 检查表[NB_NOTE]是否存在
+  secret-[INFO ] [2018-10-17 14:59:16] main - [NB_NOTE]表不存在，准备创建
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CREATE TABLE NB_NOTEBOOK (email varchar(100) NOT NULL,notebook varchar(100) NOT ' at line 2
+  secret-[ERROR] [2018-10-17 14:59:16] main - sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  secret-[ERROR] [2018-10-17 14:59:16] main - sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+  secret-[ERROR] [2018-10-17 14:59:16] main - sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+  secret-[ERROR] [2018-10-17 14:59:16] main - java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.Util.getInstance(Util.java:408)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.SQLError.createSQLException(SQLError.java:943)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3973)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3909)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2527)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2680)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2487)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+  secret-[ERROR] [2018-10-17 14:59:16] main - com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+  secret-[ERROR] [2018-10-17 14:59:16] main - cn.tz.cj.dao.BaseDao.update(BaseDao.java:170)
+  secret-[ERROR] [2018-10-17 14:59:16] main - cn.tz.cj.dao.SystemDao.initDBTable(SystemDao.java:63)
+  secret-[ERROR] [2018-10-17 14:59:16] main - cn.tz.cj.service.SystemService.checkDBAndInit(SystemService.java:24)
+  secret-[ERROR] [2018-10-17 14:59:16] main - Test.main(Test.java:33)
+  secret-[INFO ] [2018-10-17 15:02:26] main - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 15:02:26] main - 检查表[NB_NOTE]是否存在
+  secret-[INFO ] [2018-10-17 15:02:26] main - [NB_NOTE]表不存在，准备创建
+  secret-[WARN ] [2018-10-17 15:03:24] main - Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+  secret-[WARN ] [2018-10-17 15:03:24] main - 数据库不能用,配置：{mysql,jdbc:mysql://localhost:3307/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 15:06:35] main - 数据库能用,配置：{mysql,jdbc:mysql://localhost:3306/notebook?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull,root}
+  secret-[INFO ] [2018-10-17 15:06:35] main - 检查系统表是否存在
+  secret-[INFO ] [2018-10-17 15:06:35] main - 初始化系统表
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'email' cannot be null
+  secret-[ERROR] [2018-10-17 17:18:45] main - sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  secret-[ERROR] [2018-10-17 17:18:45] main - sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+  secret-[ERROR] [2018-10-17 17:18:45] main - sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+  secret-[ERROR] [2018-10-17 17:18:45] main - java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.Util.getInstance(Util.java:408)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.SQLError.createSQLException(SQLError.java:935)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3973)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3909)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2527)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2680)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2487)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+  secret-[ERROR] [2018-10-17 17:18:45] main - com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+  secret-[ERROR] [2018-10-17 17:18:45] main - cn.tz.cj.dao.BaseDao.update(BaseDao.java:170)
+  secret-[ERROR] [2018-10-17 17:18:45] main - cn.tz.cj.dao.NoteBookDao.insertNoteBook(NoteBookDao.java:14)
+  secret-[ERROR] [2018-10-17 17:18:45] main - cn.tz.cj.service.NoteBookService.addNoteBook(NoteBookService.java:27)
+  secret-[ERROR] [2018-10-17 17:18:45] main - Test.main(Test.java:41)
+  
