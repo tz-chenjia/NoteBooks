@@ -1,12 +1,10 @@
 package cn.tz.cj.service;
 
 import cn.tz.cj.entity.UserConfigs;
-import cn.tz.cj.rule.EDBType;
 import cn.tz.cj.service.intf.IConfigsService;
 import cn.tz.cj.tools.EncryptUtils;
 import cn.tz.cj.tools.ExceptionHandleUtils;
 import cn.tz.cj.tools.FileRWUtils;
-import cn.tz.cj.tools.JDBCUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -77,11 +75,11 @@ public class ConfigsService implements IConfigsService {
     }
 
     private static File getSingleConf(String conf) {
-        FileRWUtils.exists(getConfPath() + conf);
+        FileRWUtils.existsAndCreate(getConfPath() + conf);
         return new File(getConfPath() + conf);
     }
 
-    private static String getConfPath() {
+    public static String getConfPath() {
         return getRootPath() + "conf" + File.separator;
     }
 

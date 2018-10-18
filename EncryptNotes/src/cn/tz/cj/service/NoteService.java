@@ -14,6 +14,11 @@ public class NoteService implements INoteService {
     @Override
     public int addNote(String noteBookName, String title, String content) {
         int i = 0;
+        if (noteBookName == null || noteBookName.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "请选择笔记本！", "添加笔记失败", JOptionPane.WARNING_MESSAGE);
+            return i;
+        }
+        noteBookName = noteBookName.trim();
         if (title == null || title.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "笔记标题不能为空！", "添加笔记失败", JOptionPane.WARNING_MESSAGE);
             return i;

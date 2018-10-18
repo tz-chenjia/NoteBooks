@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Summernote</title>
+  <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet"/>
+  <script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+  <link href="summernote.css" rel="stylesheet"/>
+  <script src="summernote.js"></script>
+  <script src="lang/summernote-zh-CN.js"></script>
+</head>
+<body onload="btnClick()">
+    <div id="summernote">
+    </div>
+  <script>
+    $(document).ready(function() {
+    	$('#summernote').summernote({
+    		lang: 'zh-CN',
+	        toolbar: [
+	            ['style', ['style']],
+                ['para', ['paragraph','ul', 'ol']],
+			    ['style', ['bold', 'italic', 'underline']],
+			    ['font', ['fontsize']],
+			    ['color', ['color']],
+			    ['picture', ['picture']],
+			    ['fullscreen', ['fullscreen']],
+			],
+		});
+    });
+
+    function btnClick(){
+    	$(".btn-fullscreen").click();
+    	$(".btn-fullscreen").css("display","none");
+    }
+  </script>
+</body>
+</html>

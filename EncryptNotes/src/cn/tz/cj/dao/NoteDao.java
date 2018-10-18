@@ -21,8 +21,8 @@ public class NoteDao extends BaseDao {
     public int updateNoteDao(Note note){
         int i = 0;
         if(note != null){
-            deleteNoteDao(note.getNotebook(), note.getTitle());
-            insertNoteDao(note);
+            i = deleteNoteDao(note.getNotebook(), note.getTitle());
+            i = insertNoteDao(note);
         }
         return i;
     }

@@ -17,6 +17,7 @@ public class LoginForm extends JFrame{
         setContentPane(mainJPanel);
         setSize(500, 500);
         setLocationRelativeTo(mainJPanel);
+        FormSetting.setFrameLocation(this);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -34,7 +35,7 @@ public class LoginForm extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 IAuthService authService = new AuthService();
                 if(authService.login(mailTextField.getText(), String.valueOf(pwdPasswordField.getPassword()))){
-                    new MainForm();
+                    MainForm.runMainForm();
                     dispose();
                 }
             }
