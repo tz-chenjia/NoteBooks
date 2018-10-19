@@ -41,12 +41,7 @@
                 </constraints>
                 <properties/>
                 <border type="none"/>
-                <children>
-                  <component id="8dd10" class="javax.swing.JTree" binding="tree">
-                    <constraints/>
-                    <properties/>
-                  </component>
-                </children>
+                <children/>
               </scrollpane>
             </children>
           </grid>

@@ -33,14 +33,15 @@ public class EditDialog extends JDialog {
     private JComboBox notebookComboBox;
     private JPanel editJPanel;
     private JTextField titleTextField;
+    private JLabel errorLabel;
     private JWebBrowser jWebBrowser;	//浏览器模型
+    private NoteBookTree nbTree;
 
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
-    private MainForm mainForm;
 
-    public EditDialog(JFrame parentFrame, String notebook, String note) {
-        mainForm = (MainForm)parentFrame;
+    public EditDialog(NoteBookTree nbTree,String notebook, String note) {
+        this.nbTree = nbTree;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -84,22 +85,32 @@ public class EditDialog extends JDialog {
     }
 
     private void onOK(String noteName) {
+
         int i = 0;
-        String notebook = notebookComboBox.getSelectedItem().toString();
+        String notebookName = notebookComboBox.getSelectedItem().toString();
+        if(notebookName == null || notebookName.trim().equals("")){
+            errorLabel.setText("请选择笔记本！");
+            return;
+        }
         String text = titleTextField.getText();
+        if(text == null || text.trim().equals("")){
+            errorLabel.setText("笔记标题不能为空！");
+            return;
+        }
+        if(noteService.checkTitleExists(notebookName, text)){
+            errorLabel.setText("笔记["+text+"]已存在！");
+            return;
+        }
         String htmlContent = jWebBrowser.getHTMLContent();
         Document doc = Jsoup.parse(htmlContent);
         htmlContent = doc.select("div.note-editable").html();
         if(noteName != null){
-            i = noteService.updateNote(notebook, noteName, htmlContent);
+            i = noteService.updateNote(notebookName, text, htmlContent);
         }else{
-            i = noteService.addNote(notebook, text, htmlContent);
+            i = noteService.addNote(notebookName, text, htmlContent);
         }
-        if(i > 0){
-            mainForm.initTree(null, notebook, text);
-            mainForm.getjWebBrowser().setHTMLContent(htmlContent);
-            dispose();
-        }
+        nbTree.refresh(true, null, notebookName, text);
+        dispose();
     }
 
     private void onCancel() {
@@ -151,7 +162,7 @@ public class EditDialog extends JDialog {
         editJPanel.add(jWebBrowser);
     }
 
-    public static void runEditDialog(JFrame parentFrame, String notebook, String note){
+    public static void runEditDialog(NoteBookTree nbTree, String notebook, String note){
         UIUtils.setPreferredLookAndFeel();
         if(!NativeInterface.isOpen()){
             NativeInterface.initialize();
@@ -160,7 +171,7 @@ public class EditDialog extends JDialog {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    EditDialog editDialog = new EditDialog(parentFrame, notebook, note);
+                    EditDialog editDialog = new EditDialog(nbTree, notebook, note);
                     editDialog.pack();
                     editDialog.setVisible(true);
                 } catch (Exception e) {

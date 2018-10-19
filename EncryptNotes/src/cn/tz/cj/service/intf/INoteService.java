@@ -14,5 +14,6 @@ public interface INoteService {
     public int getNotesNumWithNoteBook(String noteBookName);
     public int updateNoteBookByNote(String noteBookName, String newName);
     public Set<String> getNotesTitlesByNoteBook(String noteBookName);
+    public boolean checkTitleExists(String noteBookName, String title);
 
 }

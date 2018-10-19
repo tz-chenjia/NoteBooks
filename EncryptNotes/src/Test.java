@@ -69,9 +69,9 @@ public class Test {
         //List<NoteBook> noteBooks = noteBookService.getNoteBooks();
         //System.out.println(noteBooks);
 
-        String htmlContent = "\uFEFF<!DOCTYPE html><html><head>  <meta charset=\"UTF-8\"/>  <title>Summernote</title>  <link href=\"http://www.jq22.com/jquery/bootstrap-3.3.4.css\" rel=\"stylesheet\"/>  <script src=\"http://www.jq22.com/jquery/2.1.1/jquery.min.js\"></script>  <script src=\"http://www.jq22.com/jquery/bootstrap-3.3.4.js\"></script>  <link href=\"summernote.css\" rel=\"stylesheet\"/>  <script src=\"summernote.js\"></script>  <script src=\"lang/summernote-zh-CN.js\"></script></head><body onload=\"btnClick()\">    <div id=\"summernote\">        <h2 align=\"center\">邮件标题<br></h2>        <h3>亲爱的<span id=\"name\" style=\"color: skyblue\">（自动替换为接受对象的姓名）</span>校友：</h3>        <p>输入邮件内容...</p>    </div>  <script>    $(document).ready(function() {    \t$('#summernote').summernote({    \t\tlang: 'zh-CN',\t        toolbar: [\t            ['style', ['style']],                ['para', ['paragraph','ul', 'ol']],\t\t\t    ['style', ['bold', 'italic', 'underline']],\t\t\t    ['font', ['fontsize']],\t\t\t    ['color', ['color']],\t\t\t    ['picture', ['picture']],\t\t\t    ['fullscreen', ['fullscreen']],\t\t\t],\t\t});    });    function btnClick(){    \t$(\".btn-fullscreen\").click();    \t$(\".btn-fullscreen\").css(\"display\",\"none\");    }  </script></body></html>";
-        Document doc = Jsoup.parse(htmlContent, "utf-8");
-        System.out.println(doc.html());
+       Object[] a = {};
+       Object[] b = {};
+        System.out.println(a.equals(b));
     }
 
 }

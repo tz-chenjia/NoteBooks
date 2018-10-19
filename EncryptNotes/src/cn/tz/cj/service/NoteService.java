@@ -14,7 +14,7 @@ public class NoteService implements INoteService {
     @Override
     public int addNote(String noteBookName, String title, String content) {
         int i = 0;
-        if (noteBookName == null || noteBookName.trim().equals("")) {
+        /*if (noteBookName == null || noteBookName.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "请选择笔记本！", "添加笔记失败", JOptionPane.WARNING_MESSAGE);
             return i;
         }
@@ -29,7 +29,8 @@ public class NoteService implements INoteService {
             i = noteDao.insertNoteDao(buildNote(noteBookName, title, content));
         }else{
             JOptionPane.showMessageDialog(null, "笔记["+title+"]已存在！", "添加笔记失败", JOptionPane.WARNING_MESSAGE);
-        }
+        }*/
+        i = noteDao.insertNoteDao(buildNote(noteBookName, title, content));
         return i;
     }
 
@@ -71,7 +72,8 @@ public class NoteService implements INoteService {
         return note;
     }
 
-    private boolean checkTitleExists(String noteBookName, String title){
+    @Override
+    public boolean checkTitleExists(String noteBookName, String title){
         Note note = noteDao.getNote(noteBookName, title);
         return note != null;
     }
