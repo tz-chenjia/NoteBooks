@@ -3,21 +3,15 @@ package cn.tz.cj.ui;
 import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import cn.tz.cj.entity.Note;
-import cn.tz.cj.entity.NoteBook;
 import cn.tz.cj.service.NoteBookService;
 import cn.tz.cj.service.NoteService;
 import cn.tz.cj.service.intf.INoteBookService;
 import cn.tz.cj.service.intf.INoteService;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Set;
 
 public class MainForm extends JFrame{
 
@@ -31,9 +25,9 @@ public class MainForm extends JFrame{
     private JButton addNotebookBtn;
     private JButton addNoteBtn;
     private JButton loginOutBtn;
-    private JLabel noteLable;
-    private JLabel notebookLabel;
     private JPanel contentJPanel;
+    private JLabel noteLabel;
+    private JLabel notebookLabel;
     private NoteBookTree tree;
     private JWebBrowser jWebBrowser;	//浏览器模型
 
@@ -42,6 +36,14 @@ public class MainForm extends JFrame{
 
     public JWebBrowser getjWebBrowser() {
         return jWebBrowser;
+    }
+
+    public JLabel getNoteLabel() {
+        return noteLabel;
+    }
+
+    public JLabel getNotebookLabel() {
+        return notebookLabel;
     }
 
     public MainForm(){

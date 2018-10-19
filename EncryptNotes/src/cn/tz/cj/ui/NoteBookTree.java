@@ -1,6 +1,5 @@
 package cn.tz.cj.ui;
 
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import cn.tz.cj.bo.Auth;
 import cn.tz.cj.entity.Note;
 import cn.tz.cj.entity.NoteBook;
@@ -62,8 +61,12 @@ public class NoteBookTree extends JTree {
             // 自动显示对应内容
             Note note = noteService.getNote(this.lastSelectedNotebook, this.lastSelectedNote);
             mainForm.getjWebBrowser().setHTMLContent(note.getContent());
+            mainForm.getNoteLabel().setText(this.lastSelectedNote);
+            mainForm.getNotebookLabel().setText("《" + this.lastSelectedNotebook + "》");
         }else {
             mainForm.getjWebBrowser().setHTMLContent("");
+            mainForm.getNoteLabel().setText("");
+            mainForm.getNotebookLabel().setText("");
         }
     }
 
@@ -137,7 +140,7 @@ public class NoteBookTree extends JTree {
                         int level = selPath.getPathCount();
                     Object[] path = selPath.getPath();
                     if(level == 3){
-                        refresh(true, key, path[1].toString(), path[2].toString());
+                        refresh(isAll, key, path[1].toString(), path[2].toString());
                     }
                 }
                 }
