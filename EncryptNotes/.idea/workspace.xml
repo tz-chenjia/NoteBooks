@@ -192,8 +192,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/NoteBookTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="97" column="57" selection-start-line="97" selection-start-column="57" selection-end-line="97" selection-end-column="57" />
+            <state relative-caret-position="118">
+              <caret line="222" column="17" selection-start-line="222" selection-start-column="17" selection-end-line="222" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4948#6077#0" expanded="true" />
@@ -213,7 +213,7 @@
         <entry file="jar://E:/Java/jdk1.8.0_181/src.zip!/javax/swing/tree/TreePath.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="202">
-              <caret line="201" column="23" lean-forward="true" selection-start-line="201" selection-start-column="23" selection-end-line="201" selection-end-column="23" />
+              <caret line="201" column="23" selection-start-line="201" selection-start-column="23" selection-end-line="201" selection-end-column="23" />
               <folding>
                 <element signature="e#7195#7196#0" expanded="true" />
                 <element signature="e#7235#7236#0" expanded="true" />
@@ -322,7 +322,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="11" />
     <option name="y" value="45" />
     <option name="width" value="1460" />
@@ -343,11 +343,6 @@
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
               <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="conf" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
@@ -545,18 +540,17 @@
       <option name="presentableId" value="Default" />
       <updated>1539926448681</updated>
       <workItem from="1539926450572" duration="12433000" />
-      <workItem from="1539939634336" duration="1922000" />
+      <workItem from="1539939634336" duration="2168000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14355000" />
+    <option name="totallyTimeSpent" value="14601000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="886" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6551724" visible="true" weight="0.28008595" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6551724" visible="true" weight="0.28008595" />
       <window_info id="Structure" order="1" sideWeight="0.3448276" side_tool="true" visible="true" weight="0.28008595" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -565,7 +559,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.51458883" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23076923" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.23076923" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.29442972" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -978,7 +972,7 @@
     <entry file="jar://E:/Java/jdk1.8.0_181/src.zip!/javax/swing/tree/TreePath.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
-          <caret line="201" column="23" lean-forward="true" selection-start-line="201" selection-start-column="23" selection-end-line="201" selection-end-column="23" />
+          <caret line="201" column="23" selection-start-line="201" selection-start-column="23" selection-end-line="201" selection-end-column="23" />
           <folding>
             <element signature="e#7195#7196#0" expanded="true" />
             <element signature="e#7235#7236#0" expanded="true" />
@@ -988,8 +982,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/NoteBookTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="97" column="57" selection-start-line="97" selection-start-column="57" selection-end-line="97" selection-end-column="57" />
+        <state relative-caret-position="118">
+          <caret line="222" column="17" selection-start-line="222" selection-start-column="17" selection-end-line="222" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4948#6077#0" expanded="true" />
