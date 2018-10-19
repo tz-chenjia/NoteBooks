@@ -40,7 +40,7 @@ public class EditDialog extends JDialog {
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
 
-    public EditDialog(NoteBookTree nbTree,String notebook, String note) {
+    public EditDialog(NoteBookTree nbTree,String notebookName, String noteName) {
         this.nbTree = nbTree;
         setContentPane(contentPane);
         setModal(true);
@@ -50,7 +50,7 @@ public class EditDialog extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK(note);
+                onOK(notebookName, noteName);
             }
         });
 
@@ -69,8 +69,8 @@ public class EditDialog extends JDialog {
 
             @Override
             public void windowOpened(WindowEvent e) {
-                initNotebooks(notebook);
-                initJWebBrowser(notebook, note);
+                initNotebooks(notebookName);
+                initJWebBrowser(notebookName, noteName);
             }
 
 
@@ -84,8 +84,7 @@ public class EditDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK(String noteName) {
-
+    private void onOK(String oldNotebookName,String oldNoteName) {
         int i = 0;
         String notebookName = notebookComboBox.getSelectedItem().toString();
         if(notebookName == null || notebookName.trim().equals("")){
@@ -97,15 +96,15 @@ public class EditDialog extends JDialog {
             errorLabel.setText("笔记标题不能为空！");
             return;
         }
-        if(noteService.checkTitleExists(notebookName, text)){
+        if(oldNoteName == null && noteService.checkTitleExists(notebookName, text)){
             errorLabel.setText("笔记["+text+"]已存在！");
             return;
         }
         String htmlContent = jWebBrowser.getHTMLContent();
         Document doc = Jsoup.parse(htmlContent);
         htmlContent = doc.select("div.note-editable").html();
-        if(noteName != null){
-            i = noteService.updateNote(notebookName, text, htmlContent);
+        if(oldNoteName != null){
+            i = noteService.updateNote(oldNotebookName, oldNoteName, notebookName, text, htmlContent);
         }else{
             i = noteService.addNote(notebookName, text, htmlContent);
         }
@@ -118,12 +117,14 @@ public class EditDialog extends JDialog {
         dispose();
     }
 
-    private void initNotebooks(String notebook){
+    private void initNotebooks(String notebookName){
         List<NoteBook> noteBooks = noteBookService.getNoteBooks();
         for(NoteBook nb : noteBooks){
             notebookComboBox.addItem(nb.getNotebook());
         }
-        notebookComboBox.setSelectedItem(notebook);
+        if(notebookName != null){
+            notebookComboBox.setSelectedItem(notebookName);
+        }
     }
 
     private void initLocalHTMLModel(String notebookName, String noteName){
@@ -138,7 +139,6 @@ public class EditDialog extends JDialog {
             Note note = noteService.getNote(notebookName, noteName);
             if(note != null){
                 titleTextField.setText(noteName);
-                titleTextField.setEditable(false);
                 select.empty();
                 select.append(note.getContent());
             }else{

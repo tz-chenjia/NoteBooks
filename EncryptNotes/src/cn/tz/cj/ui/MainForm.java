@@ -28,6 +28,12 @@ public class MainForm extends JFrame{
     private JPanel leftJPanel;
     private JScrollPane treeJScrollPane;
     private JPanel rightJPanel;
+    private JButton addNotebookBtn;
+    private JButton addNoteBtn;
+    private JButton loginOutBtn;
+    private JLabel noteLable;
+    private JLabel notebookLabel;
+    private JPanel contentJPanel;
     private NoteBookTree tree;
     private JWebBrowser jWebBrowser;	//浏览器模型
 
@@ -64,18 +70,38 @@ public class MainForm extends JFrame{
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
                     //initTree(searchTextField.getText(), null,null);
                     String text = searchTextField.getText();
-                    if(text != null && text.trim() != ""){
+                    if(text != null && !text.trim().equals("")){
                         tree.refresh(false, text.trim(),null,null);
+                    }else {
+                        NoteBookTree.initTree(MainForm.this);
                     }
                 }
+            }
+        });
+        addNotebookBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NoteBookTree.getInstance(MainForm.this).onAddNotebook();
+            }
+        });
+        addNoteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NoteBookTree.getInstance(MainForm.this).onAddNote(null);
+            }
+        });
+        loginOutBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
     }
 
     private void initTree(){
-        tree = NoteBookTree.getInstance(jWebBrowser);
+        tree = NoteBookTree.getInstance(this);
         treeJScrollPane.setViewportView(tree);
-        tree.refresh(true, null,null,null);
+        NoteBookTree.initTree(this);
     }
 
     private void initJWebBrowser(){
@@ -84,7 +110,7 @@ public class MainForm extends JFrame{
         jWebBrowser.setMenuBarVisible(false);
         jWebBrowser.setButtonBarVisible(false);
         jWebBrowser.setStatusBarVisible(false);
-        rightJPanel.add(jWebBrowser);
+        contentJPanel.add(jWebBrowser);
     }
 
     public static void runMainForm(){
