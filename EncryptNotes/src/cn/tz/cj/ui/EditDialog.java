@@ -76,8 +76,7 @@ public class EditDialog extends JDialog {
             public void windowOpened(WindowEvent e) {
                 initNotebooks(notebookName);
                 initJWebBrowser(notebookName, noteName);
-                //titleTextField.requestFocus();
-                jWebBrowser.requestFocus();
+                titleTextField.requestFocusInWindow();
             }
         });
 
@@ -197,7 +196,8 @@ public class EditDialog extends JDialog {
                 });
             }
         });
-        jWebBrowser.
+
+
         editJPanel.add(jWebBrowser);
     }
 

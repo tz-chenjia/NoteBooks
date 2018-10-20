@@ -112,7 +112,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="7" />
+          <entry key="class" value="8" />
           <entry key="form" value="6" />
           <entry key="html" value="1" />
           <entry key="java" value="18" />
@@ -120,7 +120,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="7" />
+          <entry key="CLASS" value="8" />
           <entry key="GUI_DESIGNER_FORM" value="6" />
           <entry key="HTML" value="1" />
           <entry key="JAVA" value="18" />
@@ -129,13 +129,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="71" />
-          <entry key="java" value="3605" />
+          <entry key="java" value="3738" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="71" />
-          <entry key="JAVA" value="3605" />
+          <entry key="JAVA" value="3738" />
         </counts>
       </usages-collector>
     </session>
@@ -145,22 +145,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="199" column="20" selection-start-line="199" selection-start-column="20" selection-end-line="199" selection-end-column="20" />
+            <state relative-caret-position="361">
+              <caret line="90" column="37" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2009#2010#0" expanded="true" />
-                <element signature="e#2069#2070#0" expanded="true" />
-                <element signature="e#2201#2202#0" expanded="true" />
-                <element signature="e#2243#2244#0" expanded="true" />
-                <element signature="e#3167#3168#0" expanded="true" />
-                <element signature="e#3209#3210#0" expanded="true" />
-                <element signature="e#6346#7669#0" expanded="true" />
-                <element signature="e#6696#7751#0" expanded="true" />
-                <element signature="e#7573#7574#0" expanded="true" />
-                <element signature="e#7682#7683#0" expanded="true" />
-                <element signature="e#7750#7751#0" expanded="true" />
-                <element signature="e#7668#7669#0" expanded="true" />
+                <element signature="e#2149#2150#0" expanded="true" />
+                <element signature="e#2209#2210#0" expanded="true" />
+                <element signature="e#2341#2342#0" expanded="true" />
+                <element signature="e#2383#2384#0" expanded="true" />
+                <element signature="e#3050#3051#0" expanded="true" />
+                <element signature="e#3102#3103#0" expanded="true" />
+                <element signature="e#3178#3179#0" expanded="true" />
+                <element signature="e#3233#3234#0" expanded="true" />
+                <element signature="e#3104#3105#0" expanded="true" />
+                <element signature="e#3146#3147#0" expanded="true" />
+                <element signature="e#6354#7708#0" expanded="true" />
+                <element signature="e#6594#7682#0" expanded="true" />
+                <element signature="e#7504#7505#0" expanded="true" />
+                <element signature="e#7613#7614#0" expanded="true" />
+                <element signature="e#7681#7682#0" expanded="true" />
+                <element signature="e#7707#7708#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -183,8 +187,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/resource/html/summer/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+            <state relative-caret-position="97">
+              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -310,9 +314,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="11" />
-    <option name="y" value="45" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="26" />
+    <option name="y" value="23" />
     <option name="width" value="1460" />
     <option name="height" value="920" />
   </component>
@@ -335,6 +339,11 @@
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
               <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
               <item name="conf" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
@@ -424,24 +433,27 @@
   <component name="PropertiesComponent">
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="222" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540030037596" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540037463796" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\GitHub\notebook\svn\trunk\EncryptNotes\libs" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="cn.tz.cj.dao" />
       <recent name="cn.tz.cj.tools" />
       <recent name="cn.tz.cj.rule" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\GitHub\notebook\svn\trunk\EncryptNotes\libs" />
       <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\libs" />
       <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\conf" />
       <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\src\cn\tz\cj\resource\html" />
       <recent name="G:\study\github\encryptNotes\svn\EncryptNotes\libs" />
-      <recent name="G:\study\github\encryptNotes\svn\EncryptNotes\src\cn\tz\cj\resource\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -545,19 +557,19 @@
       <workItem from="1539954099850" duration="401000" />
       <workItem from="1539954745517" duration="8321000" />
       <workItem from="1539963182505" duration="19000" />
-      <workItem from="1540010439263" duration="19149000" />
+      <workItem from="1540010439263" duration="22556000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42650000" />
+    <option name="totallyTimeSpent" value="46057000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="886" extended-state="6" />
+    <frame x="26" y="23" width="1460" height="920" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6345811" visible="true" weight="0.29727793" />
-      <window_info id="Structure" order="1" sideWeight="0.36541888" side_tool="true" visible="true" weight="0.29727793" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6337308" visible="true" weight="0.29642856" />
+      <window_info id="Structure" order="1" sideWeight="0.36626917" side_tool="true" visible="true" weight="0.29642856" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
@@ -565,8 +577,8 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.51326257" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25596818" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.29442972" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25507614" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.28172588" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -595,7 +607,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java</url>
-          <line>93</line>
+          <line>104</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
@@ -900,21 +912,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/djnativeswing-swt.jar!/chrriis/dj/nativeswing/swtimpl/NSPanelComponent.class">
+    <entry file="jar://$PROJECT_DIR$/libs/DJNativeSwing-SWT.jar!/chrriis/dj/nativeswing/swtimpl/NSPanelComponent.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/djnativeswing-swt.jar!/chrriis/dj/nativeswing/swtimpl/components/WebBrowserDecorator.class">
+    <entry file="jar://$PROJECT_DIR$/libs/DJNativeSwing-SWT.jar!/chrriis/dj/nativeswing/swtimpl/components/WebBrowserDecorator.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="10" column="41" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/djnativeswing-swt.jar!/chrriis/dj/nativeswing/swtimpl/components/DefaultWebBrowserDecorator.class">
+    <entry file="jar://$PROJECT_DIR$/libs/DJNativeSwing-SWT.jar!/chrriis/dj/nativeswing/swtimpl/components/DefaultWebBrowserDecorator.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="46" column="56" selection-start-line="46" selection-start-column="56" selection-end-line="46" selection-end-column="56" />
@@ -928,14 +940,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/djnativeswing-swt.jar!/chrriis/dj/nativeswing/swtimpl/components/JWebBrowser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/djnativeswing-swt.jar!/chrriis/dj/nativeswing/swtimpl/components/WebBrowserAdapter.class">
+    <entry file="jar://$PROJECT_DIR$/libs/DJNativeSwing-SWT.jar!/chrriis/dj/nativeswing/swtimpl/components/WebBrowserAdapter.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="15" column="5" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="15" selection-end-column="5" />
@@ -1012,31 +1017,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/DJNativeSwing-SWT.jar!/chrriis/dj/nativeswing/swtimpl/components/JWebBrowser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="87" column="16" selection-start-line="87" selection-start-column="16" selection-end-line="87" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/resource/html/summer/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        <state relative-caret-position="97">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="199" column="20" selection-start-line="199" selection-start-column="20" selection-end-line="199" selection-end-column="20" />
+        <state relative-caret-position="361">
+          <caret line="90" column="37" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2009#2010#0" expanded="true" />
-            <element signature="e#2069#2070#0" expanded="true" />
-            <element signature="e#2201#2202#0" expanded="true" />
-            <element signature="e#2243#2244#0" expanded="true" />
-            <element signature="e#3167#3168#0" expanded="true" />
-            <element signature="e#3209#3210#0" expanded="true" />
-            <element signature="e#6346#7669#0" expanded="true" />
-            <element signature="e#6696#7751#0" expanded="true" />
-            <element signature="e#7573#7574#0" expanded="true" />
-            <element signature="e#7682#7683#0" expanded="true" />
-            <element signature="e#7750#7751#0" expanded="true" />
-            <element signature="e#7668#7669#0" expanded="true" />
+            <element signature="e#2149#2150#0" expanded="true" />
+            <element signature="e#2209#2210#0" expanded="true" />
+            <element signature="e#2341#2342#0" expanded="true" />
+            <element signature="e#2383#2384#0" expanded="true" />
+            <element signature="e#3050#3051#0" expanded="true" />
+            <element signature="e#3102#3103#0" expanded="true" />
+            <element signature="e#3178#3179#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3104#3105#0" expanded="true" />
+            <element signature="e#3146#3147#0" expanded="true" />
+            <element signature="e#6354#7708#0" expanded="true" />
+            <element signature="e#6594#7682#0" expanded="true" />
+            <element signature="e#7504#7505#0" expanded="true" />
+            <element signature="e#7613#7614#0" expanded="true" />
+            <element signature="e#7681#7682#0" expanded="true" />
+            <element signature="e#7707#7708#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1098,7 +1114,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
