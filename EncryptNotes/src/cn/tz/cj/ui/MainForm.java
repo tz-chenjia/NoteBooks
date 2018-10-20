@@ -3,6 +3,9 @@ package cn.tz.cj.ui;
 import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
 import cn.tz.cj.service.NoteBookService;
 import cn.tz.cj.service.NoteService;
 import cn.tz.cj.service.intf.INoteBookService;
@@ -12,9 +15,9 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URI;
 
 public class MainForm extends JFrame{
-
     private final String URL = EditDialog.class.getResource("../resource/html/summer/index.html").getPath().substring(1);
 
     private JTextField searchTextField;
@@ -112,6 +115,36 @@ public class MainForm extends JFrame{
         jWebBrowser.setMenuBarVisible(false);
         jWebBrowser.setButtonBarVisible(false);
         jWebBrowser.setStatusBarVisible(false);
+        jWebBrowser.addWebBrowserListener(new WebBrowserAdapter() {
+            @Override
+            public void windowWillOpen(WebBrowserWindowWillOpenEvent e) {
+                JWebBrowser newWebBrowser = e.getNewWebBrowser();
+                newWebBrowser.addWebBrowserListener(new WebBrowserAdapter() {
+                    @Override
+                    public void locationChanging(WebBrowserNavigationEvent newEvent) {
+                        // launch default OS browser
+                        if (Desktop.isDesktopSupported()) {
+                            Desktop desktop = Desktop.getDesktop();
+
+                            if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                                try {
+                                    desktop.browse(new URI(newEvent.getNewResourceLocation()));
+                                } catch (Exception ex) {}
+                            }
+                        }
+                        newEvent.consume();
+
+                        // immediately close the new swing window
+                        SwingUtilities.invokeLater(new Runnable() {
+
+                            public void run() {
+                                newWebBrowser.getWebBrowserWindow().dispose();
+                            }
+                        });
+                    }
+                });
+            }
+        });
         contentJPanel.add(jWebBrowser);
     }
 

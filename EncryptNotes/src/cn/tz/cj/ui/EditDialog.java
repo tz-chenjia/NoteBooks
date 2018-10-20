@@ -16,16 +16,21 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 
 public class EditDialog extends JDialog {
 
     private final String INTERNAL_HTMLMODEL_URL = EditDialog.class.getResource("../resource/html/summer").getPath().substring(1);
     private final String CONFIGS_HTMLMODEL_URL = ConfigsService.getConfPath() + "summer";
-    private final String URL = ConfigsService.getConfPath() + "summer"+ File.separator + "index.html";
+    private final String URL = ConfigsService.getConfPath() + "summer" + File.separator + "index.html";
 
     private JPanel contentPane;
     private JButton buttonOK;
@@ -34,13 +39,13 @@ public class EditDialog extends JDialog {
     private JPanel editJPanel;
     private JTextField titleTextField;
     private JLabel errorLabel;
-    private JWebBrowser jWebBrowser;	//浏览器模型
+    private JWebBrowser jWebBrowser;    //浏览器模型
     private NoteBookTree nbTree;
 
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
 
-    public EditDialog(NoteBookTree nbTree,String notebookName, String noteName) {
+    public EditDialog(NoteBookTree nbTree, String notebookName, String noteName) {
         this.nbTree = nbTree;
         setContentPane(contentPane);
         setModal(true);
@@ -71,9 +76,9 @@ public class EditDialog extends JDialog {
             public void windowOpened(WindowEvent e) {
                 initNotebooks(notebookName);
                 initJWebBrowser(notebookName, noteName);
+                //titleTextField.requestFocus();
+                jWebBrowser.requestFocus();
             }
-
-
         });
 
         // call onCancel() on ESCAPE
@@ -84,28 +89,28 @@ public class EditDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK(String oldNotebookName,String oldNoteName) {
+    private void onOK(String oldNotebookName, String oldNoteName) {
         int i = 0;
         String notebookName = notebookComboBox.getSelectedItem().toString();
-        if(notebookName == null || notebookName.trim().equals("")){
+        if (notebookName == null || notebookName.trim().equals("")) {
             errorLabel.setText("请选择笔记本！");
             return;
         }
         String text = titleTextField.getText();
-        if(text == null || text.trim().equals("")){
+        if (text == null || text.trim().equals("")) {
             errorLabel.setText("笔记标题不能为空！");
             return;
         }
-        if(oldNoteName == null && noteService.checkTitleExists(notebookName, text)){
-            errorLabel.setText("笔记["+text+"]已存在！");
+        if (oldNoteName == null && noteService.checkTitleExists(notebookName, text)) {
+            errorLabel.setText("笔记[" + text + "]已存在！");
             return;
         }
         String htmlContent = jWebBrowser.getHTMLContent();
         Document doc = Jsoup.parse(htmlContent);
         htmlContent = doc.select("div.note-editable").html();
-        if(oldNoteName != null){
+        if (oldNoteName != null) {
             i = noteService.updateNote(oldNotebookName, oldNoteName, notebookName, text, htmlContent);
-        }else{
+        } else {
             i = noteService.addNote(notebookName, text, htmlContent);
         }
         nbTree.refresh(true, null, notebookName, text);
@@ -117,54 +122,88 @@ public class EditDialog extends JDialog {
         dispose();
     }
 
-    private void initNotebooks(String notebookName){
+    private void initNotebooks(String notebookName) {
         List<NoteBook> noteBooks = noteBookService.getNoteBooks();
-        for(NoteBook nb : noteBooks){
+        for (NoteBook nb : noteBooks) {
             notebookComboBox.addItem(nb.getNotebook());
         }
-        if(notebookName != null){
+        if (notebookName != null) {
             notebookComboBox.setSelectedItem(notebookName);
         }
     }
 
-    private void initLocalHTMLModel(String notebookName, String noteName){
-        if(!FileRWUtils.exists(URL)){
+    private void initLocalHTMLModel(String notebookName, String noteName) {
+        if (!FileRWUtils.exists(URL)) {
             FileRWUtils.copyFolder(INTERNAL_HTMLMODEL_URL, CONFIGS_HTMLMODEL_URL);
         }
         String htmlContent = FileRWUtils.read(new File(URL)).trim();
         htmlContent = htmlContent.substring(htmlContent.indexOf("doctype") - 2);
         Document doc = Jsoup.parse(htmlContent, "utf-8");
         Elements select = doc.select("div#summernote");
-        if(noteName != null){
+        if (noteName != null) {
             Note note = noteService.getNote(notebookName, noteName);
-            if(note != null){
+            if (note != null) {
                 titleTextField.setText(noteName);
                 select.empty();
                 select.append(note.getContent());
-            }else{
+            } else {
                 select.empty();
             }
-        }else {
+        } else {
             select.empty();
         }
         FileRWUtils.write(new File(URL), doc.html());
     }
 
-    private void initJWebBrowser(String notebookName, String noteName){
+    private void initJWebBrowser(String notebookName, String noteName) {
         initLocalHTMLModel(notebookName, noteName);
         jWebBrowser = new JWebBrowser();
         jWebBrowser.navigate(URL);
-        jWebBrowser.setPreferredSize(new Dimension(800,400));
+        jWebBrowser.setPreferredSize(new Dimension(800, 400));
         jWebBrowser.setBarsVisible(false);
         jWebBrowser.setMenuBarVisible(false);
         jWebBrowser.setButtonBarVisible(false);
         jWebBrowser.setStatusBarVisible(false);
+        jWebBrowser.setDefaultPopupMenuRegistered(false);
+        jWebBrowser.setFocusable(true);
+        jWebBrowser.addWebBrowserListener(new WebBrowserAdapter() {
+            @Override
+            public void windowWillOpen(WebBrowserWindowWillOpenEvent e) {
+                JWebBrowser newWebBrowser = e.getNewWebBrowser();
+                newWebBrowser.addWebBrowserListener(new WebBrowserAdapter() {
+                    @Override
+                    public void locationChanging(WebBrowserNavigationEvent newEvent) {
+                        // launch default OS browser
+                        if (Desktop.isDesktopSupported()) {
+                            Desktop desktop = Desktop.getDesktop();
+
+                            if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                                try {
+                                    desktop.browse(new URI(newEvent.getNewResourceLocation()));
+                                } catch (Exception ex) {
+                                }
+                            }
+                        }
+                        newEvent.consume();
+
+                        // immediately close the new swing window
+                        SwingUtilities.invokeLater(new Runnable() {
+
+                            public void run() {
+                                newWebBrowser.getWebBrowserWindow().dispose();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        jWebBrowser.
         editJPanel.add(jWebBrowser);
     }
 
-    public static void runEditDialog(NoteBookTree nbTree, String notebook, String note){
+    public static void runEditDialog(NoteBookTree nbTree, String notebook, String note) {
         UIUtils.setPreferredLookAndFeel();
-        if(!NativeInterface.isOpen()){
+        if (!NativeInterface.isOpen()) {
             NativeInterface.initialize();
             NativeInterface.open();
         }
