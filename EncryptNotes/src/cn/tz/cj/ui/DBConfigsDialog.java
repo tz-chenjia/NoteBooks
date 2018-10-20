@@ -29,12 +29,13 @@ public class DBConfigsDialog extends JDialog {
     private IConfigsService configsService = new ConfigsService();
 
     public DBConfigsDialog() {
-
+        setTitle("NoteBooks - 配置");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         setSize(500, 500);
         setLocationRelativeTo(contentPane);
+        setIconImage(ConfigsService.getImage("notebook.png"));
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

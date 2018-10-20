@@ -1,6 +1,9 @@
 package cn.tz.cj.entity;
 
-public class NoteBook {
+import java.text.Collator;
+import java.util.Comparator;
+
+public class NoteBook implements Comparable<NoteBook>{
 
     private String email;
 
@@ -25,5 +28,11 @@ public class NoteBook {
     @Override
     public String toString() {
         return "{email:"+email+",notebook:"+notebook+"}";
+    }
+
+    @Override
+    public int compareTo(NoteBook o) {
+        Comparator<Object> com = Collator.getInstance(java.util.Locale.CHINA);
+        return com.compare(notebook, o.getNotebook());
     }
 }

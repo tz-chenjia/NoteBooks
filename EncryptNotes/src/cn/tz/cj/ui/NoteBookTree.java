@@ -3,6 +3,7 @@ package cn.tz.cj.ui;
 import cn.tz.cj.bo.Auth;
 import cn.tz.cj.entity.Note;
 import cn.tz.cj.entity.NoteBook;
+import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.NoteBookService;
 import cn.tz.cj.service.NoteService;
 import cn.tz.cj.service.intf.INoteBookService;
@@ -10,7 +11,9 @@ import cn.tz.cj.service.intf.INoteService;
 
 import javax.swing.*;
 import javax.swing.tree.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
@@ -73,6 +76,7 @@ public class NoteBookTree extends JTree {
     private void loadTree(String key){
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(ROOTNODE_NAME);
         List<NoteBook> noteBooks = noteBookService.getNoteBooks();
+        Collections.sort(noteBooks);
         if(key == null || key.trim().equals("")){
             for(NoteBook nb : noteBooks){
                 String notebook = nb.getNotebook();
@@ -114,7 +118,7 @@ public class NoteBookTree extends JTree {
         this.setModel(treeModel);
         treeRender(rootNode);
     }
-    int i;
+
     private void bindEvent(){
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -140,7 +144,8 @@ public class NoteBookTree extends JTree {
                         int level = selPath.getPathCount();
                     Object[] path = selPath.getPath();
                     if(level == 3){
-                        refresh(isAll, key, path[1].toString(), path[2].toString());
+                        //有问题，待解决
+                        refresh(isAll, null, path[1].toString(), path[2].toString());
                     }
                 }
                 }
@@ -230,14 +235,9 @@ public class NoteBookTree extends JTree {
         }
         // 设置自动选中
         findInTree();
-        /*if(selectedNodeName != null && !selectedNodeName.trim().equals("")){
-            DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectedNodeName);
-            //DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) selectedNode.getParent();
-            tree.setSelectionPath(new TreePath(selectedNode.getPath())); //选中该节点
-            //tree.expandPath(selectedNode.getPath()); //展开该节点，对叶子节点无效
-            tree.scrollPathToVisible(new TreePath(selectedNode.getPath())); //滚动Tree使该节点可见。
-            tree.setCellRenderer(new NodeRenderer(selectedParentNodeName,selectedNodeName));
-        }*/
+        // 树样式渲染
+        this.setCellRenderer(new MyTreeCellRenderer());
+        this.setRowHeight(25);
     }
 
     /**
@@ -320,5 +320,46 @@ public class NoteBookTree extends JTree {
 
     public void onAddNote(String notebookName){
         EditDialog.runEditDialog(NoteBookTree.this, notebookName, null);
+    }
+}
+class MyTreeCellRenderer extends DefaultTreeCellRenderer{
+    @Override
+    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+        //执行父类原型操作
+        super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf,
+                row, hasFocus);
+
+        setText(value.toString());
+
+        if (sel)
+        {
+            setForeground(getTextSelectionColor());
+        }
+        else
+        {
+            setForeground(getTextNonSelectionColor());
+        }
+
+        setFont(new Font("Serif",Font.PLAIN,16));//设置树的整体字体样式
+        setTextSelectionColor(Color.WHITE);//设置当前选中节点的文本颜色
+        setBorderSelectionColor(new Color(174,207,247));//节点具有焦点时，用于焦点指示符的颜色
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));//设置节点的边框样式
+        setBackgroundSelectionColor(new Color(0,0,0));//设置节点具有焦点时的背景色
+        //得到每个节点的TreeNode
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
+        int level = node.getLevel();
+        switch (level){
+            case 1:
+                this.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebook.png")));
+                break;
+            case 2:
+                this.setIcon(new ImageIcon(ConfigsService.getImage("tree-note.png")));
+                break;
+                default:
+                    this.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
+                    break;
+        }
+
+        return this;
     }
 }

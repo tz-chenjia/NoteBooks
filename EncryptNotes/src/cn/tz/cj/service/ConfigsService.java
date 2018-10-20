@@ -64,14 +64,14 @@ public class ConfigsService implements IConfigsService {
         }
     }
 
-    public static Image getLogo() {
-        Image logo = null;
+    public static Image getImage(String name) {
+        Image img = null;
         try {
-            logo = ImageIO.read(ConfigsService.class.getResource("../resource/images/logo.png"));
+            img = ImageIO.read(ConfigsService.class.getResource("../resource/images/" + name));
         } catch (IOException e) {
             ExceptionHandleUtils.handling(e);
         }
-        return logo;
+        return img;
     }
 
     private static File getSingleConf(String conf) {

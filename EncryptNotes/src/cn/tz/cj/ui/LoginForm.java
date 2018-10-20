@@ -1,6 +1,7 @@
 package cn.tz.cj.ui;
 
 import cn.tz.cj.service.AuthService;
+import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IAuthService;
 
 import javax.swing.*;
@@ -13,13 +14,14 @@ public class LoginForm extends JFrame{
     }
 
     public LoginForm(){
-        setTitle("Secret");
+        setTitle("NoteBooks - 登录");
         setContentPane(mainJPanel);
         setSize(500, 500);
         setLocationRelativeTo(mainJPanel);
         FormSetting.setFrameLocation(this);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setIconImage(ConfigsService.getImage("notebook.png"));
         pack();
         setVisible(true);
         configBtn.addActionListener(new ActionListener() {

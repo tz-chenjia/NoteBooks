@@ -6,6 +6,7 @@ import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
+import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.NoteBookService;
 import cn.tz.cj.service.NoteService;
 import cn.tz.cj.service.intf.INoteBookService;
@@ -50,11 +51,13 @@ public class MainForm extends JFrame{
     }
 
     public MainForm(){
+        setTitle("NoteBooks");
         setContentPane(mainJPanel);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setSize(1000, 500);
         FormSetting.setFrameLocation(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setIconImage(ConfigsService.getImage("notebook.png"));
         pack();
         setVisible(true);
         initJWebBrowser();
@@ -67,6 +70,7 @@ public class MainForm extends JFrame{
 
             @Override
             public void windowOpened(WindowEvent e) {
+                searchTextField.requestFocusInWindow();
             }
         });
         searchTextField.addKeyListener(new KeyAdapter() {
@@ -83,12 +87,14 @@ public class MainForm extends JFrame{
                 }
             }
         });
+        addNotebookBtn.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebook.png")));
         addNotebookBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NoteBookTree.getInstance(MainForm.this).onAddNotebook();
             }
         });
+        addNoteBtn.setIcon(new ImageIcon(ConfigsService.getImage("tree-note.png")));
         addNoteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -163,34 +169,5 @@ public class MainForm extends JFrame{
                 }
             }
         });
-    }
-
-    class NodeRenderer extends DefaultTreeCellRenderer {
-
-        private String parentKey;
-        private String key;
-
-        public NodeRenderer(String parentKey,String key){
-            this.parentKey = parentKey;
-            this.key = key;
-        }
-
-        public Component getTreeCellRendererComponent(JTree tree, Object value,
-                                                      boolean selected, boolean expanded, boolean leaf, int row,
-                                                      boolean hasFocus) {
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
-            DefaultMutableTreeNode parent = (DefaultMutableTreeNode)node.getParent();
-            super.getTreeCellRendererComponent(tree, value, selected, expanded,
-                    leaf, row, hasFocus);
-            if (node.getUserObject().toString().trim().equals(key) && parent.getUserObject().toString().trim().equals(parentKey)) {
-
-                setForeground(Color.BLUE);
-                setTextSelectionColor(Color.WHITE);
-                setBackgroundSelectionColor(Color.WHITE);
-                setBackgroundNonSelectionColor(Color.WHITE);
-
-            }
-            return this;
-        }
     }
 }
