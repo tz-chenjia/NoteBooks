@@ -13,13 +13,12 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Collections;
-import java.util.Enumeration;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 public class NoteBookTree extends JTree {
     private static final String ROOTNODE_NAME = "NoteBooks";
+    private static final Color SELECTED_BACKGROUD = new Color(115,115,115);
     private static NoteBookTree nbTree;
     private MainForm mainForm;
     private NoteBookTree(){
@@ -59,11 +58,9 @@ public class NoteBookTree extends JTree {
             Note note = noteService.getNote(this.lastSelectedNotebook, this.lastSelectedNote);
             mainForm.getjWebBrowser().setHTMLContent(note.getContent());
             mainForm.getNoteLabel().setText(this.lastSelectedNote);
-            mainForm.getNotebookLabel().setText("《" + this.lastSelectedNotebook + "》");
         }else {
             mainForm.getjWebBrowser().setHTMLContent("");
             mainForm.getNoteLabel().setText("");
-            mainForm.getNotebookLabel().setText("");
         }
     }
 
@@ -145,6 +142,9 @@ public class NoteBookTree extends JTree {
                     if(level == 3){
                         //有问题，待解决
                         refresh(key, path[1].toString(), path[2].toString());
+                    }else{
+                        mainForm.getjWebBrowser().setHTMLContent("");
+                        mainForm.getNoteLabel().setText("");
                     }
                 }
                 }
@@ -235,7 +235,10 @@ public class NoteBookTree extends JTree {
         // 设置自动选中
         findInTree();
         // 树样式渲染
+        //this.setShowsRootHandles(false);
         this.setCellRenderer(new MyTreeCellRenderer());
+        this.addFocusListener(fl);
+        this.setOpaque(false);
     }
 
     /**
@@ -319,54 +322,65 @@ public class NoteBookTree extends JTree {
     public void onAddNote(String notebookName){
         EditDialog.runEditDialog(NoteBookTree.this, notebookName, null);
     }
+
+    FocusListener fl = new FocusListener() {
+        @Override public void focusGained(FocusEvent e) {
+            e.getComponent().repaint();
+        }
+        @Override public void focusLost(FocusEvent e) {
+            e.getComponent().repaint();
+        }
+    };
+
+    @Override public void paintComponent(Graphics g) {
+        g.setColor(getBackground());
+        g.fillRect(0, 0, getWidth(), getHeight());
+        if (getSelectionCount() > 0) {
+            g.setColor(SELECTED_BACKGROUD);
+            for (int i : getSelectionRows()) {
+                Rectangle r = getRowBounds(i);
+                g.fillRect(0, r.y, getWidth(), r.height);
+            }
+        }
+        super.paintComponent(g);
+        if (getLeadSelectionPath() != null) {
+            Rectangle r = getRowBounds(getRowForPath(getLeadSelectionPath()));
+            g.setColor(SELECTED_BACKGROUD);
+            g.drawRect(0, r.y, getWidth() - 1, r.height - 1);
+        }
+    }
 }
 class MyTreeCellRenderer extends DefaultTreeCellRenderer{
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         //执行父类原型操作
-        super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf,
+        JLabel l = (JLabel) super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf,
                 row, hasFocus);
-
+        l.setBackground(selected ? new Color(115,115,115)
+                : tree.getBackground());
+        l.setOpaque(true);
         setText(value.toString());
+        this.setIcon(null);
 
-        if (sel)
-        {
-            setForeground(getTextSelectionColor());
-        }
-        else
-        {
-            setForeground(getTextNonSelectionColor());
-        }
-
-
-
-        setTextSelectionColor(Color.WHITE);//设置当前选中节点的文本颜色
-        //setBorderSelectionColor(new Color(174,207,247));//节点具有焦点时，用于焦点指示符的颜色
-        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));//设置节点的边框样式
-        setBackgroundSelectionColor(new Color(0,0,0));//设置节点具有焦点时的背景色
         //得到每个节点的TreeNode
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
         int level = node.getLevel();
         switch (level){
             case 1:
-                setFont(new Font("宋体",Font.BOLD,14));//设置树的整体字体样式
-                //setForeground(new Color(75,212,242));
-                //this.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebook.png")));
-                this.setIcon(null);
-
+                //System.out.println(getFont());
+                setFont(new Font("SimSun",Font.PLAIN,12));
                 break;
             case 2:
-                //setForeground(new Color(73,255,124));
-                //this.setIcon(new ImageIcon(ConfigsService.getImage("tree-note.png")));
-                setFont(new Font("宋体",Font.PLAIN,12));//设置树的整体字体样式
-                this.setIcon(null);
+                setFont(new Font("SimSun",Font.PLAIN,12));
                 break;
                 default:
-                    setFont(new Font("宋体",Font.PLAIN,16));//设置树的整体字体样式
+                    setFont(new Font("SimSun",Font.PLAIN,14));
                     this.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
                     break;
         }
         tree.setRowHeight(25);
+        tree.setRootVisible(false);
+        tree.setShowsRootHandles(true);
         return this;
     }
 }

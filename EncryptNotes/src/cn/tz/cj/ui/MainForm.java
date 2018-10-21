@@ -25,13 +25,18 @@ public class MainForm extends JFrame{
     private JPanel mainJPanel;
     private JPanel leftJPanel;
     private JScrollPane treeJScrollPane;
-    private JPanel rightJPanel;
     private JButton addNotebookBtn;
     private JButton addNoteBtn;
     private JButton loginOutBtn;
+    private JPanel rightJPanel;
     private JPanel contentJPanel;
     private JLabel noteLabel;
-    private JLabel notebookLabel;
+    private JButton impDataBtn;
+    private JButton expDataBtn;
+    private JButton emailBackupBtn;
+    private JButton delUserBtn;
+    private JButton editUserBtn;
+    private JButton aboutBtn;
     private NoteBookTree tree;
     private JWebBrowser jWebBrowser;	//浏览器模型
 
@@ -46,10 +51,6 @@ public class MainForm extends JFrame{
         return noteLabel;
     }
 
-    public JLabel getNotebookLabel() {
-        return notebookLabel;
-    }
-
     public MainForm(){
         setTitle("NoteBooks");
         setContentPane(mainJPanel);
@@ -62,6 +63,7 @@ public class MainForm extends JFrame{
         setVisible(true);
         initJWebBrowser();
         initTree();
+        setBtnIcon();
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -87,14 +89,12 @@ public class MainForm extends JFrame{
                 }
             }
         });
-        addNotebookBtn.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebook.png")));
         addNotebookBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NoteBookTree.getInstance(MainForm.this).onAddNotebook();
             }
         });
-        addNoteBtn.setIcon(new ImageIcon(ConfigsService.getImage("tree-note.png")));
         addNoteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,6 +107,18 @@ public class MainForm extends JFrame{
                 dispose();
             }
         });
+    }
+
+    private void setBtnIcon(){
+        loginOutBtn.setIcon(new ImageIcon(ConfigsService.getImage("loginout.png")));
+        editUserBtn.setIcon(new ImageIcon(ConfigsService.getImage("edituser.png")));
+        delUserBtn.setIcon(new ImageIcon(ConfigsService.getImage("deluser.png")));
+        emailBackupBtn.setIcon(new ImageIcon(ConfigsService.getImage("sendemail.png")));
+        expDataBtn.setIcon(new ImageIcon(ConfigsService.getImage("expdata.png")));
+        impDataBtn.setIcon(new ImageIcon(ConfigsService.getImage("impdata.png")));
+        addNotebookBtn.setIcon(new ImageIcon(ConfigsService.getImage("addnotebook.png")));
+        addNoteBtn.setIcon(new ImageIcon(ConfigsService.getImage("addnote.png")));
+        aboutBtn.setIcon(new ImageIcon(ConfigsService.getImage("about.png")));
     }
 
     private void initTree(){
