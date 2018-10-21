@@ -102,41 +102,41 @@
     <session id="850482914">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.17" value="1" />
+          <entry key="project.open.time.17" value="2" />
           <entry key="project.open.time.18" value="2" />
           <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="8" />
-          <entry key="form" value="7" />
+          <entry key="form" value="8" />
           <entry key="html" value="1" />
-          <entry key="java" value="27" />
+          <entry key="java" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="8" />
-          <entry key="GUI_DESIGNER_FORM" value="7" />
+          <entry key="GUI_DESIGNER_FORM" value="8" />
           <entry key="HTML" value="1" />
-          <entry key="JAVA" value="27" />
+          <entry key="JAVA" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="71" />
-          <entry key="java" value="4155" />
+          <entry key="java" value="4391" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="71" />
-          <entry key="JAVA" value="4155" />
+          <entry key="JAVA" value="4391" />
         </counts>
       </usages-collector>
     </session>
@@ -146,16 +146,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/NoteBookTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="146" column="33" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+            <state relative-caret-position="278">
+              <caret line="355" selection-start-line="355" selection-end-line="355" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#treeMenu#0;class#NoteBookTree#0" />
-                <element signature="e#6613#6614#0" expanded="true" />
-                <element signature="e#6660#6661#0" expanded="true" />
                 <element signature="method#noteBookMenu#0;class#NoteBookTree#0" />
-                <element signature="e#7080#7081#0" expanded="true" />
-                <element signature="e#7135#7136#0" expanded="true" />
                 <element signature="method#noteMenu#0;class#NoteBookTree#0" />
                 <element signature="method#findInTree#0;class#NoteBookTree#0" />
                 <element signature="method#findInPath#0;class#NoteBookTree#0" />
@@ -166,10 +162,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="jar://E:/Java/jdk1.8.0_181/src.zip!/java/awt/Font.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="566" column="11" selection-start-line="566" selection-start-column="11" selection-end-line="566" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="55" column="60" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="60" />
+            <state relative-caret-position="219">
+              <caret line="116" column="23" selection-start-line="116" selection-start-column="23" selection-end-line="116" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -180,7 +185,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="277">
               <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
             </state>
           </provider>
@@ -189,10 +194,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="95" column="11" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
+            <state relative-caret-position="704">
+              <caret line="82" column="37" lean-forward="true" selection-start-line="82" selection-start-column="37" selection-end-line="82" selection-end-column="37" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form">
+          <provider selected="true" editor-type-id="ui-designer" />
         </entry>
       </file>
     </leaf>
@@ -211,6 +221,7 @@
       <find>nbTree</find>
       <find>refresh(true,null,null,null);</find>
       <find>edit</find>
+      <find>isAll</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -257,15 +268,15 @@
         <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/NoteDao.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/NoteService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/NoteBookService.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.form" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/resource/html/summer/index.html" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/entity/NoteBook.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/ConfigsService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/DBConfigsDialog.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/NoteBookTree.java" />
       </list>
     </option>
@@ -276,7 +287,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-69" />
     <option name="y" value="30" />
     <option name="width" value="1460" />
@@ -288,7 +299,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -336,6 +346,14 @@
             </path>
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cj" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="MainForm" type="e9f4de52:FormNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
@@ -368,6 +386,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
@@ -375,7 +394,7 @@
   <component name="PropertiesComponent">
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="222" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540044740092" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540098142747" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -501,25 +520,26 @@
       <workItem from="1539963182505" duration="19000" />
       <workItem from="1540010439263" duration="29072000" />
       <workItem from="1540044830115" duration="339000" />
+      <workItem from="1540094631853" duration="3545000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52912000" />
+    <option name="totallyTimeSpent" value="56457000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-69" y="30" width="1460" height="920" extended-state="0" />
+    <frame x="-8" y="-8" width="1456" height="886" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6319797" visible="true" weight="0.30071428" />
-      <window_info id="Structure" order="1" sideWeight="0.3680203" side_tool="true" visible="true" weight="0.30071428" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.1790451" visible="true" weight="0.3051576" />
+      <window_info id="Structure" order="1" sideWeight="0.8209549" side_tool="true" visible="true" weight="0.3051576" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.51269037" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.25507614" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.51193637" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25464192" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.28172588" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -618,13 +638,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/tools/JDBCUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/tools/ExceptionHandleUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -761,10 +774,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3344">
           <caret line="201" column="23" selection-start-line="201" selection-start-column="23" selection-end-line="201" selection-end-column="23" />
-          <folding>
-            <element signature="e#7195#7196#0" expanded="true" />
-            <element signature="e#7235#7236#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -799,10 +808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="988">
           <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#buildNote#0;class#NoteService#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -857,9 +862,6 @@
           <caret line="15" column="5" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="15" selection-end-column="5" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form">
-      <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="jar://E:/Java/jdk1.8.0_181/src.zip!/javax/swing/JComponent.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -933,42 +935,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="82" column="37" lean-forward="true" selection-start-line="82" selection-start-column="37" selection-end-line="82" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="55" column="60" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="60" />
+        <state relative-caret-position="219">
+          <caret line="116" column="23" selection-start-line="116" selection-start-column="23" selection-end-line="116" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="jar://E:/Java/jdk1.8.0_181/src.zip!/java/awt/Font.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="566" column="11" selection-start-line="566" selection-start-column="11" selection-end-line="566" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="277">
           <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="95" column="11" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form">
+      <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/NoteBookTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="146" column="33" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+        <state relative-caret-position="278">
+          <caret line="355" selection-start-line="355" selection-end-line="355" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#treeMenu#0;class#NoteBookTree#0" />
-            <element signature="e#6613#6614#0" expanded="true" />
-            <element signature="e#6660#6661#0" expanded="true" />
             <element signature="method#noteBookMenu#0;class#NoteBookTree#0" />
-            <element signature="e#7080#7081#0" expanded="true" />
-            <element signature="e#7135#7136#0" expanded="true" />
             <element signature="method#noteMenu#0;class#NoteBookTree#0" />
             <element signature="method#findInTree#0;class#NoteBookTree#0" />
             <element signature="method#findInPath#0;class#NoteBookTree#0" />

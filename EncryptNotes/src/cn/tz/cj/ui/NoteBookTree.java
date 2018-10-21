@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 public class NoteBookTree extends JTree {
-    private static final String ROOTNODE_NAME = "Notes";
+    private static final String ROOTNODE_NAME = "NoteBooks";
     private static NoteBookTree nbTree;
     private MainForm mainForm;
     private NoteBookTree(){
@@ -37,7 +37,6 @@ public class NoteBookTree extends JTree {
         return nbTree;
     }
 
-    private boolean isAll;
     private String key;
     private String lastSelectedNotebook;
     private String lastSelectedNote;
@@ -47,19 +46,14 @@ public class NoteBookTree extends JTree {
 
     public static void initTree(MainForm mainForm){
         NoteBookTree instance = NoteBookTree.getInstance(mainForm);
-        instance.refresh(true,null,null,null);
+        instance.refresh(null,null,null);
     }
 
-    public void refresh(boolean isAll, String key, String lastSelectedNotebook, String lastSelectedNote){
-        this.isAll = isAll;
+    public void refresh(String key, String lastSelectedNotebook, String lastSelectedNote){
         this.key = key;
         this.lastSelectedNotebook = lastSelectedNotebook;
         this.lastSelectedNote = lastSelectedNote;
-        if(isAll){
-            loadTree(null);
-        }else {
-            loadTree(key);
-        }
+        loadTree(lastSelectedNotebook, lastSelectedNote);
         if(this.lastSelectedNotebook != null && this.lastSelectedNote != null){
             // 自动显示对应内容
             Note note = noteService.getNote(this.lastSelectedNotebook, this.lastSelectedNote);
@@ -73,7 +67,7 @@ public class NoteBookTree extends JTree {
         }
     }
 
-    private void loadTree(String key){
+    private void loadTree(String lastSelectedNotebook, String lastSelectedNote){
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(ROOTNODE_NAME);
         List<NoteBook> noteBooks = noteBookService.getNoteBooks();
         Collections.sort(noteBooks);
@@ -101,8 +95,13 @@ public class NoteBookTree extends JTree {
                     if(a.contains(b)){
                         DefaultMutableTreeNode noteNode = new DefaultMutableTreeNode(title);
                         if(!isRecordFirstSelected){
-                            lastSelectedNote = title;
-                            lastSelectedNotebook = notebook;
+                            if(lastSelectedNote == null && lastSelectedNotebook == null){
+                                this.lastSelectedNote = title;
+                                this.lastSelectedNotebook = notebook;
+                            }else{
+                                this.lastSelectedNote = lastSelectedNote;
+                                this.lastSelectedNotebook = lastSelectedNotebook;
+                            }
                             isRecordFirstSelected = true;
                         }
                         notebookNode.add(noteNode);
@@ -145,7 +144,7 @@ public class NoteBookTree extends JTree {
                     Object[] path = selPath.getPath();
                     if(level == 3){
                         //有问题，待解决
-                        refresh(isAll, null, path[1].toString(), path[2].toString());
+                        refresh(key, path[1].toString(), path[2].toString());
                     }
                 }
                 }
@@ -230,14 +229,13 @@ public class NoteBookTree extends JTree {
     }
 
     private void treeRender(DefaultMutableTreeNode rootNode){
-        if(!isAll){
+        if(key != null && !key.trim().equals("")){
             expandAll(this, new TreePath(rootNode), true);
         }
         // 设置自动选中
         findInTree();
         // 树样式渲染
         this.setCellRenderer(new MyTreeCellRenderer());
-        this.setRowHeight(25);
     }
 
     /**
@@ -340,9 +338,10 @@ class MyTreeCellRenderer extends DefaultTreeCellRenderer{
             setForeground(getTextNonSelectionColor());
         }
 
-        setFont(new Font("Serif",Font.PLAIN,16));//设置树的整体字体样式
+
+
         setTextSelectionColor(Color.WHITE);//设置当前选中节点的文本颜色
-        setBorderSelectionColor(new Color(174,207,247));//节点具有焦点时，用于焦点指示符的颜色
+        //setBorderSelectionColor(new Color(174,207,247));//节点具有焦点时，用于焦点指示符的颜色
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));//设置节点的边框样式
         setBackgroundSelectionColor(new Color(0,0,0));//设置节点具有焦点时的背景色
         //得到每个节点的TreeNode
@@ -350,16 +349,24 @@ class MyTreeCellRenderer extends DefaultTreeCellRenderer{
         int level = node.getLevel();
         switch (level){
             case 1:
-                this.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebook.png")));
+                setFont(new Font("宋体",Font.BOLD,14));//设置树的整体字体样式
+                //setForeground(new Color(75,212,242));
+                //this.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebook.png")));
+                this.setIcon(null);
+
                 break;
             case 2:
-                this.setIcon(new ImageIcon(ConfigsService.getImage("tree-note.png")));
+                //setForeground(new Color(73,255,124));
+                //this.setIcon(new ImageIcon(ConfigsService.getImage("tree-note.png")));
+                setFont(new Font("宋体",Font.PLAIN,12));//设置树的整体字体样式
+                this.setIcon(null);
                 break;
                 default:
+                    setFont(new Font("宋体",Font.PLAIN,16));//设置树的整体字体样式
                     this.setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
                     break;
         }
-
+        tree.setRowHeight(25);
         return this;
     }
 }

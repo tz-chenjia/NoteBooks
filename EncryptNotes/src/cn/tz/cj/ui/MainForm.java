@@ -80,7 +80,7 @@ public class MainForm extends JFrame{
                     //initTree(searchTextField.getText(), null,null);
                     String text = searchTextField.getText();
                     if(text != null && !text.trim().equals("")){
-                        tree.refresh(false, text.trim(),null,null);
+                        tree.refresh(text.trim(),null,null);
                     }else {
                         NoteBookTree.initTree(MainForm.this);
                     }

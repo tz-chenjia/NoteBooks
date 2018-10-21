@@ -114,7 +114,7 @@ public class EditDialog extends JDialog {
         } else {
             i = noteService.addNote(notebookName, text, htmlContent);
         }
-        nbTree.refresh(true, null, notebookName, text);
+        nbTree.refresh(null, notebookName, text);
         dispose();
     }
 
