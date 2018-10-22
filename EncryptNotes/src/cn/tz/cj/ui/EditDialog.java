@@ -54,6 +54,9 @@ public class EditDialog extends JDialog {
         setLocationRelativeTo(contentPane);
         setTitle("NoteBooks - 编辑");
         setIconImage(ConfigsService.getImage("notebook.png"));
+        initNotebooks(notebookName);
+        initJWebBrowser(notebookName, noteName);
+        titleTextField.requestFocusInWindow();
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -76,9 +79,6 @@ public class EditDialog extends JDialog {
 
             @Override
             public void windowOpened(WindowEvent e) {
-                initNotebooks(notebookName);
-                initJWebBrowser(notebookName, noteName);
-                titleTextField.requestFocusInWindow();
             }
         });
 
@@ -92,11 +92,12 @@ public class EditDialog extends JDialog {
 
     private void onOK(String oldNotebookName, String oldNoteName) {
         int i = 0;
-        String notebookName = notebookComboBox.getSelectedItem().toString();
-        if (notebookName == null || notebookName.trim().equals("")) {
+        Object notebookObj = notebookComboBox.getSelectedItem();
+        if (notebookObj == null || notebookObj.toString().trim().equals("")) {
             errorLabel.setText("请选择笔记本！");
             return;
         }
+        String notebookName = notebookObj.toString().trim();
         String text = titleTextField.getText();
         if (text == null || text.trim().equals("")) {
             errorLabel.setText("笔记标题不能为空！");

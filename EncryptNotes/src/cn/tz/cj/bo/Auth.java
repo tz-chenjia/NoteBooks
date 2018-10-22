@@ -1,12 +1,13 @@
 package cn.tz.cj.bo;
 
-import cn.tz.cj.entity.User;
-
 public class Auth {
-
     private static Auth auth;
     private String name;
     private String pwd;
+
+    private String searchKey;
+    private String selectedNoteBookName;
+    private String selectedNoteName;
 
     public Auth getAuth() {
         return auth;
@@ -32,11 +33,35 @@ public class Auth {
         this.pwd = pwd;
     }
 
-    private Auth(){
+    public String getSearchKey() {
+        return searchKey;
+    }
+
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
+    }
+
+    public String getSelectedNoteBookName() {
+        return selectedNoteBookName;
+    }
+
+    public void setSelectedNoteBookName(String selectedNoteBookName) {
+        this.selectedNoteBookName = selectedNoteBookName;
+    }
+
+    public String getSelectedNoteName() {
+        return selectedNoteName;
+    }
+
+    public void setSelectedNoteName(String selectedNoteName) {
+        this.selectedNoteName = selectedNoteName;
+    }
+
+    private Auth() {
 
     }
 
-    public static Auth getInstance(){
+    public static Auth getInstance() {
         if (auth == null) {
             synchronized (Auth.class) {
                 if (auth == null) {

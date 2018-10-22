@@ -14,7 +14,7 @@ import javax.swing.*;
 
 public class AuthService implements IAuthService {
 
-    private static final String EMAIL_REG = "^[A-Za-z0-9_.-\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+    public static final String EMAIL_REG = "^[A-Za-z0-9_.-\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
 
     private UserDao userDao = new UserDao();
 

@@ -1,7 +1,6 @@
 package cn.tz.cj.ui;
 
 import cn.tz.cj.bo.Auth;
-import cn.tz.cj.entity.Note;
 import cn.tz.cj.entity.NoteBook;
 import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.NoteBookService;
@@ -13,95 +12,80 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Set;
 
 public class NoteBookTree extends JTree {
     private static final String ROOTNODE_NAME = "NoteBooks";
-    private static final Color SELECTED_BACKGROUD = new Color(115,115,115);
-    private static NoteBookTree nbTree;
-    private MainForm mainForm;
-    private NoteBookTree(){
-    }
-    public static NoteBookTree getInstance(MainForm mainForm){
-        if (nbTree == null) {
-            synchronized (Auth.class) {
-                if (nbTree == null) {
-                    nbTree = new NoteBookTree();
-                    nbTree.bindEvent(); //监听事件是在初始化时绑定一次
-                    nbTree.mainForm = mainForm;
-                }
-            }
-        }
-        return nbTree;
-    }
-
-    public static void dispose(){
-        nbTree = null;
-    }
-
-    private String key;
-    private String lastSelectedNotebook;
-    private String lastSelectedNote;
+    private static final Color SELECTED_BACKGROUD = new Color(115, 115, 115);
 
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
+    private Auth auth = Auth.getInstance();
 
-    public static void initTree(MainForm mainForm){
-        NoteBookTree instance = NoteBookTree.getInstance(mainForm);
-        instance.refresh(null,null,null);
+    private MainForm mainForm;
+
+    public NoteBookTree(MainForm mainForm) {
+        this.mainForm = mainForm;
+        init();
     }
 
-    public void refresh(String key, String lastSelectedNotebook, String lastSelectedNote){
-        nbTree.key = key == null ? nbTree.key : key;
-        nbTree.lastSelectedNotebook = lastSelectedNotebook;
-        nbTree.lastSelectedNote = lastSelectedNote;
-        loadTree(lastSelectedNotebook, lastSelectedNote);
-        if(nbTree.lastSelectedNotebook != null && nbTree.lastSelectedNote != null){
-            // 自动显示对应内容
-            Note note = noteService.getNote(nbTree.lastSelectedNotebook, nbTree.lastSelectedNote);
-            mainForm.getjWebBrowser().setHTMLContent(note.getContent());
-            mainForm.setNoteToolsVisible(true, nbTree.lastSelectedNotebook, nbTree.lastSelectedNote);
-        }else {
-            mainForm.getjWebBrowser().setHTMLContent("");
-            mainForm.setNoteToolsVisible(false, "","");
-        }
+    private void init() {
+        // 数据加载
+        refresh(null, null, null);
+        // 事件绑定
+        bindEvent();
+        // 树样式渲染
+        this.setCellRenderer(new MyTreeCellRenderer());
+        this.addFocusListener(fl);
+        this.setOpaque(false);
+        this.setRowHeight(25);
+        this.setRootVisible(false);
+        this.setShowsRootHandles(true);
     }
 
-    private void loadTree(String lastSelectedNotebook, String lastSelectedNote){
+    public void refresh(String key, String lastSelectedNotebook, String lastSelectedNote) {
+        loadTree(key, lastSelectedNotebook, lastSelectedNote);
+        findInTree();// 设置自动选中
+        mainForm.refreshNoteTools(); // 主页右边内容匹配显示
+    }
+
+    private void loadTree(String key, String lastSelectedNotebook, String lastSelectedNote) {
+        auth.setSearchKey(key);
+        auth.setSelectedNoteBookName(lastSelectedNotebook);
+        auth.setSelectedNoteName(lastSelectedNote);
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(ROOTNODE_NAME);
         List<NoteBook> noteBooks = noteBookService.getNoteBooks();
         Collections.sort(noteBooks);
-        if(key == null || key.trim().equals("")){
-            for(NoteBook nb : noteBooks){
+        if (key == null || key.trim().equals("")) {
+            for (NoteBook nb : noteBooks) {
                 String notebook = nb.getNotebook();
                 DefaultMutableTreeNode notebookNode = new DefaultMutableTreeNode(notebook);
                 Set<String> notesTitlesByNoteBook = noteService.getNotesTitlesByNoteBook(notebook);
-                for(String title : notesTitlesByNoteBook){
+                for (String title : notesTitlesByNoteBook) {
                     DefaultMutableTreeNode noteNode = new DefaultMutableTreeNode(title);
                     notebookNode.add(noteNode);
                 }
                 rootNode.add(notebookNode);
             }
-        }else {
+        } else {
             boolean isRecordFirstSelected = false;
-            for(NoteBook nb : noteBooks){
+            for (NoteBook nb : noteBooks) {
                 String notebook = nb.getNotebook();
                 DefaultMutableTreeNode notebookNode = new DefaultMutableTreeNode(notebook);
                 Set<String> notesTitlesByNoteBook = noteService.getNotesTitlesByNoteBook(notebook);
                 boolean match = false;
-                for(String title : notesTitlesByNoteBook){
+                for (String title : notesTitlesByNoteBook) {
                     String a = title.toLowerCase();
                     String b = key.toLowerCase();
-                    if(a.contains(b)){
+                    if (a.contains(b)) {
                         DefaultMutableTreeNode noteNode = new DefaultMutableTreeNode(title);
-                        if(!isRecordFirstSelected){
-                            if(lastSelectedNote == null && lastSelectedNotebook == null){
-                                nbTree.lastSelectedNote = title;
-                                nbTree.lastSelectedNotebook = notebook;
-                            }else{
-                                nbTree.lastSelectedNote = lastSelectedNote;
-                                nbTree.lastSelectedNotebook = lastSelectedNotebook;
+                        if (!isRecordFirstSelected) {
+                            if (lastSelectedNote == null && lastSelectedNotebook == null) {
+                                auth.setSelectedNoteBookName(notebook);
+                                auth.setSelectedNoteName(title);
                             }
                             isRecordFirstSelected = true;
                         }
@@ -109,54 +93,50 @@ public class NoteBookTree extends JTree {
                         match = true;
                     }
                 }
-                if(match || notebook.toLowerCase().contains(key.toLowerCase())){
+                if (match || notebook.toLowerCase().contains(key.toLowerCase())) {
                     rootNode.add(notebookNode);
                 }
             }
         }
         TreeModel treeModel = new DefaultTreeModel(rootNode);
-        nbTree.setModel(treeModel);
-        treeRender(rootNode);
+        this.setModel(treeModel);
+        if(key != null && !key.trim().equals("")){
+            expandAll(this, new TreePath(rootNode), true);
+        }
     }
 
-    private void bindEvent(){
-        nbTree.addMouseListener(new MouseAdapter() {
+    private void bindEvent() {
+        this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                TreePath selPath   =   NoteBookTree.nbTree.getPathForLocation(e.getX(),   e.getY());
-                if(e.getButton() == e.BUTTON3){
-                    if(selPath != null){
+                TreePath selPath = NoteBookTree.this.getPathForLocation(e.getX(), e.getY());
+                if (e.getButton() == e.BUTTON3) {
+                    if (selPath != null) {
                         int level = selPath.getPathCount();
                         String sel = selPath.getLastPathComponent().toString();
-                        if(level == 1){
-                            //treeMenu().show(e.getComponent(), e.getX(), e.getY());//弹出右键菜单
-                        }else if(level == 2){
+                        if (level == 2) {
                             noteBookMenu(sel).show(e.getComponent(), e.getX(), e.getY());//弹出右键菜单
-                        }else if(level == 3){
+                        } else if (level == 3) {
                             Object[] path = selPath.getPath();
-                            noteMenu(path[1].toString(),sel).show(e.getComponent(), e.getX(), e.getY());//弹出右键菜单
+                            noteMenu(path[1].toString(), sel).show(e.getComponent(), e.getX(), e.getY());//弹出右键菜单
                         }
-                    }else {
-                        //treeMenu().show(e.getComponent(), e.getX(), e.getY());//弹出右键菜单
                     }
-                }else if(e.getButton() == e.BUTTON1){
-                    if(selPath != null){
+                } else if (e.getButton() == e.BUTTON1) {
+                    if (selPath != null) {
                         int level = selPath.getPathCount();
-                    Object[] path = selPath.getPath();
-                    if(level == 3){
-                        //有问题，待解决
-                        refresh(key, path[1].toString(), path[2].toString());
-                    }else{
-                        mainForm.getjWebBrowser().setHTMLContent("");
-                        mainForm.setNoteToolsVisible(false,"","");
+                        Object[] path = selPath.getPath();
+                        if (level == 3) {
+                            refresh(auth.getSearchKey(), path[1].toString(), path[2].toString());
+                        } else {
+                            refresh(auth.getSearchKey(), null, null);
+                        }
                     }
-                }
                 }
             }
         });
     }
 
-    private JPopupMenu treeMenu(){
+    private JPopupMenu treeMenu() {
         JPopupMenu treeJPopupMenu = new JPopupMenu();
         JMenuItem jMenuItem_addNotebook = new JMenuItem("新建笔记本");
         jMenuItem_addNotebook.addActionListener(new ActionListener() {
@@ -169,7 +149,7 @@ public class NoteBookTree extends JTree {
         return treeJPopupMenu;
     }
 
-    private JPopupMenu noteBookMenu(String notebookName){
+    private JPopupMenu noteBookMenu(String notebookName) {
         JPopupMenu treeJPopupMenu = new JPopupMenu();
         JMenuItem jMenuItem_addNote = new JMenuItem("新建笔记");
         jMenuItem_addNote.addActionListener(new ActionListener() {
@@ -182,10 +162,10 @@ public class NoteBookTree extends JTree {
         jMenuItem_rename.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String newName = (String)JOptionPane.showInputDialog(null,"","请输入笔记本的名称",
+                String newName = (String) JOptionPane.showInputDialog(null, "", "请输入笔记本的名称",
                         JOptionPane.QUESTION_MESSAGE);
-                if(noteBookService.rename(notebookName, newName) >  0){
-                    initTree(mainForm);
+                if (noteBookService.rename(notebookName, newName) > 0) {
+                    refresh(null, null, null);
                 }
             }
         });
@@ -193,10 +173,10 @@ public class NoteBookTree extends JTree {
         jMenuItem_remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(null, "确定删除["+notebookName+"]？", "删除笔记本", JOptionPane.YES_NO_OPTION);
-                if(i == 0){
-                    if(noteBookService.removeNoteBook(notebookName) > 0){
-                        initTree(mainForm);
+                int i = JOptionPane.showConfirmDialog(null, "确定删除[" + notebookName + "]？", "删除笔记本", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    if (noteBookService.removeNoteBook(notebookName) > 0) {
+                        refresh(null, null, null);
                     }
                 }
             }
@@ -207,23 +187,23 @@ public class NoteBookTree extends JTree {
         return treeJPopupMenu;
     }
 
-    private JPopupMenu noteMenu(String notebookName, String noteName){
+    private JPopupMenu noteMenu(String notebookName, String noteName) {
         JPopupMenu treeJPopupMenu = new JPopupMenu();
         JMenuItem jMenuItem_updateNote = new JMenuItem("修改笔记");
         jMenuItem_updateNote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EditDialog.runEditDialog(nbTree, notebookName, noteName);
+                EditDialog.runEditDialog(NoteBookTree.this, notebookName, noteName);
             }
         });
         JMenuItem jMenuItem_remove = new JMenuItem("删除笔记");
         jMenuItem_remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(null, "确定删除["+noteName+"]？", "删除笔记", JOptionPane.YES_NO_OPTION);
-                if(i == 0){
+                int i = JOptionPane.showConfirmDialog(null, "确定删除[" + noteName + "]？", "删除笔记", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
                     noteService.removeNote(notebookName, noteName);
-                    initTree(mainForm);
+                    refresh(null, null, null);
                 }
             }
         });
@@ -232,32 +212,19 @@ public class NoteBookTree extends JTree {
         return treeJPopupMenu;
     }
 
-    private void treeRender(DefaultMutableTreeNode rootNode){
-        if(key != null && !key.trim().equals("")){
-            expandAll(nbTree, new TreePath(rootNode), true);
-        }
-        // 设置自动选中
-        findInTree();
-        // 树样式渲染
-        //nbTree.setShowsRootHandles(false);
-        nbTree.setCellRenderer(new MyTreeCellRenderer());
-        nbTree.addFocusListener(fl);
-        nbTree.setOpaque(false);
-    }
-
     /**
      * 定位选中的笔记
      */
     private void findInTree() {
-        if(nbTree.lastSelectedNotebook == null || nbTree.lastSelectedNote == null){
+        if (auth.getSelectedNoteBookName() == null || auth.getSelectedNoteName() == null) {
             return;
         }
-        Object root = nbTree.getModel().getRoot();
+        Object root = this.getModel().getRoot();
         TreePath treePath = new TreePath(root);
-        treePath = findInPath(treePath, nbTree.lastSelectedNotebook, nbTree.lastSelectedNote);
+        treePath = findInPath(treePath, auth.getSelectedNoteBookName(), auth.getSelectedNoteName());
         if (treePath != null) {
-            nbTree.setSelectionPath(treePath);
-            nbTree.scrollPathToVisible(treePath);
+            this.setSelectionPath(treePath);
+            this.scrollPathToVisible(treePath);
         }
     }
 
@@ -270,7 +237,7 @@ public class NoteBookTree extends JTree {
         if (noteName.equals(value) && treePath.getParentPath().getLastPathComponent().toString().equals(notebookName)) {
             return treePath;
         } else {
-            TreeModel model = nbTree.getModel();
+            TreeModel model = this.getModel();
             int n = model.getChildCount(object);
             for (int i = 0; i < n; i++) {
                 Object child = model.getChild(object, i);
@@ -287,6 +254,7 @@ public class NoteBookTree extends JTree {
 
     /**
      * 全部展开
+     *
      * @param tree
      * @param parent
      * @param expand
@@ -310,33 +278,37 @@ public class NoteBookTree extends JTree {
         }
     }
 
-    public void onAddNotebook(){
-        String typeName = (String)JOptionPane.showInputDialog(null,"","请输入笔记本的名称",
+    public void onAddNotebook() {
+        String typeName = (String) JOptionPane.showInputDialog(null, "", "请输入笔记本的名称",
                 JOptionPane.QUESTION_MESSAGE);
-        if(typeName != null){
-            if(!typeName.equals("")){
+        if (typeName != null) {
+            if (!typeName.equals("")) {
                 noteBookService.addNoteBook(typeName);
-                initTree(mainForm);
-            }else {
+                refresh(null, null, null);
+            } else {
                 JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "创建笔记本失败", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
 
-    public void onAddNote(String notebookName){
-        EditDialog.runEditDialog(nbTree, notebookName, null);
+    public void onAddNote(String notebookName) {
+        EditDialog.runEditDialog(this, notebookName, null);
     }
 
     FocusListener fl = new FocusListener() {
-        @Override public void focusGained(FocusEvent e) {
+        @Override
+        public void focusGained(FocusEvent e) {
             e.getComponent().repaint();
         }
-        @Override public void focusLost(FocusEvent e) {
+
+        @Override
+        public void focusLost(FocusEvent e) {
             e.getComponent().repaint();
         }
     };
 
-    @Override public void paintComponent(Graphics g) {
+    @Override
+    public void paintComponent(Graphics g) {
         g.setColor(getBackground());
         g.fillRect(0, 0, getWidth(), getHeight());
         if (getSelectionCount() > 0) {
@@ -354,13 +326,14 @@ public class NoteBookTree extends JTree {
         }
     }
 }
-class MyTreeCellRenderer extends DefaultTreeCellRenderer{
+
+class MyTreeCellRenderer extends DefaultTreeCellRenderer {
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         //执行父类原型操作
         JLabel l = (JLabel) super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf,
                 row, hasFocus);
-        l.setBackground(selected ? new Color(115,115,115)
+        l.setBackground(selected ? new Color(115, 115, 115)
                 : tree.getBackground());
         l.setOpaque(true);
         setText(value.toString());
@@ -369,22 +342,20 @@ class MyTreeCellRenderer extends DefaultTreeCellRenderer{
         //得到每个节点的TreeNode
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
         int level = node.getLevel();
-        switch (level){
+        switch (level) {
             case 1:
                 //System.out.println(getFont());
-                setFont(new Font("SimSun",Font.PLAIN,12));
+                setFont(new Font("SimSun", Font.PLAIN, 12));
                 break;
             case 2:
-                setFont(new Font("SimSun",Font.PLAIN,12));
+                setFont(new Font("SimSun", Font.PLAIN, 12));
                 break;
-                default:
-                    setFont(new Font("SimSun",Font.PLAIN,14));
-                    setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
-                    break;
+            default:
+                setFont(new Font("SimSun", Font.PLAIN, 14));
+                setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
+                break;
         }
-        tree.setRowHeight(25);
-        tree.setRootVisible(false);
-        tree.setShowsRootHandles(true);
+
         return this;
     }
 }

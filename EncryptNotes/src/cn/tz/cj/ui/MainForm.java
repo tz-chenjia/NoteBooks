@@ -6,13 +6,12 @@ import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
 import cn.tz.cj.bo.Auth;
-import cn.tz.cj.entity.User;
+import cn.tz.cj.entity.Note;
 import cn.tz.cj.service.*;
 import cn.tz.cj.service.intf.IAuthService;
 import cn.tz.cj.service.intf.INoteBookService;
 import cn.tz.cj.service.intf.INoteService;
 import cn.tz.cj.service.intf.ISystemService;
-import cn.tz.cj.tools.EncryptUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,23 +31,26 @@ public class MainForm extends JFrame {
     private JButton loginOutBtn;
     private JPanel rightJPanel;
     private JPanel contentJPanel;
-    private JLabel noteLabel;
     private JButton impDataBtn;
     private JButton expDataBtn;
     private JButton emailBackupBtn;
     private JButton delUserBtn;
     private JButton editUserBtn;
     private JButton aboutBtn;
-    private JButton editNoteBtn;
-    private JButton delNoteBtn;
-    private JLabel notebookLabel;
     private NoteBookTree tree;
-    private JWebBrowser jWebBrowser;    //浏览器模型
+
+    //公共组件
+    public JButton editNoteBtn;
+    public JButton delNoteBtn;
+    public JLabel noteLabel;
+    public JLabel notebookLabel;
+    public JWebBrowser jWebBrowser;    //浏览器模型
 
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
     private ISystemService systemService = new SystemService();
     private IAuthService authService = new AuthService();
+    private Auth auth = Auth.getInstance();
 
     public JWebBrowser getjWebBrowser() {
         return jWebBrowser;
@@ -94,7 +96,7 @@ public class MainForm extends JFrame {
                     if (text != null && !text.trim().equals("")) {
                         tree.refresh(text.trim(), null, null);
                     } else {
-                        NoteBookTree.initTree(MainForm.this);
+                        tree.refresh(null, null, null);
                     }
                 }
             }
@@ -102,13 +104,13 @@ public class MainForm extends JFrame {
         addNotebookBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NoteBookTree.getInstance(MainForm.this).onAddNotebook();
+                tree.onAddNotebook();
             }
         });
         addNoteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NoteBookTree.getInstance(MainForm.this).onAddNote(null);
+                tree.onAddNote(null);
             }
         });
         loginOutBtn.addActionListener(new ActionListener() {
@@ -117,14 +119,14 @@ public class MainForm extends JFrame {
                 dispose();
             }
         });
-        setNoteToolsVisible(false, "", "");
+        refreshNoteTools();
         notebookLabel.setOpaque(true);
         editNoteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String notebookName = notebookLabel.getText();
                 String noteName = noteLabel.getText();
-                EditDialog.runEditDialog(NoteBookTree.getInstance(MainForm.this), notebookName, noteName);
+                EditDialog.runEditDialog(tree, notebookName, noteName);
             }
         });
         delNoteBtn.addActionListener(new ActionListener() {
@@ -136,7 +138,7 @@ public class MainForm extends JFrame {
                     int i = JOptionPane.showConfirmDialog(null, "确定删除[" + noteName + "]？", "删除笔记", JOptionPane.YES_NO_OPTION);
                     if (i == 0) {
                         noteService.removeNote(notebookName, noteName);
-                        NoteBookTree.initTree(MainForm.this);
+                        tree.refresh(null, null, null);
                     }
                 }
             }
@@ -145,9 +147,9 @@ public class MainForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 File file = FileChooser.expFileChooser();
-                if(file != null){
+                if (file != null) {
                     systemService.expData(file);
-                    JOptionPane.showMessageDialog(null,"导出成功\n"+file.getPath());
+                    JOptionPane.showMessageDialog(null, "导出成功\n" + file.getPath());
                 }
             }
         });
@@ -157,9 +159,9 @@ public class MainForm extends JFrame {
                 int i = JOptionPane.showConfirmDialog(null, "导入数据是覆盖该用户的所有数据，确认导入？", "导入数据", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     File file = FileChooser.impFileChooser();
-                    if(file != null){
+                    if (file != null) {
                         systemService.impData(file);
-                        JOptionPane.showMessageDialog(null,"导入完成，请重新登录系统！");
+                        JOptionPane.showMessageDialog(null, "导入完成，请重新登录系统！");
                         authService.loginOut(MainForm.this);
                     }
                 }
@@ -184,17 +186,43 @@ public class MainForm extends JFrame {
         emailBackupBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                Object o = JOptionPane.showInputDialog(null, "请输入您的邮箱", "邮箱备份",
+                        JOptionPane.QUESTION_MESSAGE, null, null, userName);
+                if (o != null) {
+                    String email = o.toString();
+                    if (email.matches(AuthService.EMAIL_REG)) {
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "发送失败，邮箱格式不正确！");
+                    }
+                }
+
             }
         });
     }
 
-    public void setNoteToolsVisible(boolean isShow, String notebookName, String noteName) {
-        editNoteBtn.setVisible(isShow);
-        delNoteBtn.setVisible(isShow);
-        noteLabel.setVisible(isShow);
-        notebookLabel.setText(notebookName);
-        noteLabel.setText(noteName);
+    /**
+     * 刷新右边内容区域以及操作按钮
+     */
+    public void refreshNoteTools() {
+        if (auth.getSelectedNoteBookName() != null && auth.getSelectedNoteName() != null) {
+            editNoteBtn.setVisible(true);
+            delNoteBtn.setVisible(true);
+            noteLabel.setVisible(true);
+            Note note = noteService.getNote(auth.getSelectedNoteBookName(), auth.getSelectedNoteName());
+            if (note != null) {
+                notebookLabel.setText(note.getNotebook());
+                noteLabel.setText(note.getTitle());
+                jWebBrowser.setHTMLContent(note.getContent());
+            }
+        } else {
+            editNoteBtn.setVisible(false);
+            delNoteBtn.setVisible(false);
+            noteLabel.setVisible(false);
+            notebookLabel.setText("");
+            noteLabel.setText("");
+            jWebBrowser.setHTMLContent("");
+        }
     }
 
     private void setBtnIcon() {
@@ -210,9 +238,8 @@ public class MainForm extends JFrame {
     }
 
     private void initTree() {
-        tree = NoteBookTree.getInstance(this);
+        tree = new NoteBookTree(this);
         treeJScrollPane.setViewportView(tree);
-        NoteBookTree.initTree(this);
     }
 
     private void initJWebBrowser() {
