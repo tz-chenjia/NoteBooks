@@ -1,5 +1,6 @@
 package cn.tz.cj.tools;
 
+import cn.tz.cj.bo.Auth;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.*;
@@ -92,6 +93,14 @@ public class EncryptUtils {
 
     public static String e(String data, String key) {
         return encrypt(data, getSecrtKey(key));
+    }
+
+    public static String toEncryptWithUserPwd(String data){
+        return e(data, Auth.getInstance().getPwd());
+    }
+
+    public static String toDencryptWithUserPwd(String data){
+        return d(data, Auth.getInstance().getPwd());
     }
 
     public static void main(String[] args) {

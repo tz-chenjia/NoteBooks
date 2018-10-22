@@ -1,12 +1,26 @@
 package cn.tz.cj.dao;
 
 import cn.tz.cj.entity.Note;
+import cn.tz.cj.tools.EncryptUtils;
 
 import java.util.*;
 
 public class NoteDao extends BaseDao {
 
+    private void encrypt(Note note){
+        note.setNotebook(EncryptUtils.toEncryptWithUserPwd(note.getNotebook()));
+        note.setContent(EncryptUtils.toEncryptWithUserPwd(note.getContent()));
+        note.setTitle(EncryptUtils.toEncryptWithUserPwd(note.getTitle()));
+    }
+
+    private void dencrypt(Note note){
+        note.setNotebook(EncryptUtils.toDencryptWithUserPwd(note.getNotebook()));
+        note.setContent(EncryptUtils.toDencryptWithUserPwd(note.getContent()));
+        note.setTitle(EncryptUtils.toDencryptWithUserPwd(note.getTitle()));
+    }
+
     public int insertNoteDao(Note note){
+        encrypt(note);
         int i = 0;
         if(note != null){
             List<String> section = section(note.getContent(), 1000);
@@ -21,34 +35,36 @@ public class NoteDao extends BaseDao {
     public int updateNoteDao(Note oldNote, Note note){
         int i = 0;
         if(oldNote != null && note != null){
-            i = deleteNoteDao(oldNote.getNotebook(), oldNote.getTitle());
+            i = deleteNoteDao(oldNote);
             i = insertNoteDao(note);
         }
         return i;
     }
 
-    public int deleteNoteDao(String noteBookName, String title){
+    public int deleteNoteDao(Note note){
+        encrypt(note);
         int i = 0;
         String sql = "delete from nb_note where notebook = ? and title = ?";
-        i = update(sql, new Object[]{noteBookName,title});
+        i = update(sql, new Object[]{note.getNotebook(),note.getTitle()});
         return i;
     }
 
-    public Note getNote(String noteBookName, String title){
+    public Note getNote(Note note){
+        encrypt(note);
         Note n = null;
         String sql = "select * from nb_note where notebook = ? and title = ?";
-        List<Note> notes = queryToBean(sql, new Object[]{noteBookName, title}, Note.class);
+        List<Note> notes = queryToBean(sql, new Object[]{note.getNotebook(), note.getTitle()}, Note.class);
         if(notes.size() > 0){
             Map<Integer, String> sections = new HashMap<Integer, String>();
-            for(Note note : notes){
-                String content = note.getContent();
-                int sectionno = note.getSectionno();
+            for(Note nt : notes){
+                String content = nt.getContent();
+                int sectionno = nt.getSectionno();
                 sections.put(sectionno, content);
             }
             String merge = merge(sections);
             n = notes.get(0);
             n.setContent(merge);
-
+            dencrypt(n);
         }
         return n;
     }
@@ -66,16 +82,16 @@ public class NoteDao extends BaseDao {
     public int updateNoteBookByNote(String noteBookName, String newName){
         int n = 0 ;
         String sql = "update nb_note set notebook= ? where notebook = ?";
-        n = update(sql, new Object[]{newName, noteBookName});
+        n = update(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(newName), EncryptUtils.toEncryptWithUserPwd(noteBookName)});
         return n;
     }
 
     public Set<String> getNotesTitlesByNoteBook(String noteBookName){
         Set<String> titles = new HashSet<String>();
         String sql = "select title from nb_note where notebook = ?";
-        List<Map<String, Object>> data = query(sql, new Object[]{noteBookName});
+        List<Map<String, Object>> data = query(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(noteBookName)});
         for(Map<String, Object> m : data){
-            titles.add(m.get("title").toString());
+            titles.add(EncryptUtils.toDencryptWithUserPwd(m.get("title").toString()));
         }
         return titles;
     }

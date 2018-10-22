@@ -67,6 +67,7 @@ public class MainForm extends JFrame{
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                NativeInterface.close();
                 System.exit(1);
             }
 
