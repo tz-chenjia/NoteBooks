@@ -37,7 +37,7 @@ public class LoginForm extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 IAuthService authService = new AuthService();
                 if(authService.login(mailTextField.getText(), String.valueOf(pwdPasswordField.getPassword()))){
-                    MainForm.runMainForm();
+                    new MainForm(mailTextField.getText());
                     dispose();
                 }
             }

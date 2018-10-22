@@ -11,7 +11,6 @@ import java.util.List;
 
 public class NoteBookService implements INoteBookService {
 
-    private static final String EMAIL = Auth.getInstance().getName();
     private NoteBookDao noteBookDao = new NoteBookDao();
     private INoteService noteService = new NoteService();
 
@@ -65,12 +64,12 @@ public class NoteBookService implements INoteBookService {
 
     @Override
     public List<NoteBook> getNoteBooks() {
-        return noteBookDao.getNoteBooks(EMAIL);
+        return noteBookDao.getNoteBooks(Auth.getInstance().getName());
     }
 
     private NoteBook buildNoteBook(String noteBookName){
         NoteBook noteBook = new NoteBook();
-        noteBook.setEmail(EMAIL);
+        noteBook.setEmail(Auth.getInstance().getName());
         noteBook.setNotebook(noteBookName);
         return noteBook;
     }

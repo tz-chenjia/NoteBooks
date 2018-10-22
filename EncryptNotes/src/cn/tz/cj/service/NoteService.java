@@ -23,7 +23,7 @@ public class NoteService implements INoteService {
 
     @Override
     public int updateNote(String oldNoteBookName, String oldTitle, String noteBookName, String title, String content) {
-        return noteDao.updateNoteDao(buildNote(oldNoteBookName,oldTitle,null), buildNote(noteBookName,title,content));
+        return noteDao.updateNoteDao(buildNote(oldNoteBookName,oldTitle,""), buildNote(noteBookName,title,content));
     }
 
     @Override

@@ -69,6 +69,11 @@ public class NoteDao extends BaseDao {
         return n;
     }
 
+    public List<Note> getNotesToExport(String notebookName){
+        String sql = "select * from nb_note where notebook = ?";
+        return queryToBean(sql, new Object[]{notebookName}, Note.class);
+    }
+
     public int getNotesNumWithNoteBook(String noteBookName){
         int n = 0 ;
         String sql = "select count(title) n from nb_note where notebook = ?";

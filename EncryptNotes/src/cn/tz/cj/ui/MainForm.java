@@ -1,24 +1,26 @@
 package cn.tz.cj.ui;
 
-import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
-import cn.tz.cj.service.ConfigsService;
-import cn.tz.cj.service.NoteBookService;
-import cn.tz.cj.service.NoteService;
+import cn.tz.cj.bo.Auth;
+import cn.tz.cj.entity.User;
+import cn.tz.cj.service.*;
+import cn.tz.cj.service.intf.IAuthService;
 import cn.tz.cj.service.intf.INoteBookService;
 import cn.tz.cj.service.intf.INoteService;
+import cn.tz.cj.service.intf.ISystemService;
+import cn.tz.cj.tools.EncryptUtils;
 
 import javax.swing.*;
-import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.net.URI;
 
-public class MainForm extends JFrame{
+public class MainForm extends JFrame {
     private final String URL = EditDialog.class.getResource("../resource/html/summer/index.html").getPath().substring(1);
 
     private JTextField searchTextField;
@@ -37,11 +39,16 @@ public class MainForm extends JFrame{
     private JButton delUserBtn;
     private JButton editUserBtn;
     private JButton aboutBtn;
+    private JButton editNoteBtn;
+    private JButton delNoteBtn;
+    private JLabel notebookLabel;
     private NoteBookTree tree;
-    private JWebBrowser jWebBrowser;	//浏览器模型
+    private JWebBrowser jWebBrowser;    //浏览器模型
 
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
+    private ISystemService systemService = new SystemService();
+    private IAuthService authService = new AuthService();
 
     public JWebBrowser getjWebBrowser() {
         return jWebBrowser;
@@ -51,8 +58,8 @@ public class MainForm extends JFrame{
         return noteLabel;
     }
 
-    public MainForm(){
-        setTitle("NoteBooks");
+    public MainForm(String userName) {
+        setTitle("NoteBooks - " + userName);
         setContentPane(mainJPanel);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setSize(1000, 500);
@@ -67,7 +74,9 @@ public class MainForm extends JFrame{
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                NativeInterface.close();
+                if (NativeInterface.isOpen()) {
+                    NativeInterface.close();
+                }
                 System.exit(1);
             }
 
@@ -79,12 +88,12 @@ public class MainForm extends JFrame{
         searchTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     //initTree(searchTextField.getText(), null,null);
                     String text = searchTextField.getText();
-                    if(text != null && !text.trim().equals("")){
-                        tree.refresh(text.trim(),null,null);
-                    }else {
+                    if (text != null && !text.trim().equals("")) {
+                        tree.refresh(text.trim(), null, null);
+                    } else {
                         NoteBookTree.initTree(MainForm.this);
                     }
                 }
@@ -108,9 +117,87 @@ public class MainForm extends JFrame{
                 dispose();
             }
         });
+        setNoteToolsVisible(false, "", "");
+        notebookLabel.setOpaque(true);
+        editNoteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String notebookName = notebookLabel.getText();
+                String noteName = noteLabel.getText();
+                EditDialog.runEditDialog(NoteBookTree.getInstance(MainForm.this), notebookName, noteName);
+            }
+        });
+        delNoteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String notebookName = notebookLabel.getText();
+                String noteName = noteLabel.getText();
+                if (notebookName != null && noteName != null && !notebookName.equals("") && !noteName.equals("")) {
+                    int i = JOptionPane.showConfirmDialog(null, "确定删除[" + noteName + "]？", "删除笔记", JOptionPane.YES_NO_OPTION);
+                    if (i == 0) {
+                        noteService.removeNote(notebookName, noteName);
+                        NoteBookTree.initTree(MainForm.this);
+                    }
+                }
+            }
+        });
+        expDataBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File file = FileChooser.expFileChooser();
+                if(file != null){
+                    systemService.expData(file);
+                    JOptionPane.showMessageDialog(null,"导出成功\n"+file.getPath());
+                }
+            }
+        });
+        impDataBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = JOptionPane.showConfirmDialog(null, "导入数据是覆盖该用户的所有数据，确认导入？", "导入数据", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    File file = FileChooser.impFileChooser();
+                    if(file != null){
+                        systemService.impData(file);
+                        JOptionPane.showMessageDialog(null,"导入完成，请重新登录系统！");
+                        authService.loginOut(MainForm.this);
+                    }
+                }
+            }
+        });
+        delUserBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = JOptionPane.showConfirmDialog(null, "删除帐号是删除该用户的所有数据，确认删除？", "删除帐号", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    systemService.deleteUser();
+                    authService.loginOut(MainForm.this);
+                }
+            }
+        });
+        loginOutBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                authService.loginOut(MainForm.this);
+            }
+        });
+        emailBackupBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
     }
 
-    private void setBtnIcon(){
+    public void setNoteToolsVisible(boolean isShow, String notebookName, String noteName) {
+        editNoteBtn.setVisible(isShow);
+        delNoteBtn.setVisible(isShow);
+        noteLabel.setVisible(isShow);
+        notebookLabel.setText(notebookName);
+        noteLabel.setText(noteName);
+    }
+
+    private void setBtnIcon() {
         loginOutBtn.setIcon(new ImageIcon(ConfigsService.getImage("loginout.png")));
         editUserBtn.setIcon(new ImageIcon(ConfigsService.getImage("edituser.png")));
         delUserBtn.setIcon(new ImageIcon(ConfigsService.getImage("deluser.png")));
@@ -122,13 +209,13 @@ public class MainForm extends JFrame{
         aboutBtn.setIcon(new ImageIcon(ConfigsService.getImage("about.png")));
     }
 
-    private void initTree(){
+    private void initTree() {
         tree = NoteBookTree.getInstance(this);
         treeJScrollPane.setViewportView(tree);
         NoteBookTree.initTree(this);
     }
 
-    private void initJWebBrowser(){
+    private void initJWebBrowser() {
         jWebBrowser = new JWebBrowser();
         jWebBrowser.setBarsVisible(false);
         jWebBrowser.setMenuBarVisible(false);
@@ -148,7 +235,8 @@ public class MainForm extends JFrame{
                             if (desktop.isSupported(Desktop.Action.BROWSE)) {
                                 try {
                                     desktop.browse(new URI(newEvent.getNewResourceLocation()));
-                                } catch (Exception ex) {}
+                                } catch (Exception ex) {
+                                }
                             }
                         }
                         newEvent.consume();
@@ -165,22 +253,5 @@ public class MainForm extends JFrame{
             }
         });
         contentJPanel.add(jWebBrowser);
-    }
-
-    public static void runMainForm(){
-        UIUtils.setPreferredLookAndFeel();
-        if(!NativeInterface.isOpen()){
-            NativeInterface.initialize();
-            NativeInterface.open();
-        }
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new MainForm();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 }

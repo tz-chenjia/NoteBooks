@@ -2,10 +2,13 @@ package cn.tz.cj.service;
 
 import cn.tz.cj.bo.Auth;
 import cn.tz.cj.dao.UserDao;
+import cn.tz.cj.entity.NoteBook;
 import cn.tz.cj.entity.User;
 import cn.tz.cj.service.intf.IAuthService;
 import cn.tz.cj.service.intf.ISystemService;
 import cn.tz.cj.tools.EncryptUtils;
+import cn.tz.cj.ui.LoginForm;
+import cn.tz.cj.ui.NoteBookTree;
 
 import javax.swing.*;
 
@@ -44,5 +47,13 @@ public class AuthService implements IAuthService {
             }
         }
         return success;
+    }
+
+    @Override
+    public boolean loginOut(JFrame frame) {
+        Auth.getInstance().setAuth(null);
+        frame.dispose();
+        new LoginForm();
+        return false;
     }
 }

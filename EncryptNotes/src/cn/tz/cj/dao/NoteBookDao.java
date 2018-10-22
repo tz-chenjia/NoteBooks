@@ -44,4 +44,10 @@ public class NoteBookDao extends BaseDao {
         return noteBooks;
     }
 
+    public List<NoteBook> getNoteBooksToExport(String email){
+        String sql = "select * from nb_notebook where email = ?";
+        List<NoteBook> noteBooks = queryToBean(sql, new Object[]{email}, NoteBook.class);
+        return noteBooks;
+    }
+
 }

@@ -7,7 +7,6 @@ public class Auth {
     private static Auth auth;
     private String name;
     private String pwd;
-    private boolean online;
 
     public Auth getAuth() {
         return auth;
@@ -31,14 +30,6 @@ public class Auth {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
-    }
-
-    public boolean isOnline() {
-        return online;
-    }
-
-    public void setOnline(boolean online) {
-        this.online = online;
     }
 
     private Auth(){

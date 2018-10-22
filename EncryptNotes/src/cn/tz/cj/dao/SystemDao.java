@@ -51,10 +51,10 @@ public class SystemDao extends BaseDao {
                 case SQLSERVER:
                     break;
                 case ORACLE:
-                    noteSQL.replace("int","number");
-                    noteBookSQL.replace("int","number");
-                    userSQL.replace("int","number");
-                    break;
+                    //noteSQL.replace("int","number");
+                    //noteBookSQL.replace("int","number");
+                    //userSQL.replace("int","number");
+                    //break;
                 default:
                     //mysql
                     break;

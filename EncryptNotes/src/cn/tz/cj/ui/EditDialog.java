@@ -204,21 +204,8 @@ public class EditDialog extends JDialog {
     }
 
     public static void runEditDialog(NoteBookTree nbTree, String notebook, String note) {
-        UIUtils.setPreferredLookAndFeel();
-        if (!NativeInterface.isOpen()) {
-            NativeInterface.initialize();
-            NativeInterface.open();
-        }
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    EditDialog editDialog = new EditDialog(nbTree, notebook, note);
-                    editDialog.pack();
-                    editDialog.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        EditDialog editDialog = new EditDialog(nbTree, notebook, note);
+        editDialog.pack();
+        editDialog.setVisible(true);
     }
 }

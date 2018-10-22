@@ -103,11 +103,4 @@ public class EncryptUtils {
         return d(data, Auth.getInstance().getPwd());
     }
 
-    public static void main(String[] args) {
-        String data = "Abl20171026";
-        String encryptData = e(data, "2");
-        System.out.println("加密后数据" + encryptData);
-        System.out.println("解密后数据" + d(encryptData, "1"));
-    }
-
 }

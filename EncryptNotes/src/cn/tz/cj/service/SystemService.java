@@ -1,16 +1,28 @@
 package cn.tz.cj.service;
 
+import cn.tz.cj.bo.Auth;
+import cn.tz.cj.dao.NoteBookDao;
+import cn.tz.cj.dao.NoteDao;
 import cn.tz.cj.dao.SystemDao;
+import cn.tz.cj.entity.Note;
+import cn.tz.cj.entity.NoteBook;
 import cn.tz.cj.entity.UserConfigs;
 import cn.tz.cj.rule.EDBType;
 import cn.tz.cj.service.intf.IConfigsService;
+import cn.tz.cj.service.intf.INoteBookService;
+import cn.tz.cj.service.intf.INoteService;
 import cn.tz.cj.service.intf.ISystemService;
+import cn.tz.cj.tools.FileRWUtils;
 import cn.tz.cj.tools.JDBCUtils;
 
 import javax.swing.*;
+import java.io.File;
+import java.util.List;
 
 public class SystemService implements ISystemService {
     SystemDao systemDao = new SystemDao();
+    NoteBookDao noteBookDao = new NoteBookDao();
+    NoteDao noteDao = new NoteDao();
 
     @Override
     public boolean checkDBAndInit() {
@@ -35,5 +47,49 @@ public class SystemService implements ISystemService {
             isOk = false;
         }
         return isOk;
+    }
+
+    @Override
+    public void impData(File file) {
+        String sqls = FileRWUtils.read(file);
+        String[] split = sqls.split(";");
+        for(String sql : split){
+            String s = sql.toLowerCase();
+            if(s.contains("nb_note") || s.contains("nb_notebook") || s.contains("nb_user")){
+                systemDao.update(sql, new Object[]{});
+            }
+        }
+    }
+
+    @Override
+    public void expData(File file) {
+        FileRWUtils.write(file, getAllDataWithUser());
+    }
+
+    @Override
+    public void deleteUser() {
+        String userName = Auth.getInstance().getName();
+        systemDao.update("delete from nb_note where notebook in (select notebook from nb_notebook where email='" + userName + "')",new Object[]{});
+        systemDao.update("delete from nb_notebook where email='" + userName + "'",new Object[]{});
+        systemDao.update("delete from nb_user where email='" + userName + "'",new Object[]{});
+    }
+
+    private String getAllDataWithUser(){
+        String userName = Auth.getInstance().getName();
+        String userPwd = Auth.getInstance().getPwd();
+        StringBuffer sb = new StringBuffer();
+        sb.append("delete from nb_note where notebook in (select notebook from nb_notebook where email='" + userName + "');\n");
+        sb.append("delete from nb_notebook where email='" + userName + "';\n");
+        sb.append("delete from nb_user where email='" + userName + "';\n");
+        sb.append("insert into NB_USER (email, pwd) values ('" + userName + "','" + userPwd + "');\n");
+        List<NoteBook> noteBooks = noteBookDao.getNoteBooksToExport(userName);
+        for(NoteBook nb : noteBooks){
+            sb.append("insert into NB_NOTEBOOK (email, notebook) values ('" + nb.getEmail() + "','" + nb.getNotebook() + "');\n");
+            List<Note> notes = noteDao.getNotesToExport(nb.getNotebook());
+            for(Note n : notes){
+                sb.append("insert into NB_NOTE (notebook, title,content,sectionno) values ('" + n.getNotebook() + "','" + n.getTitle() + "','" + n.getContent() + "','" + n.getSectionno() + "');\n");
+            }
+        }
+        return sb.toString();
     }
 }
