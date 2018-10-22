@@ -43,7 +43,7 @@ public class NoteBookService implements INoteBookService {
         if(!checkNoteBookExists(newName)){
             // 需要修改note中的Notebook
             noteService.updateNoteBookByNote(noteBookName, newName);
-            i = noteBookDao.updateNoteBook(buildNoteBook(noteBookName), newName);
+            i = noteBookDao.updateNoteBook(buildNoteBook(noteBookName), buildNoteBook(newName));
         }else {
             JOptionPane.showMessageDialog(null, "笔记本["+newName+"]已存在！", "重命名失败", JOptionPane.WARNING_MESSAGE);
         }

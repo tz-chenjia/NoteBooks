@@ -12,15 +12,20 @@ import cn.tz.cj.service.intf.IAuthService;
 import cn.tz.cj.service.intf.INoteBookService;
 import cn.tz.cj.service.intf.INoteService;
 import cn.tz.cj.service.intf.ISystemService;
+import cn.tz.cj.tools.FileRWUtils;
+import cn.tz.cj.tools.email.SimpleMailSender;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainForm extends JFrame {
-    private final String URL = EditDialog.class.getResource("../resource/html/summer/index.html").getPath().substring(1);
+    private static final String URL = EditDialog.class.getResource("../resource/html/summer/index.html").getPath().substring(1);
+    private static final String TEMPDATAFILE = System.getProperty("user.dir") + File.separator + "data" + File.separator + "notebooks.sql";
 
     private JTextField searchTextField;
     private JPanel mainJPanel;
@@ -62,17 +67,19 @@ public class MainForm extends JFrame {
 
     public MainForm(String userName) {
         setTitle("NoteBooks - " + userName);
-        setContentPane(mainJPanel);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setSize(1000, 500);
-        FormSetting.setFrameLocation(this);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(ConfigsService.getImage("notebook.png"));
+        setContentPane(mainJPanel);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
+        setSize(1300, 700);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
         initJWebBrowser();
         initTree();
         setBtnIcon();
+        refreshNoteTools();
+        notebookLabel.setOpaque(true);
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -91,7 +98,6 @@ public class MainForm extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    //initTree(searchTextField.getText(), null,null);
                     String text = searchTextField.getText();
                     if (text != null && !text.trim().equals("")) {
                         tree.refresh(text.trim(), null, null);
@@ -119,8 +125,6 @@ public class MainForm extends JFrame {
                 dispose();
             }
         });
-        refreshNoteTools();
-        notebookLabel.setOpaque(true);
         editNoteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -191,12 +195,30 @@ public class MainForm extends JFrame {
                 if (o != null) {
                     String email = o.toString();
                     if (email.matches(AuthService.EMAIL_REG)) {
-
+                        FileRWUtils.existsAndCreate(TEMPDATAFILE);
+                        Map<String, File> files = new HashMap<String, File>();
+                        File file = new File(TEMPDATAFILE);
+                        files.put("notebooks.sql",file);
+                        systemService.expData(file);
+                        boolean b = SimpleMailSender.sendMail(email, "【NoteBooks】", "数据备份文件已存放在附件中，请注意查收，祝您生活愉快！", files);
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "邮件已发送，请注意查收！");
+                        }else{
+                            JOptionPane.showMessageDialog(null, "邮件发送失败，请检查网络问题！");
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "发送失败，邮箱格式不正确！");
                     }
                 }
 
+            }
+        });
+        editUserBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditUserDialog editUserForm = new EditUserDialog(MainForm.this);
+                editUserForm.setVisible(true);
+                editUserForm.pack();
             }
         });
     }

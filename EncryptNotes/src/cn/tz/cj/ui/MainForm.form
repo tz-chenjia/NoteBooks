@@ -203,7 +203,7 @@
           <component id="280a0" class="javax.swing.JButton" binding="editUserBtn">
             <constraints/>
             <properties>
-              <text value="修改账号"/>
+              <text value="修改帐号"/>
             </properties>
           </component>
           <component id="aa20e" class="javax.swing.JToolBar$Separator">

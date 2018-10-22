@@ -41,6 +41,26 @@ public class NoteDao extends BaseDao {
         return i;
     }
 
+    public int updateNoteDaoWithNewPwd(Note note, String newPwd){
+        int i = 0;
+        if(note != null){
+            String sql = "delete from nb_note where notebook = ? and title = ?";
+            i = update(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(note.getNotebook()),EncryptUtils.toEncryptWithUserPwd(note.getTitle())});
+
+            System.out.println(note.getNotebook());
+            String newNotebook = EncryptUtils.e(note.getNotebook(), newPwd);
+            System.out.println(newNotebook);
+            String newTitle = EncryptUtils.e(note.getTitle(), newPwd);
+            String newContent = EncryptUtils.e(note.getContent(), newPwd);
+            List<String> section = section(newContent, 1000);
+            for(int j = 0; j < section.size(); j++){
+                sql = "insert into nb_note  (notebook,title,content,sectionno) values (?,?,?,?)";
+                i = update(sql, new Object[]{newNotebook,newTitle,section.get(j), j});
+            }
+        }
+        return i;
+    }
+
     public int deleteNoteDao(Note note){
         encrypt(note);
         int i = 0;

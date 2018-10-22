@@ -21,4 +21,9 @@ public class UserDao extends BaseDao {
         return update(sql, new Object[]{email, pwd});
     }
 
+    public int updateUser(String oldEmail, String oldPwd, String newEmail, String newPwd){
+        String sql = "update nb_user set email=?,pwd=? where email=? and pwd=?";
+        return update(sql, new Object[]{newEmail, newPwd, oldEmail, oldPwd});
+    }
+
 }

@@ -17,11 +17,22 @@ public class NoteBookDao extends BaseDao {
         return update;
     }
 
-    public int updateNoteBook(NoteBook noteBook, String noteBookName){
+    public int updateNoteBook(NoteBook oldNoteBook, NoteBook newNoteBook){
+        int update = 0;
+        if(oldNoteBook != null){
+            String sql = "update nb_notebook set email = ?,notebook = ? where email = ? and notebook = ?";
+            System.out.println(oldNoteBook);
+            System.out.println(newNoteBook);
+            update = update(sql, new Object[]{newNoteBook.getEmail(), EncryptUtils.toEncryptWithUserPwd(newNoteBook.getNotebook()),oldNoteBook.getEmail(),EncryptUtils.toEncryptWithUserPwd(oldNoteBook.getNotebook())});
+        }
+        return update;
+    }
+
+    public int updateNoteBookWithNewPwd(NoteBook noteBook, String newPwd){
         int update = 0;
         if(noteBook != null){
-            String sql = "update nb_notebook set notebook = ? where email = ? and notebook = ?";
-            update = update(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(noteBookName), noteBook.getEmail(), EncryptUtils.toEncryptWithUserPwd(noteBook.getNotebook())});
+            String sql = "update nb_notebook set email = ?,notebook = ? where email = ? and notebook = ?";
+            update = update(sql, new Object[]{noteBook.getEmail(), EncryptUtils.e(noteBook.getNotebook(), newPwd),noteBook.getEmail(),EncryptUtils.toEncryptWithUserPwd(noteBook.getNotebook())});
         }
         return update;
     }
@@ -36,7 +47,7 @@ public class NoteBookDao extends BaseDao {
     }
 
     public List<NoteBook> getNoteBooks(String email){
-        String sql = "select notebook from nb_notebook where email = ?";
+        String sql = "select * from nb_notebook where email = ?";
         List<NoteBook> noteBooks = queryToBean(sql, new Object[]{email}, NoteBook.class);
         for(NoteBook nb : noteBooks){
             nb.setNotebook(EncryptUtils.toDencryptWithUserPwd(nb.getNotebook()));

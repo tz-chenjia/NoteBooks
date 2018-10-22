@@ -50,8 +50,8 @@ public class EditDialog extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        setSize((int) (FormSetting.getWindowWidth() * 0.8), (int) (FormSetting.getWindowHeight() * 0.8));
-        setLocationRelativeTo(contentPane);
+        setSize(1600, 900);
+        setLocationRelativeTo(null);
         setTitle("NoteBooks - 编辑");
         setIconImage(ConfigsService.getImage("notebook.png"));
         initNotebooks(notebookName);
