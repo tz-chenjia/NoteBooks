@@ -2,7 +2,6 @@ package cn.tz.cj.ui;
 
 import cn.tz.cj.bo.Auth;
 import cn.tz.cj.entity.NoteBook;
-import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.NoteBookService;
 import cn.tz.cj.service.NoteService;
 import cn.tz.cj.service.intf.INoteBookService;
@@ -20,12 +19,15 @@ import java.util.Set;
 public class NoteBookTree extends JTree {
     private static final String ROOTNODE_NAME = "NoteBooks";
     private static final Color SELECTED_BACKGROUD = new Color(115, 115, 115);
+    private static final Color MOUSE_BACKGROUD = new Color(222, 222, 222);
+    private static final int TREENODE_HIGH_LINE = 30;
 
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
     private Auth auth = Auth.getInstance();
 
     private MainForm mainForm;
+    private int mouseRow;
 
     public NoteBookTree(MainForm mainForm) {
         this.mainForm = mainForm;
@@ -41,9 +43,9 @@ public class NoteBookTree extends JTree {
         this.setCellRenderer(new MyTreeCellRenderer());
         this.addFocusListener(fl);
         this.setOpaque(false);
-        this.setRowHeight(25);
-        //this.setRootVisible(false);
-        //this.setShowsRootHandles(true);
+        this.setRowHeight(TREENODE_HIGH_LINE);
+        this.setRootVisible(false);
+        this.setShowsRootHandles(true);
     }
 
     public void refresh(String key, String lastSelectedNotebook, String lastSelectedNote) {
@@ -100,16 +102,18 @@ public class NoteBookTree extends JTree {
         }
         TreeModel treeModel = new DefaultTreeModel(rootNode);
         this.setModel(treeModel);
-        if (key != null && !key.trim().equals("")) {
-            expandAll(this, new TreePath(rootNode), true);
-        }
+        //if (key != null && !key.trim().equals("")) {
+        expandAll(this, new TreePath(rootNode), true);
+        //}
     }
 
     private void bindEvent() {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                TreePath selPath = NoteBookTree.this.getPathForLocation(e.getX(), e.getY());
+                int y = (int) e.getPoint().getY();
+                TreePath selPath = getPathForRow(matchRow(y));
+                setSelected(selPath);
                 if (e.getButton() == e.BUTTON3) {
                     if (selPath != null) {
                         int level = selPath.getPathCount();
@@ -127,13 +131,46 @@ public class NoteBookTree extends JTree {
                         Object[] path = selPath.getPath();
                         if (level == 3) {
                             refresh(auth.getSearchKey(), path[1].toString(), path[2].toString());
-                        } else {
-                            refresh(auth.getSearchKey(), null, null);
+                        } else if (level == 2) {
+                            toggleExpandCollapse(selPath);
                         }
                     }
                 }
             }
         });
+
+        this.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent arg0) {
+                int y = (int) arg0.getPoint().getY();
+                mouseRow = matchRow(y);
+                NoteBookTree.this.repaint();
+            }
+        });
+    }
+
+    private void toggleExpandCollapse(TreePath selPath) {
+        if (this.isExpanded(selPath)) {
+            this.collapsePath(selPath);
+        } else {
+            this.expandPath(selPath);
+        }
+        auth.setSelectedNoteName(null);
+        mainForm.refreshNoteTools();
+    }
+
+    private int matchRow(int y) {
+        int r = -1;
+        for (int i = 0; i < this.getRowCount(); i++) {
+            Rectangle rowBounds = this.getRowBounds(i);
+            int y1 = (int) rowBounds.getY();
+            int y2 = TREENODE_HIGH_LINE + (int) rowBounds.getY();
+            if (y >= y1 && y <= y2) {
+                r = i;
+                break;
+            }
+        }
+        return r;
     }
 
     private JPopupMenu treeMenu() {
@@ -216,12 +253,16 @@ public class NoteBookTree extends JTree {
      * 定位选中的笔记
      */
     private void findInTree() {
-        if (auth.getSelectedNoteBookName() == null || auth.getSelectedNoteName() == null) {
+        if (auth.getSelectedNoteBookName() == null) {
             return;
         }
         Object root = this.getModel().getRoot();
         TreePath treePath = new TreePath(root);
         treePath = findInPath(treePath, auth.getSelectedNoteBookName(), auth.getSelectedNoteName());
+        setSelected(treePath);
+    }
+
+    private void setSelected(TreePath treePath) {
         if (treePath != null) {
             this.setSelectionPath(treePath);
             this.scrollPathToVisible(treePath);
@@ -234,7 +275,9 @@ public class NoteBookTree extends JTree {
             return null;
         }
         String value = object.toString();
-        if (noteName.equals(value) && treePath.getParentPath().getLastPathComponent().toString().equals(notebookName)) {
+        if (noteName != null && noteName.equals(value) && treePath.getParentPath().getLastPathComponent().toString().equals(notebookName)) {
+            return treePath;
+        } else if (noteName == null && notebookName.equals(value)) {
             return treePath;
         } else {
             TreeModel model = this.getModel();
@@ -311,6 +354,17 @@ public class NoteBookTree extends JTree {
     public void paintComponent(Graphics g) {
         g.setColor(getBackground());
         g.fillRect(0, 0, getWidth(), getHeight());
+        if (mouseRow != -1) {
+            g.setColor(MOUSE_BACKGROUD);
+            Rectangle r = getRowBounds(mouseRow);
+            g.fillRect(0, r.y, getWidth(), r.height);
+            g.drawRect(0, r.y, getWidth() - 1, r.height - 1);
+            MyTreeCellRenderer.mouseEnter = true;
+            MyTreeCellRenderer.mouseRow = mouseRow;
+        } else {
+            MyTreeCellRenderer.mouseEnter = false;
+        }
+
         if (getSelectionCount() > 0) {
             g.setColor(SELECTED_BACKGROUD);
             for (int i : getSelectionRows()) {
@@ -328,13 +382,22 @@ public class NoteBookTree extends JTree {
 }
 
 class MyTreeCellRenderer extends DefaultTreeCellRenderer {
+    private static final Color SELECTED_BACKGROUD = new Color(115, 115, 115);
+    private static final Color MOUSE_BACKGROUD = new Color(222, 222, 222);
+    public static boolean mouseEnter;
+    public static int mouseRow;
+
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         //执行父类原型操作
         JLabel l = (JLabel) super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf,
                 row, hasFocus);
-        l.setBackground(selected ? new Color(115, 115, 115)
-                : tree.getBackground());
+        if (mouseEnter && !selected && mouseRow == row) {
+            l.setBackground(mouseEnter ? MOUSE_BACKGROUD : tree.getBackground());
+        } else {
+            l.setBackground(selected ? SELECTED_BACKGROUD : tree.getBackground());
+        }
+
         l.setOpaque(true);
         setText(value.toString());
         setIcon(null);
@@ -344,18 +407,16 @@ class MyTreeCellRenderer extends DefaultTreeCellRenderer {
         int level = node.getLevel();
         switch (level) {
             case 1:
-                //System.out.println(getFont());
-                setFont(new Font("SimSun", Font.PLAIN, 12));
+                setFont(new Font("SimSun", Font.BOLD, 16));
                 break;
             case 2:
-                setFont(new Font("SimSun", Font.PLAIN, 12));
+                setFont(new Font("SimSun", Font.PLAIN, 14));
                 break;
             default:
-                setFont(new Font("SimSun", Font.PLAIN, 14));
+                //setFont(new Font("SimSun", Font.PLAIN, 14));
                 //setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
                 break;
         }
-
         return this;
     }
 }

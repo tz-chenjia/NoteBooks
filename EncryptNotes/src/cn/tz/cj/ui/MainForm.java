@@ -298,6 +298,8 @@ public class MainForm extends JFrame {
         addNoteBtn.setIcon(addNoteIcon);
         aboutBtn.setIcon(aboutIcon);
         recoverBtn.setIcon(recoverIcon);
+        editNoteBtn.setIcon(addNoteIcon);
+        delNoteBtn.setIcon(delUserIcon);
     }
 
     private void initTree() {
