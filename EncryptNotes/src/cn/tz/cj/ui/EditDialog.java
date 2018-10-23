@@ -1,6 +1,7 @@
 package cn.tz.cj.ui;
 
 import chrriis.common.UIUtils;
+import chrriis.dj.nativeswing.swtimpl.NSSystemPropertySWT;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.*;
 import cn.tz.cj.entity.Note;

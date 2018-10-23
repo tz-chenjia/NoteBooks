@@ -163,7 +163,7 @@ public class NoteBookTree extends JTree {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String newName = (String) JOptionPane.showInputDialog(null, "", "请输入笔记本的名称",
-                        JOptionPane.QUESTION_MESSAGE);
+                        JOptionPane.QUESTION_MESSAGE,null,null,notebookName);
                 if (noteBookService.rename(notebookName, newName) > 0) {
                     refresh(null, null, null);
                 }

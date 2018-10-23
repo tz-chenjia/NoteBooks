@@ -97,7 +97,7 @@ public class NoteDao extends BaseDao {
     public int getNotesNumWithNoteBook(String noteBookName){
         int n = 0 ;
         String sql = "select count(title) n from nb_note where notebook = ?";
-        List<Map<String, Object>> data = query(sql, new Object[]{noteBookName});
+        List<Map<String, Object>> data = query(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(noteBookName)});
         if(data.size() > 0){
             n = Integer.valueOf(data.get(0).get("n").toString());
         }

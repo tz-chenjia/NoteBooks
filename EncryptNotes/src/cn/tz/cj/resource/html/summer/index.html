@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Summernote</title>
-  <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet"/>
-  <script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
-  <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet"/>
   <link href="summernote.css" rel="stylesheet"/>
   <script src="summernote.js"></script>
   <script src="lang/summernote-zh-CN.js"></script>
@@ -16,22 +16,18 @@
   <script>
     $(document).ready(function() {
     	$('#summernote').summernote({
-    		lang: 'zh-CN',
-	        toolbar: [
-	            ['style', ['style']],
-                ['para', ['paragraph','ul', 'ol']],
-			    ['style', ['bold', 'italic', 'underline']],
-			    ['font', ['fontsize']],
-			    ['color', ['color']],
-			    ['picture', ['picture']],
-			    ['fullscreen', ['fullscreen']],
-			]
+    		lang: 'zh-CN'
 		});
     });
 
     function btnClick(){
     	$(".btn-fullscreen").click();
     	$(".btn-fullscreen").css("display","none");
+    	$(".btn-codeview").css("display","none");
+		$('.note-icon-video').parent().css("display","none");
+		$('.note-icon-question').parent().css("display","none");
+		$(".note-group-select-from-files").css("display","none");
+		$('.link-dialog .checkbox').css("display","none");
     }
   </script>
 </body>
