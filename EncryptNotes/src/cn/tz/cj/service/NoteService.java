@@ -3,6 +3,7 @@ package cn.tz.cj.service;
 import cn.tz.cj.dao.NoteDao;
 import cn.tz.cj.entity.Note;
 import cn.tz.cj.service.intf.INoteService;
+import cn.tz.cj.service.intf.ISystemService;
 
 import java.util.Set;
 
@@ -10,18 +11,23 @@ public class NoteService implements INoteService {
 
     private NoteDao noteDao = new NoteDao();
 
+    private ISystemService systemService = new SystemService();
+
     @Override
     public int addNote(String noteBookName, String title, String content) {
+        systemService.tempSaveDataToLocal();
         return noteDao.insertNoteDao(buildNote(noteBookName, title, content));
     }
 
     @Override
     public int removeNote(String noteBookName, String title) {
+        systemService.tempSaveDataToLocal();
         return noteDao.deleteNoteDao(buildNote(noteBookName, title, ""));
     }
 
     @Override
     public int updateNote(String oldNoteBookName, String oldTitle, String noteBookName, String title, String content) {
+        systemService.tempSaveDataToLocal();
         return noteDao.updateNoteDao(buildNote(oldNoteBookName, oldTitle, ""), buildNote(noteBookName, title, content));
     }
 
@@ -37,6 +43,7 @@ public class NoteService implements INoteService {
 
     @Override
     public int updateNoteBookByNote(String noteBookName, String newName) {
+        systemService.tempSaveDataToLocal();
         return noteDao.updateNoteBookByNote(noteBookName, newName);
     }
 

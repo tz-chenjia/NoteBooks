@@ -18,6 +18,8 @@ import java.io.File;
 import java.util.List;
 
 public class SystemService implements ISystemService {
+    private static final String TEMPDATAFILE = System.getProperty("user.dir") + File.separator + "data" + File.separator + "notebooks.sql";
+
     SystemDao systemDao = new SystemDao();
     NoteBookDao noteBookDao = new NoteBookDao();
     NoteDao noteDao = new NoteDao();
@@ -70,6 +72,19 @@ public class SystemService implements ISystemService {
         systemDao.update("delete from nb_note where notebook in (select notebook from nb_notebook where email='" + userName + "')", new Object[]{});
         systemDao.update("delete from nb_notebook where email='" + userName + "'", new Object[]{});
         systemDao.update("delete from nb_user where email='" + userName + "'", new Object[]{});
+    }
+
+    @Override
+    public File tempSaveDataToLocal() {
+        File file = getTempDataFile();
+        expData(file);
+        return file;
+    }
+
+    public static File getTempDataFile() {
+        FileRWUtils.existsAndCreate(TEMPDATAFILE);
+        File file = new File(TEMPDATAFILE);
+        return file;
     }
 
     private String getAllDataWithUser() {

@@ -42,8 +42,8 @@ public class NoteBookTree extends JTree {
         this.addFocusListener(fl);
         this.setOpaque(false);
         this.setRowHeight(25);
-        this.setRootVisible(false);
-        this.setShowsRootHandles(true);
+        //this.setRootVisible(false);
+        //this.setShowsRootHandles(true);
     }
 
     public void refresh(String key, String lastSelectedNotebook, String lastSelectedNote) {
@@ -352,7 +352,7 @@ class MyTreeCellRenderer extends DefaultTreeCellRenderer {
                 break;
             default:
                 setFont(new Font("SimSun", Font.PLAIN, 14));
-                setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
+                //setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
                 break;
         }
 
