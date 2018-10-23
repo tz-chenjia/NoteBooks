@@ -72,12 +72,13 @@ public class AuthService implements IAuthService {
 
     @Override
     public boolean editUserInfo(String email, String pwd) {
+        systemService.tempSaveDataToLocal();
+
         String oldPwd = auth.getPwd();
         String oldEmail = auth.getName();
         String newEmail = EncryptUtils.e(email, AuthService.class.getName());
         String newPwd = EncryptUtils.e(pwd, pwd);
         if (!newEmail.equals(oldEmail)) {
-            System.out.println("1");
             List<NoteBook> noteBooks = noteBookDao.getNoteBooks(oldEmail);
             for (NoteBook nb : noteBooks) {
                 NoteBook newNb = new NoteBook();

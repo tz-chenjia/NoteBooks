@@ -5,6 +5,7 @@ import cn.tz.cj.dao.NoteBookDao;
 import cn.tz.cj.entity.NoteBook;
 import cn.tz.cj.service.intf.INoteBookService;
 import cn.tz.cj.service.intf.INoteService;
+import cn.tz.cj.service.intf.ISystemService;
 
 import javax.swing.*;
 import java.util.List;
@@ -13,9 +14,12 @@ public class NoteBookService implements INoteBookService {
 
     private NoteBookDao noteBookDao = new NoteBookDao();
     private INoteService noteService = new NoteService();
+    private ISystemService systemService = new SystemService();
 
     @Override
     public int addNoteBook(String noteBookName) {
+        systemService.tempSaveDataToLocal();
+
         int i = 0;
         if (noteBookName == null || noteBookName.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "添加笔记本失败", JOptionPane.WARNING_MESSAGE);
@@ -33,6 +37,8 @@ public class NoteBookService implements INoteBookService {
 
     @Override
     public int rename(String noteBookName, String newName) {
+        systemService.tempSaveDataToLocal();
+
         int i = 0;
         if (newName == null || newName.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "重命名失败", JOptionPane.WARNING_MESSAGE);
@@ -52,6 +58,8 @@ public class NoteBookService implements INoteBookService {
 
     @Override
     public int removeNoteBook(String noteBookName) {
+        systemService.tempSaveDataToLocal();
+
         int i = 0;
         // 需要判断note中的是否有这个Notebook，有的话不能删除
         if (noteService.getNotesNumWithNoteBook(noteBookName) == 0) {

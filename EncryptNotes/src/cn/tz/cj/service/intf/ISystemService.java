@@ -12,4 +12,9 @@ public interface ISystemService {
 
     void deleteUser();
 
+    /**
+     * 对数据做任何修改之前，做临时备份，防数据错误导致系统崩溃
+     * */
+    File tempSaveDataToLocal();
+
 }
