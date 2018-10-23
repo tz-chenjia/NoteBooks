@@ -32,27 +32,27 @@ public class AuthService implements IAuthService {
 
     @Override
     public boolean login(String email, String pwd) {
-        if(email == null || email.trim().equals("")){
+        if (email == null || email.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "邮箱不能为空！", "登录失败", JOptionPane.WARNING_MESSAGE);
             return false;
-        }else if(!email.matches(EMAIL_REG)){
+        } else if (!email.matches(EMAIL_REG)) {
             JOptionPane.showMessageDialog(null, "邮箱格式不正确！", "登录失败", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        if(systemService.checkDBAndInit()){
+        if (systemService.checkDBAndInit()) {
             email = EncryptUtils.e(email, AuthService.class.getName());
             pwd = EncryptUtils.e(pwd, pwd);
             auth.setName(email);
             auth.setPwd(pwd);
             User user = userDao.getUser(email);
-            if(user != null){
-                if(pwd.equals(user.getPwd())){
+            if (user != null) {
+                if (pwd.equals(user.getPwd())) {
                     return true;
-                }else {
+                } else {
                     JOptionPane.showMessageDialog(null, "邮箱或密码不正确！", "登录失败", JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
-            }else {
+            } else {
                 userDao.createUser(email, pwd);
                 return true;
             }
@@ -76,22 +76,22 @@ public class AuthService implements IAuthService {
         String oldEmail = auth.getName();
         String newEmail = EncryptUtils.e(email, AuthService.class.getName());
         String newPwd = EncryptUtils.e(pwd, pwd);
-        if(!newEmail.equals(oldEmail)){
+        if (!newEmail.equals(oldEmail)) {
             System.out.println("1");
             List<NoteBook> noteBooks = noteBookDao.getNoteBooks(oldEmail);
-            for(NoteBook nb : noteBooks){
+            for (NoteBook nb : noteBooks) {
                 NoteBook newNb = new NoteBook();
                 newNb.setNotebook(nb.getNotebook());
                 newNb.setEmail(newEmail);
-                noteBookDao.updateNoteBook(nb,newNb);
+                noteBookDao.updateNoteBook(nb, newNb);
             }
         }
-        if(!oldPwd.equals(newPwd)){
+        if (!oldPwd.equals(newPwd)) {
             List<NoteBook> noteBooks = noteBookDao.getNoteBooks(newEmail);
-            for(NoteBook nb : noteBooks){
+            for (NoteBook nb : noteBooks) {
                 noteBookDao.updateNoteBookWithNewPwd(nb, newPwd);
                 Set<String> notesTitlesByNoteBook = noteDao.getNotesTitlesByNoteBook(nb.getNotebook());
-                for(String title : notesTitlesByNoteBook){
+                for (String title : notesTitlesByNoteBook) {
                     Note note = new Note();
                     note.setContent("");
                     note.setTitle(title);

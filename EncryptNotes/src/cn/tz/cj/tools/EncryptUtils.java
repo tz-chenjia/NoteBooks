@@ -88,18 +88,18 @@ public class EncryptUtils {
     }
 
     public static String d(String data, String key) {
-        return  decrypt(data, getSecrtKey(key));
+        return decrypt(data, getSecrtKey(key));
     }
 
     public static String e(String data, String key) {
         return encrypt(data, getSecrtKey(key));
     }
 
-    public static String toEncryptWithUserPwd(String data){
+    public static String toEncryptWithUserPwd(String data) {
         return e(data, Auth.getInstance().getPwd());
     }
 
-    public static String toDencryptWithUserPwd(String data){
+    public static String toDencryptWithUserPwd(String data) {
         return d(data, Auth.getInstance().getPwd());
     }
 

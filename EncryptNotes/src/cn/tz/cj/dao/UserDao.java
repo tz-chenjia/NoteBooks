@@ -6,22 +6,22 @@ import java.util.List;
 
 public class UserDao extends BaseDao {
 
-    public User getUser(String email){
+    public User getUser(String email) {
         User user = null;
         String sql = "select * from nb_user where email=?";
         List<User> users = queryToBean(sql, new Object[]{email}, User.class);
-        if(users.size() > 0){
+        if (users.size() > 0) {
             user = users.get(0);
         }
         return user;
     }
 
-    public int createUser(String email, String pwd){
+    public int createUser(String email, String pwd) {
         String sql = "insert into nb_user (email,pwd) values(?,?)";
         return update(sql, new Object[]{email, pwd});
     }
 
-    public int updateUser(String oldEmail, String oldPwd, String newEmail, String newPwd){
+    public int updateUser(String oldEmail, String oldPwd, String newEmail, String newPwd) {
         String sql = "update nb_user set email=?,pwd=? where email=? and pwd=?";
         return update(sql, new Object[]{newEmail, newPwd, oldEmail, oldPwd});
     }

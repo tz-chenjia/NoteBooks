@@ -7,7 +7,7 @@ public class FileRWUtils {
     public static boolean existsAndCreate(String filePath) {
         File file = new File(filePath);
         File fileParent = file.getParentFile();
-        if(!fileParent.exists()){
+        if (!fileParent.exists()) {
             fileParent.mkdirs();
         }
         if (file.exists()) {
@@ -30,10 +30,8 @@ public class FileRWUtils {
     /**
      * 复制整个文件夹内容
      *
-     * @param oldPath
-     *            String 原文件路径 如：c:/fqf
-     * @param newPath
-     *            String 复制后路径 如：f:/fqf/ff
+     * @param oldPath String 原文件路径 如：c:/fqf
+     * @param newPath String 复制后路径 如：f:/fqf/ff
      * @return boolean
      */
     public static void copyFolder(String oldPath, String newPath) {

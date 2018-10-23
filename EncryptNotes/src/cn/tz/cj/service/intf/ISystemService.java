@@ -4,12 +4,12 @@ import java.io.File;
 
 public interface ISystemService {
 
-    public boolean checkDBAndInit();
+    boolean checkDBAndInit();
 
-    public void impData(File file);
+    void impData(File file);
 
-    public void expData(File file);
+    void expData(File file);
 
-    public void deleteUser();
+    void deleteUser();
 
 }

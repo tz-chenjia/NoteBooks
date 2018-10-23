@@ -17,7 +17,7 @@ public class SystemDao extends BaseDao {
             SystemDao.class
     );
 
-    public boolean tablesExists(){
+    public boolean tablesExists() {
         log.info("检查系统表是否存在");
         return tableExists("NB_NOTE") && tableExists("NB_NOTEBOOK") && tableExists("NB_USER");
     }
@@ -36,13 +36,13 @@ public class SystemDao extends BaseDao {
         return flag;
     }
 
-    public void initDBTable(){
+    public void initDBTable() {
         log.info("初始化系统表");
         IConfigsService configsService = new ConfigsService();
         UserConfigs userConfigs = configsService.getUserConfigs();
-        if(userConfigs != null){
+        if (userConfigs != null) {
             String noteSQL = "CREATE TABLE NB_NOTE (notebook varchar(200) NOT NULL,title varchar(1000) NOT NULL,content varchar(2000) NOT NULL,sectionno int NOT NULL)";
-            String noteBookSQL =  "CREATE TABLE NB_NOTEBOOK (email varchar(200) NOT NULL,notebook varchar(200) NOT NULL)";
+            String noteBookSQL = "CREATE TABLE NB_NOTEBOOK (email varchar(200) NOT NULL,notebook varchar(200) NOT NULL)";
             String userSQL = "CREATE TABLE NB_USER (email varchar(200) NOT NULL,pwd varchar(200) NOT NULL);";
             EDBType dbType = EDBType.toEDBType(userConfigs.getDbType());
             switch (dbType) {

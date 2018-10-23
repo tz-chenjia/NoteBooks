@@ -5,7 +5,10 @@ import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IAuthService;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class LoginDialog extends JDialog {
     private JPanel contentPane;
@@ -50,7 +53,7 @@ public class LoginDialog extends JDialog {
     }
 
     private void onOK() {
-        if(authService.login(emailTextField.getText(), String.valueOf(pwdPasswordField.getPassword()))){
+        if (authService.login(emailTextField.getText(), String.valueOf(pwdPasswordField.getPassword()))) {
             new MainForm(emailTextField.getText());
             dispose();
         }

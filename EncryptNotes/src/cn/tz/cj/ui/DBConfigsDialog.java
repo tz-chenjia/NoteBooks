@@ -4,7 +4,6 @@ import cn.tz.cj.entity.UserConfigs;
 import cn.tz.cj.rule.EDBType;
 import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IConfigsService;
-import cn.tz.cj.tools.EncryptUtils;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -55,7 +54,7 @@ public class DBConfigsDialog extends JDialog {
             @Override
             public void windowOpened(WindowEvent e) {
                 UserConfigs userConfigs = configsService.getUserConfigs();
-                if(userConfigs != null){
+                if (userConfigs != null) {
                     dbTypeComboBox.setSelectedItem(userConfigs.getDbType());
                     IPTextField.setText(userConfigs.getDbHost());
                     portTextField.setText(userConfigs.getDbPort());
@@ -80,31 +79,31 @@ public class DBConfigsDialog extends JDialog {
 
     private void onOK() {
         UserConfigs userConfigs = checkInputAndBuild();
-        if(userConfigs != null){
+        if (userConfigs != null) {
             configsService.saveUserConfigs(userConfigs);
             dispose();
         }
     }
 
-    private UserConfigs checkInputAndBuild(){
+    private UserConfigs checkInputAndBuild() {
         String dbType = dbTypeComboBox.getSelectedItem().toString();
         String dbHost = IPTextField.getText().trim();
-        if(dbHost == null || dbHost.equals("")){
+        if (dbHost == null || dbHost.equals("")) {
             JOptionPane.showMessageDialog(null, "主机名或IP地址不能为空！", "配置设置失败", JOptionPane.WARNING_MESSAGE);
             return null;
         }
         String dbPort = portTextField.getText().trim();
-        if(dbPort == null || dbPort.equals("")){
+        if (dbPort == null || dbPort.equals("")) {
             JOptionPane.showMessageDialog(null, "端口不能为空！", "配置设置失败", JOptionPane.WARNING_MESSAGE);
             return null;
         }
         String dbName = dbNameTextField.getText().trim();
-        if(dbName == null || dbName.equals("")){
+        if (dbName == null || dbName.equals("")) {
             JOptionPane.showMessageDialog(null, "库名不能为空！", "配置设置失败", JOptionPane.WARNING_MESSAGE);
             return null;
         }
         String dbUserName = dbUserNameTextField.getText().trim();
-        if(dbUserName == null || dbUserName.equals("")){
+        if (dbUserName == null || dbUserName.equals("")) {
             JOptionPane.showMessageDialog(null, "用户名不能为空！", "配置设置失败", JOptionPane.WARNING_MESSAGE);
             return null;
         }

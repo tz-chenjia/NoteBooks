@@ -1,12 +1,14 @@
 package cn.tz.cj.dao;
 
-import cn.tz.cj.rule.EDBType;
 import cn.tz.cj.tools.ExceptionHandleUtils;
 import cn.tz.cj.tools.JDBCUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

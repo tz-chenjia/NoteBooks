@@ -198,12 +198,12 @@ public class MainForm extends JFrame {
                         FileRWUtils.existsAndCreate(TEMPDATAFILE);
                         Map<String, File> files = new HashMap<String, File>();
                         File file = new File(TEMPDATAFILE);
-                        files.put("notebooks.sql",file);
+                        files.put("notebooks.sql", file);
                         systemService.expData(file);
                         boolean b = SimpleMailSender.sendMail(email, "【NoteBooks】", "数据备份文件已存放在附件中，请注意查收，祝您生活愉快！", files);
-                        if(b){
+                        if (b) {
                             JOptionPane.showMessageDialog(null, "邮件已发送，请注意查收！");
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(null, "邮件发送失败，请检查网络问题！");
                         }
                     } else {
@@ -219,6 +219,12 @@ public class MainForm extends JFrame {
                 EditUserDialog editUserForm = new EditUserDialog(MainForm.this);
                 editUserForm.setVisible(true);
                 editUserForm.pack();
+            }
+        });
+        aboutBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "作者：CJ\nQQ：1014376159\nEmail：1014376159@qq.com");
             }
         });
     }

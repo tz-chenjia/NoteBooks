@@ -4,7 +4,6 @@ import cn.tz.cj.dao.NoteDao;
 import cn.tz.cj.entity.Note;
 import cn.tz.cj.service.intf.INoteService;
 
-import javax.swing.*;
 import java.util.Set;
 
 public class NoteService implements INoteService {
@@ -23,7 +22,7 @@ public class NoteService implements INoteService {
 
     @Override
     public int updateNote(String oldNoteBookName, String oldTitle, String noteBookName, String title, String content) {
-        return noteDao.updateNoteDao(buildNote(oldNoteBookName,oldTitle,""), buildNote(noteBookName,title,content));
+        return noteDao.updateNoteDao(buildNote(oldNoteBookName, oldTitle, ""), buildNote(noteBookName, title, content));
     }
 
     @Override
@@ -38,7 +37,7 @@ public class NoteService implements INoteService {
 
     @Override
     public int updateNoteBookByNote(String noteBookName, String newName) {
-        return noteDao.updateNoteBookByNote(noteBookName,newName);
+        return noteDao.updateNoteBookByNote(noteBookName, newName);
     }
 
     @Override
@@ -46,7 +45,7 @@ public class NoteService implements INoteService {
         return noteDao.getNotesTitlesByNoteBook(noteBookName);
     }
 
-    private Note buildNote(String noteBookName, String title, String content){
+    private Note buildNote(String noteBookName, String title, String content) {
         Note note = new Note();
         note.setNotebook(noteBookName);
         note.setTitle(title);
@@ -55,7 +54,7 @@ public class NoteService implements INoteService {
     }
 
     @Override
-    public boolean checkTitleExists(String noteBookName, String title){
+    public boolean checkTitleExists(String noteBookName, String title) {
         Note note = noteDao.getNote(buildNote(noteBookName, title, ""));
         return note != null;
     }

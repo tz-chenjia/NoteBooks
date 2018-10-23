@@ -20,7 +20,7 @@ public class Entry {
             e1.printStackTrace();
         }
         UIUtils.setPreferredLookAndFeel();
-        if(!NativeInterface.isOpen()){
+        if (!NativeInterface.isOpen()) {
             NativeInterface.initialize();
             NativeInterface.open();
         }

@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface INoteBookService {
 
-    public int addNoteBook(String noteBookName);
+    int addNoteBook(String noteBookName);
 
-    public int rename(String noteBookName, String newName);
+    int rename(String noteBookName, String newName);
 
-    public int removeNoteBook(String noteBookName);
+    int removeNoteBook(String noteBookName);
 
-    public List<NoteBook> getNoteBooks();
+    List<NoteBook> getNoteBooks();
 
 }

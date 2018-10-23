@@ -17,16 +17,16 @@ public class NoteBookService implements INoteBookService {
     @Override
     public int addNoteBook(String noteBookName) {
         int i = 0;
-        if(noteBookName == null || noteBookName.trim().equals("")){
+        if (noteBookName == null || noteBookName.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "添加笔记本失败", JOptionPane.WARNING_MESSAGE);
             return i;
         }
         noteBookName = noteBookName.trim();
         // 需要判断是否已存在同名的
-        if(!checkNoteBookExists(noteBookName)){
+        if (!checkNoteBookExists(noteBookName)) {
             i = noteBookDao.insertNoteBook(buildNoteBook(noteBookName));
-        }else {
-            JOptionPane.showMessageDialog(null, "笔记本["+noteBookName+"]已存在！", "添加笔记本失败", JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "笔记本[" + noteBookName + "]已存在！", "添加笔记本失败", JOptionPane.WARNING_MESSAGE);
         }
         return i;
     }
@@ -34,18 +34,18 @@ public class NoteBookService implements INoteBookService {
     @Override
     public int rename(String noteBookName, String newName) {
         int i = 0;
-        if(newName == null || newName.trim().equals("")){
+        if (newName == null || newName.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "重命名失败", JOptionPane.WARNING_MESSAGE);
             return i;
         }
         newName = newName.trim();
         // 需要判断是否已存在同名的
-        if(!checkNoteBookExists(newName)){
+        if (!checkNoteBookExists(newName)) {
             // 需要修改note中的Notebook
             noteService.updateNoteBookByNote(noteBookName, newName);
             i = noteBookDao.updateNoteBook(buildNoteBook(noteBookName), buildNoteBook(newName));
-        }else {
-            JOptionPane.showMessageDialog(null, "笔记本["+newName+"]已存在！", "重命名失败", JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "笔记本[" + newName + "]已存在！", "重命名失败", JOptionPane.WARNING_MESSAGE);
         }
         return i;
     }
@@ -54,10 +54,10 @@ public class NoteBookService implements INoteBookService {
     public int removeNoteBook(String noteBookName) {
         int i = 0;
         // 需要判断note中的是否有这个Notebook，有的话不能删除
-        if(noteService.getNotesNumWithNoteBook(noteBookName) == 0){
+        if (noteService.getNotesNumWithNoteBook(noteBookName) == 0) {
             i = noteBookDao.deleteNoteBook(buildNoteBook(noteBookName));
-        }else{
-            JOptionPane.showMessageDialog(null, "笔记本["+noteBookName+"]中有笔记，请先删除笔记！", "删除笔记本失败", JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "笔记本[" + noteBookName + "]中有笔记，请先删除笔记！", "删除笔记本失败", JOptionPane.WARNING_MESSAGE);
         }
         return i;
     }
@@ -67,18 +67,18 @@ public class NoteBookService implements INoteBookService {
         return noteBookDao.getNoteBooks(Auth.getInstance().getName());
     }
 
-    private NoteBook buildNoteBook(String noteBookName){
+    private NoteBook buildNoteBook(String noteBookName) {
         NoteBook noteBook = new NoteBook();
         noteBook.setEmail(Auth.getInstance().getName());
         noteBook.setNotebook(noteBookName);
         return noteBook;
     }
 
-    private boolean checkNoteBookExists(String noteBookName){
+    private boolean checkNoteBookExists(String noteBookName) {
         boolean exists = false;
         List<NoteBook> noteBooks = getNoteBooks();
-        for(NoteBook noteBook : noteBooks){
-            if(noteBook.getNotebook().equalsIgnoreCase(noteBookName)){
+        for (NoteBook noteBook : noteBooks) {
+            if (noteBook.getNotebook().equalsIgnoreCase(noteBookName)) {
                 exists = true;
                 break;
             }

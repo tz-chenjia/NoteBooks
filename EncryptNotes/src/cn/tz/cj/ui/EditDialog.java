@@ -1,9 +1,9 @@
 package cn.tz.cj.ui;
 
-import chrriis.common.UIUtils;
-import chrriis.dj.nativeswing.swtimpl.NSSystemPropertySWT;
-import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-import chrriis.dj.nativeswing.swtimpl.components.*;
+import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
 import cn.tz.cj.entity.Note;
 import cn.tz.cj.entity.NoteBook;
 import cn.tz.cj.service.ConfigsService;
@@ -17,14 +17,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
 public class EditDialog extends JDialog {

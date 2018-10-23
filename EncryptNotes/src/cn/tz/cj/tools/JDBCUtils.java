@@ -7,7 +7,6 @@ import cn.tz.cj.service.intf.IConfigsService;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.util.Properties;
 
 public class JDBCUtils {
 
@@ -23,10 +22,10 @@ public class JDBCUtils {
     public static boolean isUseDB(String host, String port, String dbName, String userName, String pwd, EDBType dbType) {
         String url = buildDBUrl(EDBType.toString(dbType), host, port, dbName);
         if (JDBCUtils.testConnection(url, dbType.getDriverClass(), userName, pwd) == null) {
-            log.warn( "数据库不能用,配置：{" + EDBType.toString(dbType) +"," + url  +"," + userName+"}");
+            log.warn("数据库不能用,配置：{" + EDBType.toString(dbType) + "," + url + "," + userName + "}");
             return false;
         } else {
-            log.info("数据库能用,配置：{" + EDBType.toString(dbType) +"," + url +"," + userName+"}");
+            log.info("数据库能用,配置：{" + EDBType.toString(dbType) + "," + url + "," + userName + "}");
             return true;
         }
     }
@@ -73,7 +72,7 @@ public class JDBCUtils {
         try {
             IConfigsService configsService = new ConfigsService();
             UserConfigs userConfigs = configsService.getUserConfigs();
-            if(userConfigs != null){
+            if (userConfigs != null) {
                 driverClass = userConfigs.getDbDriverClass();
                 userName = userConfigs.getDbUserName();
                 password = userConfigs.getDbPassword();

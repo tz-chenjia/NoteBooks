@@ -3,7 +3,7 @@ package cn.tz.cj.entity;
 import java.text.Collator;
 import java.util.Comparator;
 
-public class NoteBook implements Comparable<NoteBook>{
+public class NoteBook implements Comparable<NoteBook> {
 
     private String email;
 
@@ -27,7 +27,7 @@ public class NoteBook implements Comparable<NoteBook>{
 
     @Override
     public String toString() {
-        return "{email:"+email+",notebook:"+notebook+"}";
+        return "{email:" + email + ",notebook:" + notebook + "}";
     }
 
     @Override

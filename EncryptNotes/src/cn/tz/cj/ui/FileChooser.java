@@ -5,8 +5,6 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class FileChooser {
 
@@ -59,14 +57,14 @@ public class FileChooser {
         });
         chooser.setAcceptAllFileFilterUsed(false);
         int option = chooser.showSaveDialog(null);
-        if(option==JFileChooser.APPROVE_OPTION){	//假如用户选择了保存
+        if (option == JFileChooser.APPROVE_OPTION) {    //假如用户选择了保存
             File file = chooser.getSelectedFile();
 
-            String fname = chooser.getName(file);	//从文件名输入框中获取文件名
+            String fname = chooser.getName(file);    //从文件名输入框中获取文件名
 
             //假如用户填写的文件名不带我们制定的后缀名，那么我们给它添上后缀
-            if(fname.indexOf(".sql")==-1){
-                file=new File(chooser.getCurrentDirectory(),fname+".sql");
+            if (fname.indexOf(".sql") == -1) {
+                file = new File(chooser.getCurrentDirectory(), fname + ".sql");
                 System.out.println("renamed");
                 System.out.println(file.getName());
             }

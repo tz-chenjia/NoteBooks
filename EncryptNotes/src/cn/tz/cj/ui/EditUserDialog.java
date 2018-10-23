@@ -68,26 +68,26 @@ public class EditUserDialog extends JDialog {
     private void onOK() {
         String oldPwd = String.valueOf(oldPwdPasswordField.getPassword());
         oldPwd = EncryptUtils.e(oldPwd, oldPwd);
-        if(oldPwd.equals(auth.getPwd())){
+        if (oldPwd.equals(auth.getPwd())) {
             String newEmail = newEmailTextField.getText();
-            if(newEmail.matches(AuthService.EMAIL_REG)){
+            if (newEmail.matches(AuthService.EMAIL_REG)) {
                 String newPwd = String.valueOf(newPwdPasswordField.getPassword());
                 String newPwd2 = String.valueOf(againNewPwdPasswordField.getPassword());
-                if(newPwd.equals(newPwd2)){
-                    if(authService.editUserInfo(newEmail, newPwd)){
+                if (newPwd.equals(newPwd2)) {
+                    if (authService.editUserInfo(newEmail, newPwd)) {
                         authService.loginOut(mainForm);
                         dispose();
-                    }else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "帐号修改失败！");
                     }
 
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "新密码与确认密码不一至！");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "新邮箱格式不正确！");
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "旧密码不正确！");
         }
     }

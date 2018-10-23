@@ -9,8 +9,6 @@ import cn.tz.cj.entity.NoteBook;
 import cn.tz.cj.entity.UserConfigs;
 import cn.tz.cj.rule.EDBType;
 import cn.tz.cj.service.intf.IConfigsService;
-import cn.tz.cj.service.intf.INoteBookService;
-import cn.tz.cj.service.intf.INoteService;
 import cn.tz.cj.service.intf.ISystemService;
 import cn.tz.cj.tools.FileRWUtils;
 import cn.tz.cj.tools.JDBCUtils;
@@ -29,19 +27,19 @@ public class SystemService implements ISystemService {
         boolean isOk = true;
         IConfigsService configsService = new ConfigsService();
         UserConfigs configs = configsService.getUserConfigs();
-        if(configs != null){
+        if (configs != null) {
             // 验证连接是否可用
             boolean useDB = JDBCUtils.isUseDB(configs.getDbHost(), configs.getDbPort(), configs.getDbName(), configs.getDbUserName(), configs.getDbPassword(), EDBType.toEDBType(configs.getDbType()));
-            if(useDB){
-                if(!systemDao.tablesExists()){
+            if (useDB) {
+                if (!systemDao.tablesExists()) {
                     systemDao.initDBTable();
                 }
-            }else{
+            } else {
                 // 提示数据库不能连
                 JOptionPane.showMessageDialog(null, "请检查您的配置及网络！", "配置连接失败", JOptionPane.WARNING_MESSAGE);
                 isOk = false;
             }
-        }else{
+        } else {
             // 提示需要配置
             JOptionPane.showMessageDialog(null, "请设置您的配置！", "配置未设置", JOptionPane.WARNING_MESSAGE);
             isOk = false;
@@ -53,9 +51,9 @@ public class SystemService implements ISystemService {
     public void impData(File file) {
         String sqls = FileRWUtils.read(file);
         String[] split = sqls.split(";");
-        for(String sql : split){
+        for (String sql : split) {
             String s = sql.toLowerCase();
-            if(s.contains("nb_note") || s.contains("nb_notebook") || s.contains("nb_user")){
+            if (s.contains("nb_note") || s.contains("nb_notebook") || s.contains("nb_user")) {
                 systemDao.update(sql, new Object[]{});
             }
         }
@@ -69,12 +67,12 @@ public class SystemService implements ISystemService {
     @Override
     public void deleteUser() {
         String userName = Auth.getInstance().getName();
-        systemDao.update("delete from nb_note where notebook in (select notebook from nb_notebook where email='" + userName + "')",new Object[]{});
-        systemDao.update("delete from nb_notebook where email='" + userName + "'",new Object[]{});
-        systemDao.update("delete from nb_user where email='" + userName + "'",new Object[]{});
+        systemDao.update("delete from nb_note where notebook in (select notebook from nb_notebook where email='" + userName + "')", new Object[]{});
+        systemDao.update("delete from nb_notebook where email='" + userName + "'", new Object[]{});
+        systemDao.update("delete from nb_user where email='" + userName + "'", new Object[]{});
     }
 
-    private String getAllDataWithUser(){
+    private String getAllDataWithUser() {
         String userName = Auth.getInstance().getName();
         String userPwd = Auth.getInstance().getPwd();
         StringBuffer sb = new StringBuffer();
@@ -83,10 +81,10 @@ public class SystemService implements ISystemService {
         sb.append("delete from nb_user where email='" + userName + "';\n");
         sb.append("insert into NB_USER (email, pwd) values ('" + userName + "','" + userPwd + "');\n");
         List<NoteBook> noteBooks = noteBookDao.getNoteBooksToExport(userName);
-        for(NoteBook nb : noteBooks){
+        for (NoteBook nb : noteBooks) {
             sb.append("insert into NB_NOTEBOOK (email, notebook) values ('" + nb.getEmail() + "','" + nb.getNotebook() + "');\n");
             List<Note> notes = noteDao.getNotesToExport(nb.getNotebook());
-            for(Note n : notes){
+            for (Note n : notes) {
                 sb.append("insert into NB_NOTE (notebook, title,content,sectionno) values ('" + n.getNotebook() + "','" + n.getTitle() + "','" + n.getContent() + "','" + n.getSectionno() + "');\n");
             }
         }

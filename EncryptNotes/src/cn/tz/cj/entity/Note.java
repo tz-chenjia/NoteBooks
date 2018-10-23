@@ -41,6 +41,6 @@ public class Note {
 
     @Override
     public String toString() {
-        return "{notebook:"+notebook+",title:"+title+",content:"+content+",sectionno:"+sectionno+"}";
+        return "{notebook:" + notebook + ",title:" + title + ",content:" + content + ",sectionno:" + sectionno + "}";
     }
 }
