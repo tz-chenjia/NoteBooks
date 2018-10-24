@@ -127,15 +127,7 @@ public class NoteBookTree extends JTree {
                         }
                     }
                 } else if (e.getButton() == e.BUTTON1) {
-                    if (selPath != null) {
-                        int level = selPath.getPathCount();
-                        Object[] path = selPath.getPath();
-                        if (level == 3) {
-                            refresh(auth.getSearchKey(), path[1].toString(), path[2].toString());
-                        } else if (level == 2) {
-                            toggleExpandCollapse(selPath);
-                        }
-                    }
+                    mouseClickSelected(selPath);
                 }
             }
         });
@@ -150,14 +142,27 @@ public class NoteBookTree extends JTree {
         });
     }
 
-    private void toggleExpandCollapse(TreePath selPath) {
-        if (this.isExpanded(selPath)) {
-            this.collapsePath(selPath);
-        } else {
-            this.expandPath(selPath);
+    private void mouseClickSelected(TreePath selPath) {
+        if(selPath != null){
+            int level = selPath.getPathCount();
+            Object[] path = selPath.getPath();
+            switch (level){
+                case 2:
+                    auth.setSelectedNoteBookName(path[1].toString());
+                    auth.setSelectedNoteName(null);
+                    break;
+                case 3:
+                    auth.setSelectedNoteBookName(path[1].toString());
+                    auth.setSelectedNoteName(path[2].toString());
+                    break;
+            }
+            if (this.isExpanded(selPath)) {
+                this.collapsePath(selPath);
+            } else {
+                this.expandPath(selPath);
+            }
+            mainForm.refreshNoteTools();
         }
-        auth.setSelectedNoteName(null);
-        mainForm.refreshNoteTools();
     }
 
     private int matchRow(int y) {
