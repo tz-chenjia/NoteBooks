@@ -29,7 +29,7 @@ public class EditUserDialog extends JDialog {
     public EditUserDialog(MainForm mainForm) {
         this.mainForm = mainForm;
         setTitle("NoteBooks - 帐号修改");
-        setIconImage(ConfigsService.getImage("notebook.png"));
+        setIconImage(ImageIconMananger.LOGO.getImage());
         setSize(350, 250);
         setLocationRelativeTo(null);
         setContentPane(contentPane);
@@ -73,16 +73,22 @@ public class EditUserDialog extends JDialog {
             if (newEmail.matches(AuthService.EMAIL_REG)) {
                 String newPwd = String.valueOf(newPwdPasswordField.getPassword());
                 String newPwd2 = String.valueOf(againNewPwdPasswordField.getPassword());
-                if (newPwd.equals(newPwd2)) {
-                    if (authService.editUserInfo(newEmail, newPwd)) {
-                        authService.loginOut(mainForm);
-                        dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "帐号修改失败！");
-                    }
+                if (!EncryptUtils.e(newPwd, newPwd).equals(oldPwd)) {
+                    if (newPwd.equals(newPwd2)) {
+                        if (authService.editUserInfo(newEmail, newPwd)) {
+                            JOptionPane.showMessageDialog(null, "帐号已修改，请重新登录系统！");
+                            authService.loginOut();
+                            dispose();
+                            mainForm.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "帐号修改失败！");
+                        }
 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "新密码与确认密码不一至！");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "新密码与确认密码不一至！");
+                    JOptionPane.showMessageDialog(null, "新密码与旧密码不能相同！");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "新邮箱格式不正确！");

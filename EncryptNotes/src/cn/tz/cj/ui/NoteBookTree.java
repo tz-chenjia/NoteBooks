@@ -192,16 +192,10 @@ public class NoteBookTree extends JTree {
         return treeJPopupMenu;
     }
 
-    private void setMenuItemIcon(JMenuItem mi, Image img){
-        ImageIcon icon = new ImageIcon(img);
-        icon.setImage(icon.getImage().getScaledInstance(20, 20,Image.SCALE_DEFAULT ));
-        mi.setIcon(icon);
-    }
-
     private JPopupMenu noteBookMenu(String notebookName) {
         JPopupMenu treeJPopupMenu = new JPopupMenu();
         JMenuItem jMenuItem_addNote = new JMenuItem("新建笔记");
-        setMenuItemIcon(jMenuItem_addNote, ConfigsService.getImage("addnote-btn.png"));
+        jMenuItem_addNote.setIcon(ImageIconMananger.NOTE.getImageIcon20_20());
         jMenuItem_addNote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -209,7 +203,7 @@ public class NoteBookTree extends JTree {
             }
         });
         JMenuItem jMenuItem_rename = new JMenuItem("重命名");
-        setMenuItemIcon(jMenuItem_rename, ConfigsService.getImage("rename-btn.png"));
+        jMenuItem_rename.setIcon(ImageIconMananger.RENAME.getImageIcon20_20());
         jMenuItem_rename.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -221,7 +215,7 @@ public class NoteBookTree extends JTree {
             }
         });
         JMenuItem jMenuItem_remove = new JMenuItem("删除笔记本");
-        setMenuItemIcon(jMenuItem_remove, ConfigsService.getImage("deleteuser-btn.png"));
+        jMenuItem_remove.setIcon(ImageIconMananger.DELETE.getImageIcon20_20());
         jMenuItem_remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -242,7 +236,7 @@ public class NoteBookTree extends JTree {
     private JPopupMenu noteMenu(String notebookName, String noteName) {
         JPopupMenu treeJPopupMenu = new JPopupMenu();
         JMenuItem jMenuItem_updateNote = new JMenuItem("修改笔记");
-        setMenuItemIcon(jMenuItem_updateNote, ConfigsService.getImage("addnote-btn.png"));
+        jMenuItem_updateNote.setIcon(ImageIconMananger.EDIT.getImageIcon20_20());
         jMenuItem_updateNote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -250,7 +244,7 @@ public class NoteBookTree extends JTree {
             }
         });
         JMenuItem jMenuItem_remove = new JMenuItem("删除笔记");
-        setMenuItemIcon(jMenuItem_remove, ConfigsService.getImage("deleteuser-btn.png"));
+        jMenuItem_remove.setIcon(ImageIconMananger.DELETE.getImageIcon20_20());
         jMenuItem_remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -371,7 +365,7 @@ public class NoteBookTree extends JTree {
     public void paintComponent(Graphics g) {
         g.setColor(getBackground());
         g.fillRect(0, 0, getWidth(), getHeight());
-        if (mouseRow != -1) {
+        if (mouseRow > 0) {
             g.setColor(MOUSE_BACKGROUD);
             Rectangle r = getRowBounds(mouseRow);
             g.fillRect(0, r.y, getWidth(), r.height);
@@ -430,8 +424,6 @@ class MyTreeCellRenderer extends DefaultTreeCellRenderer {
                 setFont(new Font("SimSun", Font.PLAIN, 14));
                 break;
             default:
-                //setFont(new Font("SimSun", Font.PLAIN, 14));
-                //setIcon(new ImageIcon(ConfigsService.getImage("tree-notebooks.png")));
                 break;
         }
         return this;

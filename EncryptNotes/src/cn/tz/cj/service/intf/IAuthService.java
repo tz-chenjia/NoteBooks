@@ -6,7 +6,7 @@ public interface IAuthService {
 
     boolean login(String email, String pwd);
 
-    boolean loginOut(JFrame frame);
+    boolean loginOut();
 
     boolean editUserInfo(String email, String pwd);
 

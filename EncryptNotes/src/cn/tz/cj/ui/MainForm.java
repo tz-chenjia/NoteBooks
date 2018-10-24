@@ -24,8 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainForm extends JFrame {
-    private static final String URL = EditDialog.class.getResource("../resource/html/summer/index.html").getPath().substring(1);
-    private static final String TEMPDATAFILE = System.getProperty("user.dir") + File.separator + "data" + File.separator + "notebooks.sql";
 
     private JTextField searchTextField;
     private JPanel mainJPanel;
@@ -58,17 +56,9 @@ public class MainForm extends JFrame {
     private IAuthService authService = new AuthService();
     private Auth auth = Auth.getInstance();
 
-    public JWebBrowser getjWebBrowser() {
-        return jWebBrowser;
-    }
-
-    public JLabel getNoteLabel() {
-        return noteLabel;
-    }
-
     public MainForm(String userName) {
         setTitle("NoteBooks - " + userName);
-        setIconImage(ConfigsService.getImage("notebook.png"));
+        setIconImage(ImageIconMananger.LOGO.getImage());
         setContentPane(mainJPanel);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
         setSize(1300, 700);
@@ -167,7 +157,8 @@ public class MainForm extends JFrame {
                     if (file != null) {
                         systemService.impData(file);
                         JOptionPane.showMessageDialog(null, "导入完成，请重新登录系统！");
-                        authService.loginOut(MainForm.this);
+                        authService.loginOut();
+                        dispose();
                     }
                 }
             }
@@ -178,14 +169,16 @@ public class MainForm extends JFrame {
                 int i = JOptionPane.showConfirmDialog(null, "删除帐号是删除该用户的所有数据，确认删除？", "删除帐号", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     systemService.deleteUser();
-                    authService.loginOut(MainForm.this);
+                    authService.loginOut();
+                    dispose();
                 }
             }
         });
         loginOutBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                authService.loginOut(MainForm.this);
+                authService.loginOut();
+                dispose();
             }
         });
         emailBackupBtn.addActionListener(new ActionListener() {
@@ -233,7 +226,8 @@ public class MainForm extends JFrame {
                 if(i == 0){
                     systemService.impData(SystemService.getTempDataFile());
                     JOptionPane.showMessageDialog(null, "数据已恢复，请重新登录系统！");
-                    authService.loginOut(MainForm.this);
+                    authService.loginOut();
+                    dispose();
                 }
             }
         });
@@ -263,43 +257,19 @@ public class MainForm extends JFrame {
         }
     }
 
-    private void setIconSize(ImageIcon icon){
-        icon.setImage(icon.getImage().getScaledInstance(20, 20,Image.SCALE_DEFAULT ));
-    }
-
     private void setBtnIcon() {
-        ImageIcon loginOutIcon = new ImageIcon(ConfigsService.getImage("loginout-btn.png"));
-        ImageIcon aboutIcon = new ImageIcon(ConfigsService.getImage("about-btn.png"));
-        ImageIcon addNoteBookIcon = new ImageIcon(ConfigsService.getImage("addnotebook-btn.png"));
-        ImageIcon addNoteIcon = new ImageIcon(ConfigsService.getImage("addnote-btn.png"));
-        ImageIcon delUserIcon = new ImageIcon(ConfigsService.getImage("deleteuser-btn.png"));
-        ImageIcon editUserIcon = new ImageIcon(ConfigsService.getImage("edituser-btn.png"));
-        ImageIcon emailIcon = new ImageIcon(ConfigsService.getImage("email-btn.png"));
-        ImageIcon expIcon = new ImageIcon(ConfigsService.getImage("exp-btn.png"));
-        ImageIcon impIcon = new ImageIcon(ConfigsService.getImage("imp-btn.png"));
-        ImageIcon recoverIcon = new ImageIcon(ConfigsService.getImage("recover-btn.png"));
-        setIconSize(loginOutIcon);
-        setIconSize(aboutIcon);
-        setIconSize(addNoteBookIcon);
-        setIconSize(addNoteIcon);
-        setIconSize(delUserIcon);
-        setIconSize(editUserIcon);
-        setIconSize(emailIcon);
-        setIconSize(expIcon);
-        setIconSize(impIcon);
-        setIconSize(recoverIcon);
-        loginOutBtn.setIcon(loginOutIcon);
-        editUserBtn.setIcon(editUserIcon);
-        delUserBtn.setIcon(delUserIcon);
-        emailBackupBtn.setIcon(emailIcon);
-        expDataBtn.setIcon(expIcon);
-        impDataBtn.setIcon(impIcon);
-        addNotebookBtn.setIcon(addNoteBookIcon);
-        addNoteBtn.setIcon(addNoteIcon);
-        aboutBtn.setIcon(aboutIcon);
-        recoverBtn.setIcon(recoverIcon);
-        editNoteBtn.setIcon(addNoteIcon);
-        delNoteBtn.setIcon(delUserIcon);
+        loginOutBtn.setIcon(ImageIconMananger.LOGINOUT.getImageIcon20_20());
+        editUserBtn.setIcon(ImageIconMananger.EDITUSER.getImageIcon20_20());
+        delUserBtn.setIcon(ImageIconMananger.DELETE.getImageIcon20_20());
+        emailBackupBtn.setIcon(ImageIconMananger.BACKUP.getImageIcon20_20());
+        expDataBtn.setIcon(ImageIconMananger.EXP.getImageIcon20_20());
+        impDataBtn.setIcon(ImageIconMananger.IMP.getImageIcon20_20());
+        addNotebookBtn.setIcon(ImageIconMananger.NOTEBOOK.getImageIcon20_20());
+        addNoteBtn.setIcon(ImageIconMananger.NOTE.getImageIcon20_20());
+        aboutBtn.setIcon(ImageIconMananger.ABOUT.getImageIcon20_20());
+        recoverBtn.setIcon(ImageIconMananger.RECOVER.getImageIcon20_20());
+        editNoteBtn.setIcon(ImageIconMananger.EDIT.getImageIcon20_20());
+        delNoteBtn.setIcon(ImageIconMananger.DELETE.getImageIcon20_20());
     }
 
     private void initTree() {

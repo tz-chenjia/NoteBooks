@@ -32,17 +32,7 @@ public enum EDBType {
         }
     }
 
-    public static String toString(EDBType type) {
-        switch (type) {
-            case DB2:
-                return "db2";
-            case SQLSERVER:
-                return "sqlserver";
-            case ORACLE:
-                return "oracle";
-            default:
-                //mysql
-                return "mysql";
-        }
+    public String getType() {
+        return type;
     }
 }

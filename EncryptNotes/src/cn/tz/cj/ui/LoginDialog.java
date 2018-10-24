@@ -23,7 +23,7 @@ public class LoginDialog extends JDialog {
 
     public LoginDialog() {
         setTitle("NoteBooks - 登录");
-        setIconImage(ConfigsService.getImage("notebook.png"));
+        setIconImage(ImageIconMananger.LOGO.getImage());
         setSize(400, 400);
         setLocationRelativeTo(null);
         setContentPane(contentPane);

@@ -20,12 +20,12 @@ public class JDBCUtils {
     private static String password = null;
 
     public static boolean isUseDB(String host, String port, String dbName, String userName, String pwd, EDBType dbType) {
-        String url = buildDBUrl(EDBType.toString(dbType), host, port, dbName);
+        String url = buildDBUrl(dbType.getType(), host, port, dbName);
         if (JDBCUtils.testConnection(url, dbType.getDriverClass(), userName, pwd) == null) {
-            log.warn("数据库不能用,配置：{" + EDBType.toString(dbType) + "," + url + "," + userName + "}");
+            //log.warn("数据库不能用,配置：{" + EDBType.toString(dbType) + "," + url + "," + userName + "}");
             return false;
         } else {
-            log.info("数据库能用,配置：{" + EDBType.toString(dbType) + "," + url + "," + userName + "}");
+            //log.info("数据库能用,配置：{" + EDBType.toString(dbType) + "," + url + "," + userName + "}");
             return true;
         }
     }

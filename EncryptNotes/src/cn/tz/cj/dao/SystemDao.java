@@ -18,7 +18,6 @@ public class SystemDao extends BaseDao {
     );
 
     public boolean tablesExists() {
-        log.info("检查系统表是否存在");
         return tableExists("NB_NOTE") && tableExists("NB_NOTEBOOK") && tableExists("NB_USER");
     }
 
@@ -37,7 +36,6 @@ public class SystemDao extends BaseDao {
     }
 
     public void initDBTable() {
-        log.info("初始化系统表");
         IConfigsService configsService = new ConfigsService();
         UserConfigs userConfigs = configsService.getUserConfigs();
         if (userConfigs != null) {

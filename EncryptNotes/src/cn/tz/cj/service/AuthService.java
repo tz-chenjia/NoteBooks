@@ -61,9 +61,8 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public boolean loginOut(JFrame frame) {
+    public boolean loginOut() {
         auth.setAuth(null);
-        frame.dispose();
         LoginDialog loginDialog = new LoginDialog();
         loginDialog.pack();
         loginDialog.setVisible(true);

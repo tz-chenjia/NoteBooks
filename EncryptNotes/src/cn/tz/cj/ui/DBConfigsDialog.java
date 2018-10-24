@@ -34,7 +34,7 @@ public class DBConfigsDialog extends JDialog {
         getRootPane().setDefaultButton(buttonOK);
         setSize(450, 450);
         setLocationRelativeTo(contentPane);
-        setIconImage(ConfigsService.getImage("notebook.png"));
+        setIconImage(ImageIconMananger.LOGO.getImage());
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

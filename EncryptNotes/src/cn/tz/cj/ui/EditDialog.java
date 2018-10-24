@@ -50,10 +50,12 @@ public class EditDialog extends JDialog {
         setSize(1600, 900);
         setLocationRelativeTo(null);
         setTitle("NoteBooks - 编辑");
-        setIconImage(ConfigsService.getImage("notebook.png"));
+        setIconImage(ImageIconMananger.LOGO.getImage());
         initNotebooks(notebookName);
         initJWebBrowser(notebookName, noteName);
         titleTextField.requestFocusInWindow();
+        buttonOK.setText("保存");
+        buttonCancel.setText("取消");
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
