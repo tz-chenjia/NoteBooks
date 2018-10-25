@@ -20,87 +20,77 @@ public class EncryptUtils {
         return secretKey;
     }
 
-    private static String encrypt(String data, String key) {
+    private static String encrypt(String data, String key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException {
         Key k = toKey(Base64.decodeBase64(key));
         byte[] raw = k.getEncoded();
         SecretKeySpec secretKeySpec = new SecretKeySpec(raw, ALGORITHM);
         Cipher cipher = null;
         byte[] bytes = null;
-        try {
-            cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(1, secretKeySpec);
-            bytes = cipher.doFinal(data.getBytes("UTF-8"));
-        } catch (NoSuchAlgorithmException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (NoSuchPaddingException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (BadPaddingException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (UnsupportedEncodingException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (IllegalBlockSizeException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (InvalidKeyException e) {
-            ExceptionHandleUtils.handling(e);
-        }
+        cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(1, secretKeySpec);
+        bytes = cipher.doFinal(data.getBytes("UTF-8"));
         return Base64.encodeBase64String(bytes);
     }
 
-    private static String decrypt(String data, String key) {
+    private static String decrypt(String data, String key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
         Key k = toKey(Base64.decodeBase64(key));
         byte[] raw = k.getEncoded();
         SecretKeySpec secretKeySpec = new SecretKeySpec(raw, ALGORITHM);
         Cipher cipher = null;
         byte[] bytes = null;
-        try {
-            cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(2, secretKeySpec);
-            bytes = cipher.doFinal(Base64.decodeBase64(data));
-        } catch (NoSuchAlgorithmException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (NoSuchPaddingException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (BadPaddingException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (IllegalBlockSizeException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (InvalidKeyException e) {
-            ExceptionHandleUtils.handling(e);
-        }
+        cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(2, secretKeySpec);
+        bytes = cipher.doFinal(Base64.decodeBase64(data));
         String r = null;
-        try {
-            r = new String(bytes, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            ExceptionHandleUtils.handling(e);
-        }
+        r = new String(bytes, "UTF-8");
         return r;
     }
 
-    private static String getSecrtKey(String encrypted) {
+    private static String getSecrtKey(String encrypted) throws UnsupportedEncodingException {
         byte[] bytes = new byte[0];
-        try {
-            bytes = encrypted.getBytes("ISO8859-1");
-            bytes = Arrays.copyOf(bytes, 16);
-        } catch (UnsupportedEncodingException e) {
-            ExceptionHandleUtils.handling(e);
-        }
+        bytes = encrypted.getBytes("ISO8859-1");
+        bytes = Arrays.copyOf(bytes, 16);
         return Base64.encodeBase64String(bytes);
     }
 
     public static String d(String data, String key) {
-        return decrypt(data, getSecrtKey(key));
+        String decrypt = null;
+        try{
+            decrypt = decrypt(data, getSecrtKey(key));
+        }catch (Throwable e){
+            GlobalExceptionHandling.exceptionHanding(e);
+        }
+        return decrypt;
     }
 
     public static String e(String data, String key) {
-        return encrypt(data, getSecrtKey(key));
+        String encrypt = null;
+        try{
+            encrypt = encrypt(data, getSecrtKey(key));
+        }catch (Throwable e){
+            GlobalExceptionHandling.exceptionHanding(e);
+        }
+        return encrypt;
     }
 
     public static String toEncryptWithUserPwd(String data) {
-        return e(data, Auth.getInstance().getPwd());
+        String encrypt = null;
+        try{
+            encrypt = e(data, Auth.getInstance().getPwd());
+        }catch (Throwable e){
+            GlobalExceptionHandling.exceptionHanding(e);
+        }
+        return encrypt;
     }
 
     public static String toDencryptWithUserPwd(String data) {
-        return d(data, Auth.getInstance().getPwd());
+        String decrypt = null;
+        try{
+            decrypt = d(data, Auth.getInstance().getPwd());
+        }catch (Throwable e){
+            GlobalExceptionHandling.exceptionHanding(e);
+        }
+        return decrypt;
     }
 
 }

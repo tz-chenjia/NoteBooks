@@ -77,7 +77,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="tz_chenjia@qq.com"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="adfe8" class="javax.swing.JLabel" binding="pwdLabel">
@@ -94,7 +94,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <toolTipText value="最多40字符"/>
+            </properties>
           </component>
         </children>
       </grid>

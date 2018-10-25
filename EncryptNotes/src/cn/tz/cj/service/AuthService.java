@@ -28,8 +28,6 @@ public class AuthService implements IAuthService {
 
     private ISystemService systemService = new SystemService();
 
-    private Auth auth = Auth.getInstance();
-
     @Override
     public boolean login(String email, String pwd) {
         if (email == null || email.trim().equals("")) {
@@ -42,8 +40,8 @@ public class AuthService implements IAuthService {
         if (systemService.checkDBAndInit()) {
             email = EncryptUtils.e(email, AuthService.class.getName());
             pwd = EncryptUtils.e(pwd, pwd);
-            auth.setName(email);
-            auth.setPwd(pwd);
+            Auth.getInstance().setName(email);
+            Auth.getInstance().setPwd(pwd);
             User user = userDao.getUser(email);
             if (user != null) {
                 if (pwd.equals(user.getPwd())) {
@@ -61,8 +59,11 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public boolean loginOut() {
-        auth.setAuth(null);
+    public boolean loginOut(boolean isSaveTempData) {
+        if(isSaveTempData){
+            systemService.tempSaveDataToLocal();
+        }
+        Auth.getInstance().setAuth(null);
         LoginDialog loginDialog = new LoginDialog();
         loginDialog.pack();
         loginDialog.setVisible(true);
@@ -71,10 +72,9 @@ public class AuthService implements IAuthService {
 
     @Override
     public boolean editUserInfo(String email, String pwd) {
-        systemService.tempSaveDataToLocal();
-
-        String oldPwd = auth.getPwd();
-        String oldEmail = auth.getName();
+        //systemService.tempSaveDataToLocal();
+        String oldPwd = Auth.getInstance().getPwd();
+        String oldEmail = Auth.getInstance().getName();
         String newEmail = EncryptUtils.e(email, AuthService.class.getName());
         String newPwd = EncryptUtils.e(pwd, pwd);
         if (!newEmail.equals(oldEmail)) {
@@ -102,7 +102,7 @@ public class AuthService implements IAuthService {
 
             }
         }
-        int i = userDao.updateUser(oldEmail, oldPwd, newEmail, newPwd);
-        return i > 0;
+        userDao.updateUser(oldEmail, oldPwd, newEmail, newPwd);
+        return true;
     }
 }

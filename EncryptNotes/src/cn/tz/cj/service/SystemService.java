@@ -88,9 +88,9 @@ public class SystemService implements ISystemService {
     }
 
     private String getAllDataWithUser() {
+        StringBuffer sb = new StringBuffer();
         String userName = Auth.getInstance().getName();
         String userPwd = Auth.getInstance().getPwd();
-        StringBuffer sb = new StringBuffer();
         sb.append("delete from nb_note where notebook in (select notebook from nb_notebook where email='" + userName + "');\n");
         sb.append("delete from nb_notebook where email='" + userName + "';\n");
         sb.append("delete from nb_user where email='" + userName + "';\n");

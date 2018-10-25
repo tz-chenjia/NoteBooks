@@ -4,7 +4,6 @@ public class Auth {
     private static Auth auth;
     private String name;
     private String pwd;
-
     private String searchKey;
     private String selectedNoteBookName;
     private String selectedNoteName;

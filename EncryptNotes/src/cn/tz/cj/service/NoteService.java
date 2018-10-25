@@ -14,42 +14,45 @@ public class NoteService implements INoteService {
     private ISystemService systemService = new SystemService();
 
     @Override
-    public int addNote(String noteBookName, String title, String content) {
-        systemService.tempSaveDataToLocal();
-        return noteDao.insertNoteDao(buildNote(noteBookName, title, content));
+    public void addNote(String noteBookName, String title, String content) {
+        //systemService.tempSaveDataToLocal();
+        noteDao.insertNoteDao(buildNote(noteBookName, title, content));
     }
 
     @Override
-    public int removeNote(String noteBookName, String title) {
-        systemService.tempSaveDataToLocal();
-        return noteDao.deleteNoteDao(buildNote(noteBookName, title, ""));
+    public void removeNote(String noteBookName, String title) {
+        //systemService.tempSaveDataToLocal();
+        noteDao.deleteNoteDao(buildNote(noteBookName, title, ""));
     }
 
     @Override
-    public int updateNote(String oldNoteBookName, String oldTitle, String noteBookName, String title, String content) {
-        systemService.tempSaveDataToLocal();
-        return noteDao.updateNoteDao(buildNote(oldNoteBookName, oldTitle, ""), buildNote(noteBookName, title, content));
+    public void updateNote(String oldNoteBookName, String oldTitle, String noteBookName, String title, String content) {
+        //systemService.tempSaveDataToLocal();
+        noteDao.updateNoteDao(buildNote(oldNoteBookName, oldTitle, ""), buildNote(noteBookName, title, content));
     }
 
     @Override
     public Note getNote(String noteBookName, String title) {
-        return noteDao.getNote(buildNote(noteBookName, title, ""));
+        Note note = noteDao.getNote(buildNote(noteBookName, title, ""));
+        return note;
     }
 
     @Override
     public int getNotesNumWithNoteBook(String noteBookName) {
-        return noteDao.getNotesNumWithNoteBook(noteBookName);
+        int notesNumWithNoteBook = noteDao.getNotesNumWithNoteBook(noteBookName);
+        return notesNumWithNoteBook;
     }
 
     @Override
-    public int updateNoteBookByNote(String noteBookName, String newName) {
-        systemService.tempSaveDataToLocal();
-        return noteDao.updateNoteBookByNote(noteBookName, newName);
+    public void updateNoteBookByNote(String noteBookName, String newName) {
+        //systemService.tempSaveDataToLocal();
+        noteDao.updateNoteBookByNote(noteBookName, newName);
     }
 
     @Override
     public Set<String> getNotesTitlesByNoteBook(String noteBookName) {
-        return noteDao.getNotesTitlesByNoteBook(noteBookName);
+        Set<String> notesTitlesByNoteBook = noteDao.getNotesTitlesByNoteBook(noteBookName);
+        return notesTitlesByNoteBook;
     }
 
     private Note buildNote(String noteBookName, String title, String content) {

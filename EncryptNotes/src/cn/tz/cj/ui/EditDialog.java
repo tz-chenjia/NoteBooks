@@ -90,7 +90,6 @@ public class EditDialog extends JDialog {
     }
 
     private void onOK(String oldNotebookName, String oldNoteName) {
-        int i = 0;
         Object notebookObj = notebookComboBox.getSelectedItem();
         if (notebookObj == null || notebookObj.toString().trim().equals("")) {
             errorLabel.setText("请选择笔记本！");
@@ -110,9 +109,9 @@ public class EditDialog extends JDialog {
         Document doc = Jsoup.parse(htmlContent);
         htmlContent = doc.select("div.note-editable").html();
         if (oldNoteName != null) {
-            i = noteService.updateNote(oldNotebookName, oldNoteName, notebookName, text, htmlContent);
+            noteService.updateNote(oldNotebookName, oldNoteName, notebookName, text, htmlContent);
         } else {
-            i = noteService.addNote(notebookName, text, htmlContent);
+            noteService.addNote(notebookName, text, htmlContent);
         }
         nbTree.refresh(null, notebookName, text);
         dispose();

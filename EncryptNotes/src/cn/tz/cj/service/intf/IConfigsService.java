@@ -8,4 +8,6 @@ public interface IConfigsService {
 
     UserConfigs getUserConfigs();
 
+    UserConfigs setUserEmail(String userEmail);
+
 }

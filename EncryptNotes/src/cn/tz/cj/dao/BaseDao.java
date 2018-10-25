@@ -1,6 +1,6 @@
 package cn.tz.cj.dao;
 
-import cn.tz.cj.tools.ExceptionHandleUtils;
+import cn.tz.cj.tools.GlobalExceptionHandling;
 import cn.tz.cj.tools.JDBCUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
@@ -16,10 +16,6 @@ import java.util.Map;
 
 public class BaseDao {
 
-    private static final Logger log = Logger.getLogger(
-            BaseDao.class
-    );
-
     // 初始化参数
     protected Connection con;
     protected PreparedStatement pstmt;
@@ -32,10 +28,9 @@ public class BaseDao {
      * @param paramsValue
      */
     public <T> List<T> queryToBean(String sql, Object[] paramsValue, Class<T> clazz) {
-
+        // 返回的集合
+        List<T> list = new ArrayList<T>();
         try {
-            // 返回的集合
-            List<T> list = new ArrayList<T>();
             // 对象
             T t = null;
 
@@ -75,14 +70,12 @@ public class BaseDao {
                 // 把封装完毕的对象，添加到list集合中
                 list.add(t);
             }
-
-            return list;
         } catch (Exception e) {
-            ExceptionHandleUtils.handling(e);
-            return null;
+            GlobalExceptionHandling.exceptionHanding(e);
         } finally {
             JDBCUtils.close(con, pstmt, rs);
         }
+        return list;
     }
 
     /**
@@ -92,10 +85,9 @@ public class BaseDao {
      * @param paramsValue
      */
     public List<Map<String, Object>> query(String sql, Object[] paramsValue) {
-
+        // 返回的集合
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         try {
-            // 返回的集合
-            List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
             // 对象
             Map<String, Object> t = null;
 
@@ -135,14 +127,12 @@ public class BaseDao {
                 // 把封装完毕的对象，添加到list集合中
                 list.add(t);
             }
-
-            return list;
         } catch (Exception e) {
-            ExceptionHandleUtils.handling(e);
-            return null;
+            GlobalExceptionHandling.exceptionHanding(e);
         } finally {
             JDBCUtils.close(con, pstmt, rs);
         }
+        return list;
     }
 
     /**
@@ -151,8 +141,7 @@ public class BaseDao {
      * @param sql         更新的sql语句(update/insert/delete)
      * @param paramsValue sql语句中占位符对应的值(如果没有占位符，传入null)
      */
-    public int update(String sql, Object[] paramsValue) {
-
+    public void update(String sql, Object[] paramsValue) {
         try {
             // 获取连接
             con = JDBCUtils.getConnection();
@@ -169,13 +158,11 @@ public class BaseDao {
                 }
             }
             // 执行更新
-            return pstmt.executeUpdate();
-
+            pstmt.executeUpdate();
         } catch (Exception e) {
-            ExceptionHandleUtils.handling(e);
+            GlobalExceptionHandling.exceptionHanding(e);
         } finally {
             JDBCUtils.close(con, pstmt, null);
         }
-        return -1;
     }
 }

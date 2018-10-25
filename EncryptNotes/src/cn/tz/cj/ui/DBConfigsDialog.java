@@ -6,6 +6,9 @@ import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IConfigsService;
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.awt.event.*;
 
 public class DBConfigsDialog extends JDialog {
@@ -35,6 +38,15 @@ public class DBConfigsDialog extends JDialog {
         setSize(450, 450);
         setLocationRelativeTo(contentPane);
         setIconImage(ImageIconMananger.LOGO.getImage());
+
+        portTextField.setDocument(new PlainDocument() {
+            @Override
+            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+                if (str == null) return;
+                if (!str.matches("\\d+")) return;
+                super.insertString(offs, str, a);//调用父类方法
+            }
+        });
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -116,6 +128,7 @@ public class DBConfigsDialog extends JDialog {
         userConfigs.setDbPort(dbPort);
         userConfigs.setDbUserName(dbUserName);
         userConfigs.setDbPassword(dbPassword);
+        userConfigs.setUserEmail("");
         return userConfigs;
     }
 

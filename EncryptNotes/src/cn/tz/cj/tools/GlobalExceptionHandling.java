@@ -1,15 +1,14 @@
 package cn.tz.cj.tools;
 
-
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
 
-public class ExceptionHandleUtils {
+public class GlobalExceptionHandling {
 
-    private static final Logger log = Logger.getLogger(ExceptionHandleUtils.class);
+    private static Logger log = Logger.getLogger(GlobalExceptionHandling.class);
 
-    public static void handling(Throwable e) {
+    public static void exceptionHanding(Throwable e){
         log.error(e);
         StackTraceElement[] stackTrace = e.getStackTrace();
         for (StackTraceElement ste : stackTrace) {

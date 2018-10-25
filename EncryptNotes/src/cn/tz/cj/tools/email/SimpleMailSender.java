@@ -1,10 +1,13 @@
 package cn.tz.cj.tools.email;
 
 import cn.tz.cj.tools.EncryptUtils;
-import cn.tz.cj.tools.ExceptionHandleUtils;
+import cn.tz.cj.tools.GlobalExceptionHandling;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -13,24 +16,23 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Properties;
 
 public class SimpleMailSender {
 
-    public static Properties getMailProperties() {
+    public static Properties getMailProperties() throws IOException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, NoSuchPaddingException {
         Properties properties = new Properties();
         BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(SimpleMailSender.class.getResourceAsStream("email.properties")));
-            properties.load(bufferedReader);
-        } catch (FileNotFoundException e) {
-            ExceptionHandleUtils.handling(e);
-        } catch (IOException e) {
-            ExceptionHandleUtils.handling(e);
-        }
-
+        bufferedReader = new BufferedReader(new InputStreamReader(SimpleMailSender.class.getResourceAsStream("email.properties")));
+        properties.load(bufferedReader);
         properties.put("mail.password", EncryptUtils.d(properties.getProperty("mail.password"), SimpleMailSender.class.getName()));
         return properties;
     }
@@ -44,14 +46,14 @@ public class SimpleMailSender {
      */
     public static boolean sendMail(String to, String subject, String content, Map<String, File> files) {
         if (to != null) {
-            Properties prop = getMailProperties();
-            String user = prop.getProperty("mail.user");
-            String password = prop.getProperty("mail.password");
-            MailAuthenticator auth = new MailAuthenticator(user, password);
-            Session session = Session.getInstance(prop, auth);
-
-            Message message = new MimeMessage(session);
             try {
+                Properties prop = getMailProperties();
+                String user = prop.getProperty("mail.user");
+                String password = prop.getProperty("mail.password");
+                MailAuthenticator auth = new MailAuthenticator(user, password);
+                Session session = Session.getInstance(prop, auth);
+
+                Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(user));
                 message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
                 message.setSubject(subject);
@@ -76,9 +78,8 @@ public class SimpleMailSender {
                 bodyMultipart.addBodyPart(htmlPart);
                 htmlPart.setContent(content, "text/html;charset=utf-8");
                 Transport.send(message);
-            } catch (MessagingException e) {
-                ExceptionHandleUtils.handling(e);
-                return false;
+            }catch (Throwable e){
+                GlobalExceptionHandling.exceptionHanding(e);
             }
             return true;
         } else {

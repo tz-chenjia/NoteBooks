@@ -7,6 +7,7 @@ import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
 import cn.tz.cj.bo.Auth;
 import cn.tz.cj.entity.Note;
+import cn.tz.cj.entity.UserConfigs;
 import cn.tz.cj.service.*;
 import cn.tz.cj.service.intf.IAuthService;
 import cn.tz.cj.service.intf.INoteBookService;
@@ -48,16 +49,20 @@ public class MainForm extends JFrame {
     public JLabel noteLabel;
     public JLabel notebookLabel;
     private JButton recoverBtn;
+    private JToolBar.Separator recoverSeparator;
     public JWebBrowser jWebBrowser;    //浏览器模型
 
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
     private ISystemService systemService = new SystemService();
     private IAuthService authService = new AuthService();
-    private Auth auth = Auth.getInstance();
 
-    public MainForm(String userName) {
-        setTitle("NoteBooks - " + userName);
+    public MainForm(UserConfigs userConfigs) {
+        if(userConfigs != null){
+            setTitle("NoteBooks - " + userConfigs.getUserEmail() + " - " + userConfigs.getDbType() + " - " + userConfigs.getDbHost() + " : " + userConfigs.getDbPort());
+        }else {
+            setTitle("NoteBooks");
+        }
         setIconImage(ImageIconMananger.LOGO.getImage());
         setContentPane(mainJPanel);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
@@ -77,6 +82,7 @@ public class MainForm extends JFrame {
                 if (NativeInterface.isOpen()) {
                     NativeInterface.close();
                 }
+                systemService.tempSaveDataToLocal();
                 System.exit(1);
             }
 
@@ -85,6 +91,7 @@ public class MainForm extends JFrame {
                 searchTextField.requestFocusInWindow();
             }
         });
+        searchTextField.setDocument(new InputLengthLimit(100));
         searchTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -107,7 +114,7 @@ public class MainForm extends JFrame {
         addNoteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tree.onAddNote(null);
+                tree.onAddNote(Auth.getInstance().getSelectedNoteBookName());
             }
         });
         loginOutBtn.addActionListener(new ActionListener() {
@@ -157,7 +164,7 @@ public class MainForm extends JFrame {
                     if (file != null) {
                         systemService.impData(file);
                         JOptionPane.showMessageDialog(null, "导入完成，请重新登录系统！");
-                        authService.loginOut();
+                        authService.loginOut(false);
                         dispose();
                     }
                 }
@@ -169,7 +176,7 @@ public class MainForm extends JFrame {
                 int i = JOptionPane.showConfirmDialog(null, "删除帐号是删除该用户的所有数据，确认删除？", "删除帐号", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     systemService.deleteUser();
-                    authService.loginOut();
+                    authService.loginOut(false);
                     dispose();
                 }
             }
@@ -177,7 +184,7 @@ public class MainForm extends JFrame {
         loginOutBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                authService.loginOut();
+                authService.loginOut(true);
                 dispose();
             }
         });
@@ -185,7 +192,7 @@ public class MainForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object o = JOptionPane.showInputDialog(null, "请输入您的邮箱", "邮箱备份",
-                        JOptionPane.QUESTION_MESSAGE, null, null, userName);
+                        JOptionPane.QUESTION_MESSAGE, null, null, userConfigs.getUserEmail());
                 if (o != null) {
                     String email = o.toString();
                     if (email.matches(AuthService.EMAIL_REG)) {
@@ -222,11 +229,11 @@ public class MainForm extends JFrame {
         recoverBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(null, "紧急恢复数据，该操作存在风险，请谨慎操作，确认恢复？", "紧急恢复", JOptionPane.YES_NO_OPTION);
-                if(i == 0){
+                int i = JOptionPane.showConfirmDialog(null, "紧急恢复数据，该操作存在风险，确保在上一次手动关闭之前的服务上进行操作。\n数据将恢复至上一次手动关闭之前的数据，请谨慎操作，确认恢复？", "紧急恢复", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
                     systemService.impData(SystemService.getTempDataFile());
                     JOptionPane.showMessageDialog(null, "数据已恢复，请重新登录系统！");
-                    authService.loginOut();
+                    authService.loginOut(false);
                     dispose();
                 }
             }
@@ -237,11 +244,11 @@ public class MainForm extends JFrame {
      * 刷新右边内容区域以及操作按钮
      */
     public void refreshNoteTools() {
-        if (auth.getSelectedNoteBookName() != null && auth.getSelectedNoteName() != null) {
+        if (Auth.getInstance().getSelectedNoteBookName() != null && Auth.getInstance().getSelectedNoteName() != null) {
             editNoteBtn.setVisible(true);
             delNoteBtn.setVisible(true);
             noteLabel.setVisible(true);
-            Note note = noteService.getNote(auth.getSelectedNoteBookName(), auth.getSelectedNoteName());
+            Note note = noteService.getNote(Auth.getInstance().getSelectedNoteBookName(), Auth.getInstance().getSelectedNoteName());
             if (note != null) {
                 notebookLabel.setText(note.getNotebook());
                 noteLabel.setText(note.getTitle());

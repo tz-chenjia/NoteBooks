@@ -6,7 +6,7 @@ public interface IAuthService {
 
     boolean login(String email, String pwd);
 
-    boolean loginOut();
+    boolean loginOut(boolean isSaveTempData);
 
     boolean editUserInfo(String email, String pwd);
 

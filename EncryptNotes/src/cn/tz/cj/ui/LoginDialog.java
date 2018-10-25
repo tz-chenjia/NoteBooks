@@ -1,8 +1,10 @@
 package cn.tz.cj.ui;
 
+import cn.tz.cj.entity.UserConfigs;
 import cn.tz.cj.service.AuthService;
 import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IAuthService;
+import cn.tz.cj.service.intf.IConfigsService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +22,7 @@ public class LoginDialog extends JDialog {
     private JLabel pwdLabel;
 
     private IAuthService authService = new AuthService();
+    private IConfigsService configsService = new ConfigsService();
 
     public LoginDialog() {
         setTitle("NoteBooks - 登录");
@@ -28,6 +31,13 @@ public class LoginDialog extends JDialog {
         setLocationRelativeTo(null);
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
+
+        emailTextField.setDocument(new InputLengthLimit(40));
+        UserConfigs userConfigs = configsService.getUserConfigs();
+        if(userConfigs != null){
+            emailTextField.setText(userConfigs.getUserEmail());
+        }
+        pwdPasswordField.setDocument(new InputLengthLimit(40));
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -54,15 +64,9 @@ public class LoginDialog extends JDialog {
 
     private void onOK() {
         if (authService.login(emailTextField.getText(), String.valueOf(pwdPasswordField.getPassword()))) {
-            new MainForm(emailTextField.getText());
+            UserConfigs userConfigs = configsService.setUserEmail(emailTextField.getText());
+            new MainForm(userConfigs);
             dispose();
         }
-    }
-
-    public static void main(String[] args) {
-        LoginDialog dialog = new LoginDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 }

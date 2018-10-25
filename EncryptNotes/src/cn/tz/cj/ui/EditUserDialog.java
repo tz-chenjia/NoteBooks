@@ -4,6 +4,7 @@ import cn.tz.cj.bo.Auth;
 import cn.tz.cj.service.AuthService;
 import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IAuthService;
+import cn.tz.cj.service.intf.IConfigsService;
 import cn.tz.cj.tools.EncryptUtils;
 
 import javax.swing.*;
@@ -23,8 +24,8 @@ public class EditUserDialog extends JDialog {
     private JLabel againNewPwdLabel;
 
     private MainForm mainForm;
-    private Auth auth = Auth.getInstance();
     private IAuthService authService = new AuthService();
+    private IConfigsService configsService = new ConfigsService();
 
     public EditUserDialog(MainForm mainForm) {
         this.mainForm = mainForm;
@@ -35,8 +36,12 @@ public class EditUserDialog extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        newEmailTextField.setText(EncryptUtils.d(auth.getName(), AuthService.class.getName()));
 
+        oldPwdPasswordField.setDocument(new InputLengthLimit(40));
+        newEmailTextField.setDocument(new InputLengthLimit(40));
+        newPwdPasswordField.setDocument(new InputLengthLimit(40));
+        againNewPwdPasswordField.setDocument(new InputLengthLimit(40));
+        newEmailTextField.setText(EncryptUtils.d(Auth.getInstance().getName(), AuthService.class.getName()));
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
@@ -68,7 +73,7 @@ public class EditUserDialog extends JDialog {
     private void onOK() {
         String oldPwd = String.valueOf(oldPwdPasswordField.getPassword());
         oldPwd = EncryptUtils.e(oldPwd, oldPwd);
-        if (oldPwd.equals(auth.getPwd())) {
+        if (oldPwd.equals(Auth.getInstance().getPwd())) {
             String newEmail = newEmailTextField.getText();
             if (newEmail.matches(AuthService.EMAIL_REG)) {
                 String newPwd = String.valueOf(newPwdPasswordField.getPassword());
@@ -76,8 +81,9 @@ public class EditUserDialog extends JDialog {
                 if (!EncryptUtils.e(newPwd, newPwd).equals(oldPwd)) {
                     if (newPwd.equals(newPwd2)) {
                         if (authService.editUserInfo(newEmail, newPwd)) {
+                            configsService.setUserEmail(newEmail);
                             JOptionPane.showMessageDialog(null, "帐号已修改，请重新登录系统！");
-                            authService.loginOut();
+                            authService.loginOut(false);
                             dispose();
                             mainForm.dispose();
                         } else {

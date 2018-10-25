@@ -57,9 +57,9 @@ public class JDBCUtils {
             Class.forName(driverClass);
             conn = DriverManager.getConnection(url, userName, password);
         } catch (ClassNotFoundException e) {
-            log.warn(e.getMessage());
+            log.warn("配置连接异常：" + e.getMessage());
         } catch (SQLException e) {
-            log.warn(e.getMessage());
+            log.warn("配置连接异常：" + e.getMessage());
         }
         return conn;
     }
@@ -69,27 +69,26 @@ public class JDBCUtils {
      */
     public static Connection getConnection() {
         Connection conn = null;
+        IConfigsService configsService = new ConfigsService();
+        UserConfigs userConfigs = configsService.getUserConfigs();
+        if (userConfigs != null) {
+            driverClass = userConfigs.getDbDriverClass();
+            userName = userConfigs.getDbUserName();
+            password = userConfigs.getDbPassword();
+            String dbType = userConfigs.getDbType();
+            String host = userConfigs.getDbHost();
+            String port = userConfigs.getDbPort();
+            String dbName = userConfigs.getDbName();
+            url = buildDBUrl(dbType, host, port, dbName);
+        }
+        //注册驱动程序
         try {
-            IConfigsService configsService = new ConfigsService();
-            UserConfigs userConfigs = configsService.getUserConfigs();
-            if (userConfigs != null) {
-                driverClass = userConfigs.getDbDriverClass();
-                userName = userConfigs.getDbUserName();
-                password = userConfigs.getDbPassword();
-                String dbType = userConfigs.getDbType();
-                String host = userConfigs.getDbHost();
-                String port = userConfigs.getDbPort();
-                String dbName = userConfigs.getDbName();
-                url = buildDBUrl(dbType, host, port, dbName);
-            }
-
-            //注册驱动程序
             Class.forName(driverClass);
             conn = DriverManager.getConnection(url, userName, password);
         } catch (ClassNotFoundException e) {
-            ExceptionHandleUtils.handling(e);
+            GlobalExceptionHandling.exceptionHanding(e);
         } catch (SQLException e) {
-            ExceptionHandleUtils.handling(e);
+            GlobalExceptionHandling.exceptionHanding(e);
         }
         return conn;
     }
@@ -97,25 +96,26 @@ public class JDBCUtils {
     /**
      * 清理环境，关闭连接(顺序:后打开的先关闭)
      */
-    public static void close(Connection conn, Statement stmt, ResultSet rs) {
-        if (rs != null)
+    public static void close(Connection conn, Statement stmt, ResultSet rs){
+        if (rs != null) {
             try {
                 rs.close();
-            } catch (SQLException e1) {
-                ExceptionHandleUtils.handling(e1);
+            } catch (SQLException e) {
+                GlobalExceptionHandling.exceptionHanding(e);
             }
+        }
         if (stmt != null) {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                ExceptionHandleUtils.handling(e);
+                GlobalExceptionHandling.exceptionHanding(e);
             }
         }
         if (conn != null) {
             try {
                 conn.close();
             } catch (SQLException e) {
-                ExceptionHandleUtils.handling(e);
+                GlobalExceptionHandling.exceptionHanding(e);
             }
         }
     }

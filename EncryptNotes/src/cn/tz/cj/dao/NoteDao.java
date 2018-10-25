@@ -19,51 +19,44 @@ public class NoteDao extends BaseDao {
         note.setTitle(EncryptUtils.toDencryptWithUserPwd(note.getTitle()));
     }
 
-    public int insertNoteDao(Note note) {
+    public void insertNoteDao(Note note) {
         encrypt(note);
-        int i = 0;
         if (note != null) {
             List<String> section = section(note.getContent(), 1000);
             for (int j = 0; j < section.size(); j++) {
                 String sql = "insert into nb_note  (notebook,title,content,sectionno) values (?,?,?,?)";
-                i = update(sql, new Object[]{note.getNotebook(), note.getTitle(), section.get(j), j});
+                update(sql, new Object[]{note.getNotebook(), note.getTitle(), section.get(j), j});
             }
         }
-        return i;
     }
 
-    public int updateNoteDao(Note oldNote, Note note) {
-        int i = 0;
+    public void updateNoteDao(Note oldNote, Note note) {
         if (oldNote != null && note != null) {
-            i = deleteNoteDao(oldNote);
-            i = insertNoteDao(note);
+            deleteNoteDao(oldNote);
+            insertNoteDao(note);
         }
-        return i;
     }
 
-    public int updateNoteDaoWithNewPwd(Note note, String newPwd) {
-        int i = 0;
+    public void updateNoteDaoWithNewPwd(Note note, String newPwd) {
         if (note != null) {
             String sql = "delete from nb_note where notebook = ? and title = ?";
-            i = update(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(note.getNotebook()), EncryptUtils.toEncryptWithUserPwd(note.getTitle())});
+            update(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(note.getNotebook()), EncryptUtils.toEncryptWithUserPwd(note.getTitle())});
             String newNotebook = EncryptUtils.e(note.getNotebook(), newPwd);
             String newTitle = EncryptUtils.e(note.getTitle(), newPwd);
             String newContent = EncryptUtils.e(note.getContent(), newPwd);
             List<String> section = section(newContent, 1000);
             for (int j = 0; j < section.size(); j++) {
                 sql = "insert into nb_note  (notebook,title,content,sectionno) values (?,?,?,?)";
-                i = update(sql, new Object[]{newNotebook, newTitle, section.get(j), j});
+                update(sql, new Object[]{newNotebook, newTitle, section.get(j), j});
             }
         }
-        return i;
     }
 
-    public int deleteNoteDao(Note note) {
+    public void deleteNoteDao(Note note) {
         encrypt(note);
         int i = 0;
         String sql = "delete from nb_note where notebook = ? and title = ?";
-        i = update(sql, new Object[]{note.getNotebook(), note.getTitle()});
-        return i;
+        update(sql, new Object[]{note.getNotebook(), note.getTitle()});
     }
 
     public Note getNote(Note note) {
@@ -101,11 +94,9 @@ public class NoteDao extends BaseDao {
         return n;
     }
 
-    public int updateNoteBookByNote(String noteBookName, String newName) {
-        int n = 0;
+    public void updateNoteBookByNote(String noteBookName, String newName) {
         String sql = "update nb_note set notebook= ? where notebook = ?";
-        n = update(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(newName), EncryptUtils.toEncryptWithUserPwd(noteBookName)});
-        return n;
+        update(sql, new Object[]{EncryptUtils.toEncryptWithUserPwd(newName), EncryptUtils.toEncryptWithUserPwd(noteBookName)});
     }
 
     public Set<String> getNotesTitlesByNoteBook(String noteBookName) {

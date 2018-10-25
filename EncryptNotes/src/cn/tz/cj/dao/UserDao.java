@@ -16,14 +16,14 @@ public class UserDao extends BaseDao {
         return user;
     }
 
-    public int createUser(String email, String pwd) {
+    public void createUser(String email, String pwd) {
         String sql = "insert into nb_user (email,pwd) values(?,?)";
-        return update(sql, new Object[]{email, pwd});
+        update(sql, new Object[]{email, pwd});
     }
 
-    public int updateUser(String oldEmail, String oldPwd, String newEmail, String newPwd) {
+    public void updateUser(String oldEmail, String oldPwd, String newEmail, String newPwd) {
         String sql = "update nb_user set email=?,pwd=? where email=? and pwd=?";
-        return update(sql, new Object[]{newEmail, newPwd, oldEmail, oldPwd});
+        update(sql, new Object[]{newEmail, newPwd, oldEmail, oldPwd});
     }
 
 }

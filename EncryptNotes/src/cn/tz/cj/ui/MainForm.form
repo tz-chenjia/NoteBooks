@@ -201,7 +201,7 @@
               <text value="修改帐号"/>
             </properties>
           </component>
-          <component id="aa20e" class="javax.swing.JToolBar$Separator">
+          <component id="aa20e" class="javax.swing.JToolBar$Separator" binding="recoverSeparator">
             <constraints/>
             <properties/>
           </component>

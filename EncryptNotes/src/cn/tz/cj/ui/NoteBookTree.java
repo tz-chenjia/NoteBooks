@@ -2,7 +2,6 @@ package cn.tz.cj.ui;
 
 import cn.tz.cj.bo.Auth;
 import cn.tz.cj.entity.NoteBook;
-import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.NoteBookService;
 import cn.tz.cj.service.NoteService;
 import cn.tz.cj.service.intf.INoteBookService;
@@ -25,7 +24,6 @@ public class NoteBookTree extends JTree {
 
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
-    private Auth auth = Auth.getInstance();
 
     private MainForm mainForm;
     private int mouseRow;
@@ -56,9 +54,9 @@ public class NoteBookTree extends JTree {
     }
 
     private void loadTree(String key, String lastSelectedNotebook, String lastSelectedNote) {
-        auth.setSearchKey(key);
-        auth.setSelectedNoteBookName(lastSelectedNotebook);
-        auth.setSelectedNoteName(lastSelectedNote);
+        Auth.getInstance().setSearchKey(key);
+        Auth.getInstance().setSelectedNoteBookName(lastSelectedNotebook);
+        Auth.getInstance().setSelectedNoteName(lastSelectedNote);
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(ROOTNODE_NAME);
         List<NoteBook> noteBooks = noteBookService.getNoteBooks();
         Collections.sort(noteBooks);
@@ -87,8 +85,8 @@ public class NoteBookTree extends JTree {
                         DefaultMutableTreeNode noteNode = new DefaultMutableTreeNode(title);
                         if (!isRecordFirstSelected) {
                             if (lastSelectedNote == null && lastSelectedNotebook == null) {
-                                auth.setSelectedNoteBookName(notebook);
-                                auth.setSelectedNoteName(title);
+                                Auth.getInstance().setSelectedNoteBookName(notebook);
+                                Auth.getInstance().setSelectedNoteName(title);
                             }
                             isRecordFirstSelected = true;
                         }
@@ -143,17 +141,17 @@ public class NoteBookTree extends JTree {
     }
 
     private void mouseClickSelected(TreePath selPath) {
-        if(selPath != null){
+        if (selPath != null) {
             int level = selPath.getPathCount();
             Object[] path = selPath.getPath();
-            switch (level){
+            switch (level) {
                 case 2:
-                    auth.setSelectedNoteBookName(path[1].toString());
-                    auth.setSelectedNoteName(null);
+                    Auth.getInstance().setSelectedNoteBookName(path[1].toString());
+                    Auth.getInstance().setSelectedNoteName(null);
                     break;
                 case 3:
-                    auth.setSelectedNoteBookName(path[1].toString());
-                    auth.setSelectedNoteName(path[2].toString());
+                    Auth.getInstance().setSelectedNoteBookName(path[1].toString());
+                    Auth.getInstance().setSelectedNoteName(path[2].toString());
                     break;
             }
             if (this.isExpanded(selPath)) {
@@ -209,9 +207,8 @@ public class NoteBookTree extends JTree {
             public void actionPerformed(ActionEvent e) {
                 String newName = (String) JOptionPane.showInputDialog(null, "", "请输入笔记本的名称",
                         JOptionPane.QUESTION_MESSAGE, null, null, notebookName);
-                if (noteBookService.rename(notebookName, newName) > 0) {
-                    refresh(null, null, null);
-                }
+                noteBookService.rename(notebookName, newName);
+                refresh(null, null, null);
             }
         });
         JMenuItem jMenuItem_remove = new JMenuItem("删除笔记本");
@@ -221,9 +218,8 @@ public class NoteBookTree extends JTree {
             public void actionPerformed(ActionEvent e) {
                 int i = JOptionPane.showConfirmDialog(null, "确定删除[" + notebookName + "]？", "删除笔记本", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    if (noteBookService.removeNoteBook(notebookName) > 0) {
-                        refresh(null, null, null);
-                    }
+                    noteBookService.removeNoteBook(notebookName);
+                    refresh(null, null, null);
                 }
             }
         });
@@ -264,12 +260,12 @@ public class NoteBookTree extends JTree {
      * 定位选中的笔记
      */
     private void findInTree() {
-        if (auth.getSelectedNoteBookName() == null) {
+        if (Auth.getInstance().getSelectedNoteBookName() == null) {
             return;
         }
         Object root = this.getModel().getRoot();
         TreePath treePath = new TreePath(root);
-        treePath = findInPath(treePath, auth.getSelectedNoteBookName(), auth.getSelectedNoteName());
+        treePath = findInPath(treePath, Auth.getInstance().getSelectedNoteBookName(), Auth.getInstance().getSelectedNoteName());
         setSelected(treePath);
     }
 
@@ -337,8 +333,12 @@ public class NoteBookTree extends JTree {
                 JOptionPane.QUESTION_MESSAGE);
         if (typeName != null) {
             if (!typeName.equals("")) {
-                noteBookService.addNoteBook(typeName);
-                refresh(null, null, null);
+                if (typeName.length() <= 100) {
+                    noteBookService.addNoteBook(typeName);
+                    refresh(null, null, null);
+                } else {
+                    JOptionPane.showMessageDialog(null, "笔记本名称限制100字符！", "创建笔记本失败", JOptionPane.WARNING_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "笔记本名称不能为空！", "创建笔记本失败", JOptionPane.WARNING_MESSAGE);
             }
