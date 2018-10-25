@@ -1,8 +1,11 @@
 package cn.tz.cj.tools;
 
+import cn.tz.cj.entity.UserConfigs;
+import cn.tz.cj.service.ConfigsService;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.util.Properties;
 
 public class FileRWUtils {
 
@@ -39,6 +42,7 @@ public class FileRWUtils {
      * @return boolean
      */
     public static void copyFolder(String oldPath, String newPath){
+        log.info(oldPath);
         (new File(newPath)).mkdirs(); // 如果文件夹不存在 则建立新文件夹
         File a = new File(oldPath);
         String[] file = a.list();
@@ -85,6 +89,37 @@ public class FileRWUtils {
             }
         }
 
+    }
+
+    public static void inputstreamtofile(InputStream ins,File file){
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+        } catch (FileNotFoundException e) {
+            GlobalExceptionHandling.exceptionHanding(e);
+        } catch (IOException e) {
+            GlobalExceptionHandling.exceptionHanding(e);
+        }finally {
+            if(os != null){
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    GlobalExceptionHandling.exceptionHanding(e);
+                }
+            }
+            if(ins != null){
+                try {
+                    ins.close();
+                } catch (IOException e) {
+                    GlobalExceptionHandling.exceptionHanding(e);
+                }
+            }
+        }
     }
 
     public static String read(File file){
@@ -149,10 +184,47 @@ public class FileRWUtils {
         return str.toString();
     }
 
-    public static void write(File file, String content){
+    public static Properties readProperties(String filePath){
+        File file = new File(filePath);
+        if(file.exists()){
+            Properties properties = new Properties();
+            BufferedReader bufferedReader = null;
+            try {
+                bufferedReader = new BufferedReader(new FileReader(file));
+                properties.load(bufferedReader);
+            } catch (FileNotFoundException e) {
+                GlobalExceptionHandling.exceptionHanding(e);
+            } catch (IOException e) {
+                GlobalExceptionHandling.exceptionHanding(e);
+            }
+            return properties;
+        }else {
+            return null;
+        }
+    }
+
+    public static void writeProperties(File file, Properties prop){
         BufferedWriter out = null;
         try {
             out = new BufferedWriter(new FileWriter(file));
+            prop.store(out, null);
+        } catch (IOException e) {
+            GlobalExceptionHandling.exceptionHanding(e);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    GlobalExceptionHandling.exceptionHanding(e);
+                }
+            }
+        }
+    }
+
+    public static void write(File file, String content){
+        BufferedWriter out = null;
+        try {
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
             out.write(content);
             out.flush(); // 把缓存区内容压入文件
             out.close(); // 最后记得关闭文件

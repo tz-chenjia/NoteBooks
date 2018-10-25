@@ -236,7 +236,7 @@ public class NoteBookTree extends JTree {
         jMenuItem_updateNote.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new EditDialog(mainForm, notebookName, noteName);
+                new EditForm(mainForm, notebookName, noteName);
             }
         });
         JMenuItem jMenuItem_remove = new JMenuItem("删除笔记");
@@ -346,7 +346,7 @@ public class NoteBookTree extends JTree {
     }
 
     public void onAddNote(String notebookName) {
-        new EditDialog(mainForm, notebookName, null);
+        new EditForm(mainForm, notebookName, null);
     }
 
     FocusListener fl = new FocusListener() {

@@ -127,7 +127,7 @@ public class MainForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String notebookName = notebookLabel.getText();
                 String noteName = noteLabel.getText();
-                new EditDialog(MainForm.this, notebookName, noteName);
+                new EditForm(MainForm.this, notebookName, noteName);
             }
         });
         delNoteBtn.addActionListener(new ActionListener() {
@@ -226,7 +226,7 @@ public class MainForm extends JFrame {
         recoverBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(null, "紧急恢复数据，该操作存在风险，确保在上一次手动关闭之前的服务上进行操作。\n数据将恢复至上一次手动关闭之前的数据，请谨慎操作，确认恢复？", "紧急恢复", JOptionPane.YES_NO_OPTION);
+                int i = JOptionPane.showConfirmDialog(null, "紧急恢复数据，一般发生系统错误后再使用，该操作存在风险！\n数据将恢复至上一次手动关闭之前的数据，确认恢复？", "紧急恢复", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     systemService.impData(SystemService.getTempDataFile());
                     JOptionPane.showMessageDialog(null, "数据已恢复，请重新登录系统！");

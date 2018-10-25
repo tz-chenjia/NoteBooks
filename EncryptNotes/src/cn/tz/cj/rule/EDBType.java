@@ -2,14 +2,17 @@ package cn.tz.cj.rule;
 
 public enum EDBType {
 
-    MYSQL("mysql", "com.mysql.jdbc.Driver"), SQLSERVER("sqlserver", "com.microsoft.sqlserver.jdbc.SQLServerDriver"),
-    ORACLE("oracle", "oracle.jdbc.driver.OracleDriver"), DB2("db2", "com.ibm.db2.jcc.DB2Driver");
+    MYSQL("mysql", "com.mysql.jdbc.Driver", 3306), SQLSERVER("sqlserver", "com.microsoft.sqlserver.jdbc.SQLServerDriver", 1433),
+    ORACLE("oracle", "oracle.jdbc.driver.OracleDriver", 1521);
 
     private String type;
 
     private String driverClass;
 
-    private EDBType(String type, String driverClass) {
+    private int port;
+
+    private EDBType(String type, String driverClass, int port) {
+        this.port = port;
         this.type = type;
         this.driverClass = driverClass;
     }
@@ -18,10 +21,12 @@ public enum EDBType {
         return driverClass;
     }
 
+    public int getPort(){
+        return port;
+    }
+
     public static EDBType toEDBType(String type) {
         switch (type) {
-            case "db2":
-                return DB2;
             case "sqlserver":
                 return SQLSERVER;
             case "oracle":

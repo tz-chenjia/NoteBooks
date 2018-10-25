@@ -41,8 +41,6 @@ public class SystemDao extends BaseDao {
             String userSQL = "CREATE TABLE NB_USER (email varchar(200) NOT NULL,pwd varchar(200) NOT NULL)";
             EDBType dbType = EDBType.toEDBType(userConfigs.getDbType());
             switch (dbType) {
-                case DB2:
-                    break;
                 case SQLSERVER:
                     break;
                 case ORACLE:

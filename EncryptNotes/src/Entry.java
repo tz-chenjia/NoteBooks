@@ -1,6 +1,6 @@
 import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-import cn.tz.cj.ui.LoginDialog;
+import cn.tz.cj.ui.LoginForm;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class Entry {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new LoginDialog();
+                    new LoginForm();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

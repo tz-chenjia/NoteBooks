@@ -10,7 +10,7 @@ import cn.tz.cj.entity.User;
 import cn.tz.cj.service.intf.IAuthService;
 import cn.tz.cj.service.intf.ISystemService;
 import cn.tz.cj.tools.EncryptUtils;
-import cn.tz.cj.ui.LoginDialog;
+import cn.tz.cj.ui.LoginForm;
 
 import javax.swing.*;
 import java.util.List;
@@ -60,11 +60,11 @@ public class AuthService implements IAuthService {
 
     @Override
     public boolean loginOut(boolean isSaveTempData) {
-        if(isSaveTempData){
+        if (isSaveTempData) {
             systemService.tempSaveDataToLocal();
         }
         Auth.getInstance().setAuth(null);
-        new LoginDialog();
+        new LoginForm();
         return false;
     }
 

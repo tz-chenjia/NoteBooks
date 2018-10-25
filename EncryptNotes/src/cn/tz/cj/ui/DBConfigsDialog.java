@@ -4,6 +4,7 @@ import cn.tz.cj.entity.UserConfigs;
 import cn.tz.cj.rule.EDBType;
 import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IConfigsService;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
@@ -30,7 +31,7 @@ public class DBConfigsDialog extends JDialog {
 
     private IConfigsService configsService = new ConfigsService();
 
-    public DBConfigsDialog(JDialog parentFrame) {
+    public DBConfigsDialog(JFrame parentFrame) {
         setTitle("NoteBooks - 配置");
         setContentPane(contentPane);
         setModal(true);
@@ -86,9 +87,27 @@ public class DBConfigsDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+        dbTypeComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox cb = (JComboBox)e.getSource();
+                String petName = (String)cb.getSelectedItem();
+                setPortByType(petName);
+            }
+        });
+
         pack();
         setLocationRelativeTo(parentFrame);
         setVisible(true);
+    }
+
+    private void setPortByType(String type){
+        int port = EDBType.toEDBType(type).getPort();
+        portTextField.setText(String.valueOf(port));
+        IPTextField.setText("");
+        dbNameTextField.setText("");
+        dbUserNameTextField.setText("");
+        dbPwdPasswordField.setText("");
     }
 
     private void onOK() {

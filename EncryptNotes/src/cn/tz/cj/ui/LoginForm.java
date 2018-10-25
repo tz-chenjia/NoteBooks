@@ -12,20 +12,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class LoginDialog extends JDialog {
-    private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton configBtn;
-    private JTextField emailTextField;
-    private JPasswordField pwdPasswordField;
-    private JLabel emailLabel;
-    private JLabel pwdLabel;
-    private JPanel footerJPanel;
-    private JPanel btnJPanel;
-    private JPanel formJPanel;
-
+public class LoginForm extends JFrame{
     private IAuthService authService = new AuthService();
     private IConfigsService configsService = new ConfigsService();
+
+    public static void main(String[] args) {
+        new LoginForm();
+    }
+
+    public LoginForm(){
+        setTitle("NoteBooks - 登录");
+        setIconImage(ImageIconMananger.LOGO.getImage());
+        setContentPane(contentPane);
+        getRootPane().setDefaultButton(buttonOK);
+        setResizable(false);
+        setBackGroudImg();
+    }
 
     private void setBackGroudImg(){
         ImageIcon imageIcon = ImageIconMananger.LOGINBACKGROUD.getImageIcon();
@@ -33,18 +35,6 @@ public class LoginDialog extends JDialog {
         label.setBounds(0,0,imageIcon.getIconWidth(),imageIcon.getIconHeight());
         this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
         contentPane.setOpaque(false);
-        footerJPanel.setOpaque(false);
-        formJPanel.setOpaque(false);
-        btnJPanel.setOpaque(false);
-        //this.setSize(imageIcon.getIconWidth(),imageIcon.getIconHeight());
-    }
-
-    public LoginDialog() {
-        setTitle("NoteBooks - 登录");
-        setIconImage(ImageIconMananger.LOGO.getImage());
-        setContentPane(contentPane);
-        getRootPane().setDefaultButton(buttonOK);
-        setBackGroudImg();
         emailTextField.setDocument(new InputLengthLimit(40));
         UserConfigs userConfigs = configsService.getUserConfigs();
         if(userConfigs != null){
@@ -67,7 +57,7 @@ public class LoginDialog extends JDialog {
         configBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new DBConfigsDialog(LoginDialog.this);
+                new DBConfigsDialog(LoginForm.this);
             }
         });
 
@@ -83,4 +73,12 @@ public class LoginDialog extends JDialog {
             dispose();
         }
     }
+
+    private JPanel contentPane;
+    private JTextField emailTextField;
+    private JPasswordField pwdPasswordField;
+    private JButton configBtn;
+    private JButton buttonOK;
+    private JLabel emailLabel;
+    private JLabel pwdLabel;
 }

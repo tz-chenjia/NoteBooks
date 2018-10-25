@@ -18,7 +18,7 @@ import java.io.File;
 import java.util.List;
 
 public class SystemService implements ISystemService {
-    private static final String TEMPDATAFILE = System.getProperty("user.dir") + File.separator + "data" + File.separator + "notebooks.sql";
+    private static final String TEMPDATAFILE = ConfigsService.getTempDataPath("notebooks.sql") ;
 
     SystemDao systemDao = new SystemDao();
     NoteBookDao noteBookDao = new NoteBookDao();

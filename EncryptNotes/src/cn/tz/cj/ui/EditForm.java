@@ -20,43 +20,39 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 
-public class EditDialog extends JDialog {
-
-    private final String INTERNAL_HTMLMODEL_URL = EditDialog.class.getResource("../resource/html/summer").getPath().substring(1);
-    private final String CONFIGS_HTMLMODEL_URL = ConfigsService.getConfPath() + "summer";
+public class EditForm extends JFrame {
     private final String URL = ConfigsService.getConfPath() + "summer" + File.separator + "index.html";
 
-    private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JPanel mainJPanel;
     private JComboBox notebookComboBox;
-    private JPanel editJPanel;
     private JTextField titleTextField;
+    private JButton buttonCancel;
+    private JButton buttonOK;
+    private JPanel editJPanel;
     private JLabel errorLabel;
+
     private JWebBrowser jWebBrowser;    //浏览器模型
     private NoteBookTree nbTree;
-
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
 
-    public EditDialog(MainForm mainForm, String notebookName, String noteName) {
+    public EditForm(MainForm mainForm, String notebookName, String noteName) {
         this.nbTree = mainForm.getTree();
-        setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
-        Dimension size = new Dimension();
-        size.setSize(1200, 700);
-        setPreferredSize(size);
         setTitle("NoteBooks - 编辑");
         setIconImage(ImageIconMananger.LOGO.getImage());
         initNotebooks(notebookName);
         initJWebBrowser(notebookName, noteName);
         titleTextField.requestFocusInWindow();
-        buttonOK.setText("保存");
-        buttonCancel.setText("取消");
+        setContentPane(mainJPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Dimension size = new Dimension();
+        size.setSize(1200, 700);
+        setPreferredSize(size);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -83,7 +79,7 @@ public class EditDialog extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        mainJPanel.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -138,9 +134,6 @@ public class EditDialog extends JDialog {
     }
 
     private void initLocalHTMLModel(String notebookName, String noteName) {
-        if (!FileRWUtils.exists(URL)) {
-            FileRWUtils.copyFolder(INTERNAL_HTMLMODEL_URL, CONFIGS_HTMLMODEL_URL);
-        }
         String htmlContent = FileRWUtils.read(new File(URL)).trim();
         htmlContent = htmlContent.substring(htmlContent.indexOf("doctype") - 2);
         Document doc = Jsoup.parse(htmlContent, "utf-8");
@@ -164,7 +157,7 @@ public class EditDialog extends JDialog {
         initLocalHTMLModel(notebookName, noteName);
         jWebBrowser = new JWebBrowser();
         jWebBrowser.navigate(URL);
-        jWebBrowser.setPreferredSize(new Dimension(800, 400));
+        //jWebBrowser.setPreferredSize(new Dimension(800, 400));
         jWebBrowser.setBarsVisible(false);
         jWebBrowser.setMenuBarVisible(false);
         jWebBrowser.setButtonBarVisible(false);
