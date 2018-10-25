@@ -36,17 +36,15 @@ public class LoginDialog extends JDialog {
         footerJPanel.setOpaque(false);
         formJPanel.setOpaque(false);
         btnJPanel.setOpaque(false);
+        //this.setSize(imageIcon.getIconWidth(),imageIcon.getIconHeight());
     }
 
     public LoginDialog() {
         setTitle("NoteBooks - 登录");
         setIconImage(ImageIconMananger.LOGO.getImage());
-        setSize(400, 400);
-        setLocationRelativeTo(null);
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
         setBackGroudImg();
-
         emailTextField.setDocument(new InputLengthLimit(40));
         UserConfigs userConfigs = configsService.getUserConfigs();
         if(userConfigs != null){
@@ -69,11 +67,13 @@ public class LoginDialog extends JDialog {
         configBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DBConfigsDialog dbConfigsDialog = new DBConfigsDialog();
-                dbConfigsDialog.pack();
-                dbConfigsDialog.setVisible(true);
+                new DBConfigsDialog(LoginDialog.this);
             }
         });
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void onOK() {

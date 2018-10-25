@@ -65,12 +65,11 @@ public class MainForm extends JFrame {
         }
         setIconImage(ImageIconMananger.LOGO.getImage());
         setContentPane(mainJPanel);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
-        setSize(1300, 700);
-        setLocationRelativeTo(null);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
+        Dimension size = new Dimension();
+        size.setSize(1300, 800);
+        setPreferredSize(size);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setVisible(true);
         initJWebBrowser();
         initTree();
         setBtnIcon();
@@ -128,7 +127,7 @@ public class MainForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String notebookName = notebookLabel.getText();
                 String noteName = noteLabel.getText();
-                EditDialog.runEditDialog(tree, notebookName, noteName);
+                new EditDialog(MainForm.this, notebookName, noteName);
             }
         });
         delNoteBtn.addActionListener(new ActionListener() {
@@ -215,9 +214,7 @@ public class MainForm extends JFrame {
         editUserBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EditUserDialog editUserForm = new EditUserDialog(MainForm.this);
-                editUserForm.setVisible(true);
-                editUserForm.pack();
+                new EditUserDialog(MainForm.this);
             }
         });
         aboutBtn.addActionListener(new ActionListener() {
@@ -238,6 +235,14 @@ public class MainForm extends JFrame {
                 }
             }
         });
+
+        pack();
+        setVisible(true);
+        setLocationRelativeTo(null);
+    }
+
+    public NoteBookTree getTree() {
+        return tree;
     }
 
     /**

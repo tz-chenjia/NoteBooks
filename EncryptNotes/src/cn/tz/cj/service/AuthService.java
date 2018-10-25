@@ -64,9 +64,7 @@ public class AuthService implements IAuthService {
             systemService.tempSaveDataToLocal();
         }
         Auth.getInstance().setAuth(null);
-        LoginDialog loginDialog = new LoginDialog();
-        loginDialog.pack();
-        loginDialog.setVisible(true);
+        new LoginDialog();
         return false;
     }
 

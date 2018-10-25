@@ -27,9 +27,7 @@ public class Entry {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    LoginDialog dialog = new LoginDialog();
-                    dialog.pack();
-                    dialog.setVisible(true);
+                    new LoginDialog();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

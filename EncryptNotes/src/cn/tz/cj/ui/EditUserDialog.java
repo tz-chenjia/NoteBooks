@@ -31,8 +31,8 @@ public class EditUserDialog extends JDialog {
         this.mainForm = mainForm;
         setTitle("NoteBooks - 帐号修改");
         setIconImage(ImageIconMananger.LOGO.getImage());
-        setSize(350, 250);
-        setLocationRelativeTo(null);
+        //setSize(350, 250);
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -68,6 +68,10 @@ public class EditUserDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        pack();
+        setLocationRelativeTo(mainForm);
+        setVisible(true);
     }
 
     private void onOK() {

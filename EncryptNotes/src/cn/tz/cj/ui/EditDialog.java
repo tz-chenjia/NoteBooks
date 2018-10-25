@@ -42,13 +42,14 @@ public class EditDialog extends JDialog {
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
 
-    public EditDialog(NoteBookTree nbTree, String notebookName, String noteName) {
-        this.nbTree = nbTree;
+    public EditDialog(MainForm mainForm, String notebookName, String noteName) {
+        this.nbTree = mainForm.getTree();
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        setSize(1600, 900);
-        setLocationRelativeTo(null);
+        Dimension size = new Dimension();
+        size.setSize(1200, 700);
+        setPreferredSize(size);
         setTitle("NoteBooks - 编辑");
         setIconImage(ImageIconMananger.LOGO.getImage());
         initNotebooks(notebookName);
@@ -87,6 +88,10 @@ public class EditDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        pack();
+        setLocationRelativeTo(mainForm);
+        setVisible(true);
     }
 
     private void onOK(String oldNotebookName, String oldNoteName) {
@@ -198,13 +203,6 @@ public class EditDialog extends JDialog {
             }
         });
 
-
         editJPanel.add(jWebBrowser);
-    }
-
-    public static void runEditDialog(NoteBookTree nbTree, String notebook, String note) {
-        EditDialog editDialog = new EditDialog(nbTree, notebook, note);
-        editDialog.pack();
-        editDialog.setVisible(true);
     }
 }

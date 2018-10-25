@@ -30,13 +30,11 @@ public class DBConfigsDialog extends JDialog {
 
     private IConfigsService configsService = new ConfigsService();
 
-    public DBConfigsDialog() {
+    public DBConfigsDialog(JDialog parentFrame) {
         setTitle("NoteBooks - 配置");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        setSize(450, 450);
-        setLocationRelativeTo(contentPane);
         setIconImage(ImageIconMananger.LOGO.getImage());
 
         portTextField.setDocument(new PlainDocument() {
@@ -87,6 +85,10 @@ public class DBConfigsDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        pack();
+        setLocationRelativeTo(parentFrame);
+        setVisible(true);
     }
 
     private void onOK() {
