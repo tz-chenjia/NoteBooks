@@ -80,9 +80,9 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="2" />
-          <entry key="form" value="22" />
+          <entry key="form" value="23" />
           <entry key="html" value="6" />
-          <entry key="java" value="365" />
+          <entry key="java" value="367" />
           <entry key="log" value="1" />
           <entry key="properties" value="9" />
           <entry key="sql" value="1" />
@@ -91,9 +91,9 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="2" />
-          <entry key="GUI_DESIGNER_FORM" value="22" />
+          <entry key="GUI_DESIGNER_FORM" value="23" />
           <entry key="HTML" value="6" />
-          <entry key="JAVA" value="365" />
+          <entry key="JAVA" value="367" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Properties" value="9" />
           <entry key="SQL" value="1" />
@@ -103,14 +103,14 @@
         <counts>
           <entry key="dummy" value="24" />
           <entry key="html" value="12" />
-          <entry key="java" value="20617" />
+          <entry key="java" value="20819" />
           <entry key="properties" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="12" />
-          <entry key="JAVA" value="20617" />
+          <entry key="JAVA" value="20819" />
           <entry key="PLAIN_TEXT" value="24" />
           <entry key="Properties" value="18" />
         </counts>
@@ -185,11 +185,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/conf/my.properties">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/NoteBookTree.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="111">
@@ -207,15 +202,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/entity/NoteBook.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="313">
@@ -224,16 +210,46 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditUserDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+            <state relative-caret-position="318">
+              <caret line="43" column="109" selection-start-line="43" selection-start-column="109" selection-end-line="43" selection-end-column="109" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="456">
+              <caret line="47" column="26" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/ImageIconMananger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#565#566#0" expanded="true" />
+                <element signature="e#605#606#0" expanded="true" />
+                <element signature="e#636#637#0" expanded="true" />
+                <element signature="e#697#698#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.form">
+          <provider selected="true" editor-type-id="ui-designer" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -316,7 +332,6 @@
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/IconImgMananger.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/rule/EDBType.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/JTextFieldInputLength.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.form" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/bo/ServerReturnVO.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/intf/IGlobalExceptionHandling.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/intf/IConfigsService.java" />
@@ -325,7 +340,6 @@
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/intf/INoteBookService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/tools/GlobalExceptionHandling.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/bo/Auth.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/ImageIconMananger.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/InputLengthLimit.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/DBConfigsDialog.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/EditDialog.java" />
@@ -339,7 +353,6 @@
         <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/SystemDao.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/UserDao.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/ConfigsService.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/NoteBookService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/NoteService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form" />
@@ -350,6 +363,9 @@
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/NoteBookTree.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/EditUserDialog.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/ImageIconMananger.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.form" />
       </list>
     </option>
   </component>
@@ -360,8 +376,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="277" />
-    <option name="y" value="430" />
+    <option name="x" value="145" />
+    <option name="y" value="378" />
     <option name="width" value="1649" />
     <option name="height" value="1047" />
   </component>
@@ -393,11 +409,6 @@
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
               <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -411,35 +422,15 @@
               <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="bo" type="462c0819:PsiDirectoryNode" />
+              <item name="resource" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
               <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
+              <item name="resource" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
@@ -454,39 +445,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cj" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="NoteBookTree.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="DBConfigsDialog" type="e9f4de52:FormNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="EditDialog" type="e9f4de52:FormNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="EditUserDialog" type="e9f4de52:FormNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="MainForm" type="e9f4de52:FormNode" />
+              <item name="LoginDialog" type="e9f4de52:FormNode" />
             </path>
           </expand>
           <select />
@@ -496,7 +455,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="267" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="383" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540138651768" />
     <property name="extract.method.default.visibility" value="private" />
@@ -507,8 +466,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\libs" />
       <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\src\cn\tz\cj\resource\images" />
+      <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\libs" />
       <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\src\cn\tz\cj\tools" />
       <recent name="F:\GitHub\notebook\svn\trunk\EncryptNotes\src\cn\tz\cj\resource\images" />
       <recent name="F:\GitHub\notebook\svn\trunk\EncryptNotes\libs" />
@@ -637,18 +596,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1064" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6335878" visible="true" weight="0.26984978" />
-      <window_info id="Structure" order="1" sideWeight="0.36641222" side_tool="true" visible="true" weight="0.26984978" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6342593" visible="true" weight="0.22424893" />
+      <window_info id="Structure" order="1" sideWeight="0.36574075" side_tool="true" visible="true" weight="0.22424893" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.56333333" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.28" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.56333333" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.28111112" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -679,7 +637,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditUserDialog.java</url>
-          <line>81</line>
+          <line>80</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -783,9 +741,6 @@
           <caret line="12" column="54" selection-start-line="12" selection-start-column="54" selection-end-line="12" selection-end-column="54" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.form">
-      <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/DBConfigsDialog.form">
       <provider selected="true" editor-type-id="ui-designer" />
@@ -900,20 +855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/ImageIconMananger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#605#606#0" expanded="true" />
-            <element signature="e#636#637#0" expanded="true" />
-            <element signature="e#697#698#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/InputLengthLimit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
@@ -1006,13 +947,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1151,13 +1085,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditUserDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+        <state relative-caret-position="318">
+          <caret line="43" column="109" selection-start-line="43" selection-start-column="109" selection-end-line="43" selection-end-column="109" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="47" column="26" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/ImageIconMananger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#565#566#0" expanded="true" />
+            <element signature="e#605#606#0" expanded="true" />
+            <element signature="e#636#637#0" expanded="true" />
+            <element signature="e#697#698#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.form">
+      <provider selected="true" editor-type-id="ui-designer" />
     </entry>
   </component>
   <component name="masterDetails">

@@ -8,7 +8,8 @@ import java.awt.*;
 public enum ImageIconMananger {
     ABOUT("about-btn.png"), NOTEBOOK("addnotebook-btn.png"), LOGINOUT("loginout-btn.png"), NOTE("addnote-btn.png"),
     DELETE("deleteuser-btn.png"), EDIT("addnote-btn.png"), RENAME("rename-btn.png"), EDITUSER("edituser-btn.png"),
-    BACKUP("email-btn.png"), EXP("exp-btn.png"), IMP("imp-btn.png"), RECOVER("recover-btn.png"), LOGO("notebook.png");
+    BACKUP("email-btn.png"), EXP("exp-btn.png"), IMP("imp-btn.png"), RECOVER("recover-btn.png"), LOGO("logo.png"),
+    LOGINBACKGROUD("loginbackgroud.png");
 
     private String fileName;
 
@@ -18,6 +19,11 @@ public enum ImageIconMananger {
 
     public Image getImage() {
         return ConfigsService.getImage(this.fileName);
+    }
+
+    public ImageIcon getImageIcon() {
+        ImageIcon icon = new ImageIcon(getImage());
+        return icon;
     }
 
     public ImageIcon getImageIcon20_20() {

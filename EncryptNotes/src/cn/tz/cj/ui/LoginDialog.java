@@ -20,9 +20,23 @@ public class LoginDialog extends JDialog {
     private JPasswordField pwdPasswordField;
     private JLabel emailLabel;
     private JLabel pwdLabel;
+    private JPanel footerJPanel;
+    private JPanel btnJPanel;
+    private JPanel formJPanel;
 
     private IAuthService authService = new AuthService();
     private IConfigsService configsService = new ConfigsService();
+
+    private void setBackGroudImg(){
+        ImageIcon imageIcon = ImageIconMananger.LOGINBACKGROUD.getImageIcon();
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(0,0,imageIcon.getIconWidth(),imageIcon.getIconHeight());
+        this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
+        contentPane.setOpaque(false);
+        footerJPanel.setOpaque(false);
+        formJPanel.setOpaque(false);
+        btnJPanel.setOpaque(false);
+    }
 
     public LoginDialog() {
         setTitle("NoteBooks - 登录");
@@ -31,6 +45,7 @@ public class LoginDialog extends JDialog {
         setLocationRelativeTo(null);
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
+        setBackGroudImg();
 
         emailTextField.setDocument(new InputLengthLimit(40));
         UserConfigs userConfigs = configsService.getUserConfigs();
@@ -38,7 +53,6 @@ public class LoginDialog extends JDialog {
             emailTextField.setText(userConfigs.getUserEmail());
         }
         pwdPasswordField.setDocument(new InputLengthLimit(40));
-
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
