@@ -142,6 +142,7 @@ public class NoteBookTree extends JTree {
 
     private void mouseClickSelected(TreePath selPath) {
         if (selPath != null) {
+           // mainForm.getEditor().autoSave();
             int level = selPath.getPathCount();
             Object[] path = selPath.getPath();
             switch (level) {
@@ -231,14 +232,6 @@ public class NoteBookTree extends JTree {
 
     private JPopupMenu noteMenu(String notebookName, String noteName) {
         JPopupMenu treeJPopupMenu = new JPopupMenu();
-        JMenuItem jMenuItem_updateNote = new JMenuItem("修改笔记");
-        jMenuItem_updateNote.setIcon(ImageIconMananger.EDIT.getImageIcon20_20());
-        jMenuItem_updateNote.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new EditForm(mainForm, notebookName, noteName);
-            }
-        });
         JMenuItem jMenuItem_remove = new JMenuItem("删除笔记");
         jMenuItem_remove.setIcon(ImageIconMananger.DELETE.getImageIcon20_20());
         jMenuItem_remove.addActionListener(new ActionListener() {
@@ -251,7 +244,6 @@ public class NoteBookTree extends JTree {
                 }
             }
         });
-        treeJPopupMenu.add(jMenuItem_updateNote);
         treeJPopupMenu.add(jMenuItem_remove);
         return treeJPopupMenu;
     }
@@ -346,7 +338,7 @@ public class NoteBookTree extends JTree {
     }
 
     public void onAddNote(String notebookName) {
-        new EditForm(mainForm, notebookName, null);
+        new EditForm(mainForm);
     }
 
     FocusListener fl = new FocusListener() {
@@ -365,8 +357,9 @@ public class NoteBookTree extends JTree {
     public void paintComponent(Graphics g) {
         g.setColor(getBackground());
         g.fillRect(0, 0, getWidth(), getHeight());
-        if (mouseRow > 0) {
+        if (mouseRow > 0 && mouseRow < this.getRowCount()) {
             g.setColor(MOUSE_BACKGROUD);
+            System.out.println(mouseRow);
             Rectangle r = getRowBounds(mouseRow);
             g.fillRect(0, r.y, getWidth(), r.height);
             g.drawRect(0, r.y, getWidth() - 1, r.height - 1);

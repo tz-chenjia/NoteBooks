@@ -1,26 +1,23 @@
 package cn.tz.cj.ui;
 
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
-import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
 import cn.tz.cj.bo.Auth;
 import cn.tz.cj.entity.Note;
 import cn.tz.cj.entity.UserConfigs;
-import cn.tz.cj.service.*;
+import cn.tz.cj.service.AuthService;
+import cn.tz.cj.service.NoteBookService;
+import cn.tz.cj.service.NoteService;
+import cn.tz.cj.service.SystemService;
 import cn.tz.cj.service.intf.IAuthService;
 import cn.tz.cj.service.intf.INoteBookService;
 import cn.tz.cj.service.intf.INoteService;
 import cn.tz.cj.service.intf.ISystemService;
-import cn.tz.cj.tools.FileRWUtils;
 import cn.tz.cj.tools.email.SimpleMailSender;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,8 +30,7 @@ public class MainForm extends JFrame {
     private JButton addNotebookBtn;
     private JButton addNoteBtn;
     private JButton loginOutBtn;
-    private JPanel rightJPanel;
-    private JPanel contentJPanel;
+
     private JButton impDataBtn;
     private JButton expDataBtn;
     private JButton emailBackupBtn;
@@ -42,16 +38,21 @@ public class MainForm extends JFrame {
     private JButton editUserBtn;
     private JButton aboutBtn;
     private NoteBookTree tree;
-
-    //公共组件
-    public JButton editNoteBtn;
-    public JButton delNoteBtn;
-    public JLabel noteLabel;
-    public JLabel notebookLabel;
     private JButton recoverBtn;
     private JToolBar.Separator recoverSeparator;
-    public JWebBrowser jWebBrowser;    //浏览器模型
+    private JPanel rightMainJPanel;
+    private JButton delNoteBtn;
 
+    //公共组件
+    private JPanel rightJPanel;
+    private JPanel rightHeaderJPanel;
+    private JComboBox noteBookComboBox;
+    private JTextField noteTextField;
+    private JButton saveBtn;
+
+    //public JWebBrowser jWebBrowser;    //浏览器模型
+
+    private Editor editor;
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
     private ISystemService systemService = new SystemService();
@@ -70,18 +71,17 @@ public class MainForm extends JFrame {
         size.setSize(1300, 800);
         setPreferredSize(size);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initJWebBrowser();
         initTree();
+        initEditor(noteBookComboBox,noteTextField);
         setBtnIcon();
         refreshNoteTools();
-        notebookLabel.setOpaque(true);
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                systemService.tempSaveDataToLocal(); //关闭之前自动备份到本地
                 if (NativeInterface.isOpen()) {
                     NativeInterface.close();
                 }
-                systemService.tempSaveDataToLocal();
                 System.exit(1);
             }
 
@@ -96,11 +96,7 @@ public class MainForm extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     String text = searchTextField.getText();
-                    if (text != null && !text.trim().equals("")) {
-                        tree.refresh(text.trim(), null, null);
-                    } else {
-                        tree.refresh(null, null, null);
-                    }
+                    tree.refresh(text.trim(), null, null);
                 }
             }
         });
@@ -122,19 +118,11 @@ public class MainForm extends JFrame {
                 dispose();
             }
         });
-        editNoteBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String notebookName = notebookLabel.getText();
-                String noteName = noteLabel.getText();
-                new EditForm(MainForm.this, notebookName, noteName);
-            }
-        });
         delNoteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String notebookName = notebookLabel.getText();
-                String noteName = noteLabel.getText();
+                String notebookName = noteBookComboBox.getSelectedItem().toString();
+                String noteName = noteTextField.getText();
                 if (notebookName != null && noteName != null && !notebookName.equals("") && !noteName.equals("")) {
                     int i = JOptionPane.showConfirmDialog(null, "确定删除[" + noteName + "]？", "删除笔记", JOptionPane.YES_NO_OPTION);
                     if (i == 0) {
@@ -183,6 +171,7 @@ public class MainForm extends JFrame {
         loginOutBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                systemService.tempSaveDataToLocal(); //关闭之前自动备份到本地
                 authService.loginOut(true);
                 dispose();
             }
@@ -235,6 +224,18 @@ public class MainForm extends JFrame {
                 }
             }
         });
+        saveBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editor.save();
+            }
+        });
+        rightJPanel.registerKeyboardAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editor.save();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         pack();
         setVisible(true);
@@ -245,27 +246,25 @@ public class MainForm extends JFrame {
         return tree;
     }
 
+    public Editor getEditor() {
+        return editor;
+    }
+
     /**
      * 刷新右边内容区域以及操作按钮
      */
     public void refreshNoteTools() {
         if (Auth.getInstance().getSelectedNoteBookName() != null && Auth.getInstance().getSelectedNoteName() != null) {
-            editNoteBtn.setVisible(true);
-            delNoteBtn.setVisible(true);
-            noteLabel.setVisible(true);
+            rightHeaderJPanel.setVisible(true);
+            rightMainJPanel.setVisible(true);
             Note note = noteService.getNote(Auth.getInstance().getSelectedNoteBookName(), Auth.getInstance().getSelectedNoteName());
             if (note != null) {
-                notebookLabel.setText(note.getNotebook());
-                noteLabel.setText(note.getTitle());
-                jWebBrowser.setHTMLContent(note.getContent());
+                editor.refresh(note.getNotebook(), note.getTitle(), note.getContent());
             }
         } else {
-            editNoteBtn.setVisible(false);
-            delNoteBtn.setVisible(false);
-            noteLabel.setVisible(false);
-            notebookLabel.setText("");
-            noteLabel.setText("");
-            jWebBrowser.setHTMLContent("");
+            rightHeaderJPanel.setVisible(false);
+            rightMainJPanel.setVisible(false);
+//            editor.refresh("", "", "");
         }
     }
 
@@ -280,8 +279,7 @@ public class MainForm extends JFrame {
         addNoteBtn.setIcon(ImageIconMananger.NOTE.getImageIcon20_20());
         aboutBtn.setIcon(ImageIconMananger.ABOUT.getImageIcon20_20());
         recoverBtn.setIcon(ImageIconMananger.RECOVER.getImageIcon20_20());
-        editNoteBtn.setIcon(ImageIconMananger.EDIT.getImageIcon20_20());
-        delNoteBtn.setIcon(ImageIconMananger.DELETE.getImageIcon20_20());
+        //delNoteBtn.setIcon(ImageIconMananger.DELETE.getImageIcon20_20());
     }
 
     private void initTree() {
@@ -289,43 +287,9 @@ public class MainForm extends JFrame {
         treeJScrollPane.setViewportView(tree);
     }
 
-    private void initJWebBrowser() {
-        jWebBrowser = new JWebBrowser();
-        jWebBrowser.setBarsVisible(false);
-        jWebBrowser.setMenuBarVisible(false);
-        jWebBrowser.setButtonBarVisible(false);
-        jWebBrowser.setStatusBarVisible(false);
-        jWebBrowser.addWebBrowserListener(new WebBrowserAdapter() {
-            @Override
-            public void windowWillOpen(WebBrowserWindowWillOpenEvent e) {
-                JWebBrowser newWebBrowser = e.getNewWebBrowser();
-                newWebBrowser.addWebBrowserListener(new WebBrowserAdapter() {
-                    @Override
-                    public void locationChanging(WebBrowserNavigationEvent newEvent) {
-                        // launch default OS browser
-                        if (Desktop.isDesktopSupported()) {
-                            Desktop desktop = Desktop.getDesktop();
-
-                            if (desktop.isSupported(Desktop.Action.BROWSE)) {
-                                try {
-                                    desktop.browse(new URI(newEvent.getNewResourceLocation()));
-                                } catch (Exception ex) {
-                                }
-                            }
-                        }
-                        newEvent.consume();
-
-                        // immediately close the new swing window
-                        SwingUtilities.invokeLater(new Runnable() {
-
-                            public void run() {
-                                newWebBrowser.getWebBrowserWindow().dispose();
-                            }
-                        });
-                    }
-                });
-            }
-        });
-        contentJPanel.add(jWebBrowser);
+    private void initEditor(JComboBox noteBook, JTextField note){
+        editor = new Editor(tree, noteBook, note);
+        rightMainJPanel.add(editor.getBrowserView());
+        editor.initEditor(false);
     }
 }
