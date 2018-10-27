@@ -1,6 +1,5 @@
 package cn.tz.cj.ui;
 
-import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import cn.tz.cj.bo.Auth;
 import cn.tz.cj.entity.Note;
 import cn.tz.cj.entity.UserConfigs;
@@ -79,9 +78,6 @@ public class MainForm extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 systemService.tempSaveDataToLocal(); //关闭之前自动备份到本地
-                if (NativeInterface.isOpen()) {
-                    NativeInterface.close();
-                }
                 System.exit(1);
             }
 

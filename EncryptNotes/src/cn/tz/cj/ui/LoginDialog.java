@@ -32,10 +32,10 @@ public class LoginDialog extends JDialog {
         JLabel label = new JLabel(imageIcon);
         label.setBounds(0,0,imageIcon.getIconWidth(),imageIcon.getIconHeight());
         this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
-        contentPane.setOpaque(false);
-        footerJPanel.setOpaque(false);
-        formJPanel.setOpaque(false);
-        btnJPanel.setOpaque(false);
+        //contentPane.setOpaque(false);
+        //footerJPanel.setOpaque(false);
+        //formJPanel.setOpaque(false);
+        //btnJPanel.setOpaque(false);
         //this.setSize(imageIcon.getIconWidth(),imageIcon.getIconHeight());
     }
 
