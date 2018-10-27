@@ -77,7 +77,6 @@ public class MainForm extends JFrame {
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                systemService.tempSaveDataToLocal(); //关闭之前自动备份到本地
                 System.exit(1);
             }
 
