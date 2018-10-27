@@ -8,9 +8,7 @@
       <element id="directory" name="configs">
         <element id="dir-copy" path="$PROJECT_DIR$/configs" />
       </element>
-      <element id="directory" name="libs">
-        <element id="library" level="project" name="libs" />
-      </element>
+      <element id="directory" name="libs" />
     </root>
   </artifact>
 </component>

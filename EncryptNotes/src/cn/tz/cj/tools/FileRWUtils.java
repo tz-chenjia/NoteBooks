@@ -1,7 +1,5 @@
 package cn.tz.cj.tools;
 
-import cn.tz.cj.entity.UserConfigs;
-import cn.tz.cj.service.ConfigsService;
 import org.apache.log4j.Logger;
 
 import java.io.*;

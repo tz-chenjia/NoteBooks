@@ -3,7 +3,6 @@ package cn.tz.cj.dao;
 import cn.tz.cj.tools.GlobalExceptionHandling;
 import cn.tz.cj.tools.JDBCUtils;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

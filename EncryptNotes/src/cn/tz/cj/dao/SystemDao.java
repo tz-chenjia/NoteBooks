@@ -6,7 +6,6 @@ import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IConfigsService;
 import cn.tz.cj.tools.GlobalExceptionHandling;
 import cn.tz.cj.tools.JDBCUtils;
-import org.apache.log4j.Logger;
 
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
@@ -47,7 +46,7 @@ public class SystemDao extends BaseDao {
                     //noteSQL.replace("int","number");
                     //noteBookSQL.replace("int","number");
                     //userSQL.replace("int","number");
-                    //break;
+                    break;
                 default:
                     //mysql
                     break;
