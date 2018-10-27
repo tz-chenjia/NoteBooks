@@ -359,7 +359,6 @@ public class NoteBookTree extends JTree {
         g.fillRect(0, 0, getWidth(), getHeight());
         if (mouseRow > 0 && mouseRow < this.getRowCount()) {
             g.setColor(MOUSE_BACKGROUD);
-            System.out.println(mouseRow);
             Rectangle r = getRowBounds(mouseRow);
             g.fillRect(0, r.y, getWidth(), r.height);
             g.drawRect(0, r.y, getWidth() - 1, r.height - 1);
