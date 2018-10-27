@@ -48,6 +48,7 @@ public class MainForm extends JFrame {
     private JComboBox noteBookComboBox;
     private JTextField noteTextField;
     private JButton saveBtn;
+    private javax.swing.JToolBar JToolBar;
 
     //public JWebBrowser jWebBrowser;    //浏览器模型
 
@@ -85,6 +86,7 @@ public class MainForm extends JFrame {
                 searchTextField.requestFocusInWindow();
             }
         });
+        JToolBar.setFloatable( false );//不能拖动
         searchTextField.setDocument(new InputLengthLimit(100));
         searchTextField.addKeyListener(new KeyAdapter() {
             @Override

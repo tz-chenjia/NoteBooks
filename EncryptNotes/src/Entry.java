@@ -10,7 +10,7 @@ public class Entry {
     public static void main(String[] args) {
 
         UIManager.put("RootPane.setupButtonVisible", false);
-        BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
+        BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
         BeautyEyeLNFHelper.translucencyAtFrameInactive = false;
         try {
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();

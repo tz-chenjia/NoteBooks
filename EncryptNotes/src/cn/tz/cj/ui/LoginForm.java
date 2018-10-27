@@ -27,14 +27,6 @@ public class LoginForm extends JFrame{
         getRootPane().setDefaultButton(buttonOK);
         setResizable(false);
         setBackGroudImg();
-    }
-
-    private void setBackGroudImg(){
-        ImageIcon imageIcon = ImageIconMananger.LOGINBACKGROUD.getImageIcon();
-        JLabel label = new JLabel(imageIcon);
-        label.setBounds(0,0,imageIcon.getIconWidth(),imageIcon.getIconHeight());
-        this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
-        contentPane.setOpaque(false);
         emailTextField.setDocument(new InputLengthLimit(40));
         UserConfigs userConfigs = configsService.getUserConfigs();
         if(userConfigs != null){
@@ -64,6 +56,14 @@ public class LoginForm extends JFrame{
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void setBackGroudImg(){
+        ImageIcon imageIcon = ImageIconMananger.LOGINBACKGROUD.getImageIcon();
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(0,0,imageIcon.getIconWidth(),imageIcon.getIconHeight());
+        this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
+        contentPane.setOpaque(false);
     }
 
     private void onOK() {

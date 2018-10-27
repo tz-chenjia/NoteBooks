@@ -105,7 +105,7 @@
           </grid>
         </children>
       </splitpane>
-      <toolbar id="835e2">
+      <toolbar id="835e2" binding="JToolBar">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="-1" height="20"/>
