@@ -40,10 +40,7 @@ public class LoginForm extends JFrame{
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                int i = JOptionPane.showConfirmDialog(null, "感谢您的使用，确定退出 NoteBooks？", "退出确认", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    System.exit(0);
-                }
+                System.exit(0);
             }
         });
         configBtn.addActionListener(new ActionListener() {

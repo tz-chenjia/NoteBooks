@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact name="NoteBooks:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NoteBooks_jar</output-path>
+    <root id="root">
+      <element id="archive" name="NoteBooks.jar">
+        <element id="module-output" name="NoteBooks" />
+      </element>
+      <element id="directory" name="libs">
+        <element id="library" level="project" name="libs" />
+      </element>
+      <element id="directory" name="configs">
+        <element id="dir-copy" path="$PROJECT_DIR$/configs" />
+      </element>
+    </root>
+  </artifact>
+</component>
