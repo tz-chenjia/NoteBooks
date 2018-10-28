@@ -16,10 +16,6 @@ public class LoginForm extends JFrame{
     private IAuthService authService = new AuthService();
     private IConfigsService configsService = new ConfigsService();
 
-    public static void main(String[] args) {
-        new LoginForm();
-    }
-
     public LoginForm(){
         setTitle("NoteBooks - 登录");
         setIconImage(ImageIconMananger.LOGO.getImage());
