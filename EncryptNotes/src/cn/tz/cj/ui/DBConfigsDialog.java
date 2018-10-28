@@ -95,6 +95,7 @@ public class DBConfigsDialog extends JDialog {
             }
         });
 
+        setPortByType("mysql"); // 默认
         pack();
         setLocationRelativeTo(parentFrame);
         setVisible(true);

@@ -72,7 +72,7 @@ public class Editor {
     private void setHTMLContent(String htmlContent){
         do {
             this.browser.executeJavaScript("$(\"div#summernote\").summernote(\"code\",\""+htmlContent+"\")");
-        }while (getHTMLContent().equals("SET_HTML_CONTENT_FAIL"));
+        }while (getHTMLContent().equals("GET_HTML_CONTENT_FAIL"));
     }
 
     private String getHTMLContent(){
@@ -81,7 +81,7 @@ public class Editor {
         try {
             stringValue = jsValue.getStringValue().replace("\"","\\\"");
         }catch (IllegalStateException e){
-            stringValue = "SET_HTML_CONTENT_FAIL";
+            stringValue = "GET_HTML_CONTENT_FAIL";
         }
         return stringValue;
     }
@@ -89,8 +89,10 @@ public class Editor {
     public void save(){
         String newNoteName = note.getText();
         String newNoteBookName = noteBook.getSelectedItem() == null ?"": noteBook.getSelectedItem().toString();
-        String htmlContent = getHTMLContent();
-        htmlContent = htmlContent.equals("SET_HTML_CONTENT_FAIL") ? "" : htmlContent;
+        String htmlContent = "";
+        do{
+            htmlContent = getHTMLContent();
+        }while (htmlContent.equals("GET_HTML_CONTENT_FAIL"));
         if(!newNoteBookName.trim().equals("") && !newNoteName.trim().equals("")){
             if(isNewAdd){
                 noteService.addNote(newNoteBookName,newNoteName,htmlContent);
