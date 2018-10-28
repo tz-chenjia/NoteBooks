@@ -25,6 +25,7 @@ public class LoginForm extends JFrame{
         setIconImage(ImageIconMananger.LOGO.getImage());
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setResizable(false);
         setBackGroudImg();
         emailTextField.setDocument(new InputLengthLimit(40));
@@ -43,7 +44,10 @@ public class LoginForm extends JFrame{
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                System.exit(0);
+                int i = JOptionPane.showConfirmDialog(null, "感谢您的使用，确定退出 NoteBooks？", "退出确认", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    System.exit(0);
+                }
             }
         });
         configBtn.addActionListener(new ActionListener() {

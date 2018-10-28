@@ -69,7 +69,7 @@ public class MainForm extends JFrame {
         Dimension size = new Dimension();
         size.setSize(1300, 800);
         setPreferredSize(size);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         initTree();
         initEditor(noteBookComboBox,noteTextField);
         setBtnIcon();
@@ -77,7 +77,10 @@ public class MainForm extends JFrame {
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.exit(1);
+                int i = JOptionPane.showConfirmDialog(null, "感谢您的使用，确定退出 NoteBooks？", "退出确认", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    System.exit(0);
+                }
             }
 
             @Override
