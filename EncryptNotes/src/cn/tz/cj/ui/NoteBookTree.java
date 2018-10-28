@@ -184,7 +184,9 @@ public class NoteBookTree extends JTree {
         jMenuItem_addNotebook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mainForm.getMouseLoading().startLoading();
                 onAddNotebook();
+                mainForm.getMouseLoading().stopLoading();
             }
         });
         treeJPopupMenu.add(jMenuItem_addNotebook);
@@ -206,10 +208,14 @@ public class NoteBookTree extends JTree {
         jMenuItem_rename.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mainForm.getMouseLoading().startLoading();
                 String newName = (String) JOptionPane.showInputDialog(null, "", "请输入笔记本的名称",
                         JOptionPane.QUESTION_MESSAGE, null, null, notebookName);
-                noteBookService.rename(notebookName, newName);
-                refresh(null, null, null);
+                if(!newName.equals(notebookName)){
+                    noteBookService.rename(notebookName, newName);
+                    refresh(null, null, null);
+                }
+                mainForm.getMouseLoading().stopLoading();
             }
         });
         JMenuItem jMenuItem_remove = new JMenuItem("删除笔记本");
@@ -217,11 +223,13 @@ public class NoteBookTree extends JTree {
         jMenuItem_remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(null, "确定删除[" + notebookName + "]？", "删除笔记本", JOptionPane.YES_NO_OPTION);
+                mainForm.getMouseLoading().startLoading();
+                int i = JOptionPane.showConfirmDialog(null, "确定删除笔记本[" + notebookName + "]？", "删除笔记本", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     noteBookService.removeNoteBook(notebookName);
                     refresh(null, null, null);
                 }
+                mainForm.getMouseLoading().stopLoading();
             }
         });
         treeJPopupMenu.add(jMenuItem_addNote);
@@ -237,11 +245,13 @@ public class NoteBookTree extends JTree {
         jMenuItem_remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(null, "确定删除[" + noteName + "]？", "删除笔记", JOptionPane.YES_NO_OPTION);
+                mainForm.getMouseLoading().startLoading();
+                int i = JOptionPane.showConfirmDialog(null, "确定删除笔记[" + noteName + "]？", "删除笔记", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     noteService.removeNote(notebookName, noteName);
                     refresh(null, null, null);
                 }
+                mainForm.getMouseLoading().stopLoading();
             }
         });
         treeJPopupMenu.add(jMenuItem_remove);

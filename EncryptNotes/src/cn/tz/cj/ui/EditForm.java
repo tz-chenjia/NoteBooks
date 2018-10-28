@@ -21,6 +21,7 @@ public class EditForm extends JFrame {
     private JPanel editJPanel;
     private JLabel errorLabel;
 
+    private MouseLoading mouseLoading;
     private Editor editor;
     private NoteBookTree nbTree;
     private INoteService noteService = new NoteService();
@@ -75,6 +76,8 @@ public class EditForm extends JFrame {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+        mouseLoading = new MouseLoading(this);
+
         pack();
         setLocationRelativeTo(mainForm);
         setVisible(true);
@@ -96,8 +99,10 @@ public class EditForm extends JFrame {
             errorLabel.setText("笔记[" + noteName + "]已存在！");
             return;
         }
+        mouseLoading.startLoading();
         editor.save();
         dispose();
+        mouseLoading.stopLoading();
     }
 
     private void onCancel() {

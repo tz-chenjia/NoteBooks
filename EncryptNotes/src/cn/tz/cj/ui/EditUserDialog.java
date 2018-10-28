@@ -24,6 +24,7 @@ public class EditUserDialog extends JDialog {
     private JLabel againNewPwdLabel;
 
     private MainForm mainForm;
+    private MouseLoading mouseLoading;
     private IAuthService authService = new AuthService();
     private IConfigsService configsService = new ConfigsService();
 
@@ -69,12 +70,15 @@ public class EditUserDialog extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+        mouseLoading = new MouseLoading(this);
+
         pack();
         setLocationRelativeTo(mainForm);
         setVisible(true);
     }
 
     private void onOK() {
+        mouseLoading.startLoading();
         String oldPwd = String.valueOf(oldPwdPasswordField.getPassword());
         oldPwd = EncryptUtils.e(oldPwd, oldPwd);
         if (oldPwd.equals(Auth.getInstance().getPwd())) {
@@ -106,6 +110,7 @@ public class EditUserDialog extends JDialog {
         } else {
             JOptionPane.showMessageDialog(null, "旧密码不正确！");
         }
+        mouseLoading.stopLoading();
     }
 
     private void onCancel() {

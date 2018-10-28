@@ -53,6 +53,8 @@ public class LoginForm extends JFrame{
             }
         });
 
+        mouseLoading = new MouseLoading(this);
+
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -67,11 +69,13 @@ public class LoginForm extends JFrame{
     }
 
     private void onOK() {
+        mouseLoading.startLoading();
         if (authService.login(emailTextField.getText(), String.valueOf(pwdPasswordField.getPassword()))) {
             UserConfigs userConfigs = configsService.setUserEmail(emailTextField.getText());
             new MainForm(userConfigs);
             dispose();
         }
+        mouseLoading.stopLoading();
     }
 
     private JPanel contentPane;
@@ -81,4 +85,6 @@ public class LoginForm extends JFrame{
     private JButton buttonOK;
     private JLabel emailLabel;
     private JLabel pwdLabel;
+
+    private MouseLoading mouseLoading;
 }

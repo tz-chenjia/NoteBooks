@@ -50,8 +50,7 @@ public class MainForm extends JFrame {
     private JButton saveBtn;
     private javax.swing.JToolBar JToolBar;
 
-    //public JWebBrowser jWebBrowser;    //浏览器模型
-
+    private MouseLoading mouseLoading;
     private Editor editor;
     private INoteBookService noteBookService = new NoteBookService();
     private INoteService noteService = new NoteService();
@@ -92,15 +91,19 @@ public class MainForm extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    mouseLoading.startLoading();
                     String text = searchTextField.getText();
                     tree.refresh(text.trim(), null, null);
+                    mouseLoading.stopLoading();
                 }
             }
         });
         addNotebookBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 tree.onAddNotebook();
+                mouseLoading.stopLoading();
             }
         });
         addNoteBtn.addActionListener(new ActionListener() {
@@ -109,15 +112,10 @@ public class MainForm extends JFrame {
                 tree.onAddNote(Auth.getInstance().getSelectedNoteBookName());
             }
         });
-        loginOutBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
         delNoteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 String notebookName = noteBookComboBox.getSelectedItem().toString();
                 String noteName = noteTextField.getText();
                 if (notebookName != null && noteName != null && !notebookName.equals("") && !noteName.equals("")) {
@@ -127,21 +125,25 @@ public class MainForm extends JFrame {
                         tree.refresh(null, null, null);
                     }
                 }
+                mouseLoading.stopLoading();
             }
         });
         expDataBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 File file = FileChooser.expFileChooser();
                 if (file != null) {
                     systemService.expData(file);
                     JOptionPane.showMessageDialog(null, "导出成功\n" + file.getPath());
                 }
+                mouseLoading.stopLoading();
             }
         });
         impDataBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 int i = JOptionPane.showConfirmDialog(null, "导入数据是覆盖该用户的所有数据，确认导入？", "导入数据", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     File file = FileChooser.impFileChooser();
@@ -152,30 +154,36 @@ public class MainForm extends JFrame {
                         dispose();
                     }
                 }
+                mouseLoading.stopLoading();
             }
         });
         delUserBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 int i = JOptionPane.showConfirmDialog(null, "删除帐号是删除该用户的所有数据，确认删除？", "删除帐号", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     systemService.deleteUser();
                     authService.loginOut(false);
                     dispose();
                 }
+                mouseLoading.stopLoading();
             }
         });
         loginOutBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 systemService.tempSaveDataToLocal(); //关闭之前自动备份到本地
                 authService.loginOut(true);
                 dispose();
+                mouseLoading.stopLoading();
             }
         });
         emailBackupBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 Object o = JOptionPane.showInputDialog(null, "请输入您的邮箱", "邮箱备份",
                         JOptionPane.QUESTION_MESSAGE, null, null, userConfigs.getUserEmail());
                 if (o != null) {
@@ -194,7 +202,7 @@ public class MainForm extends JFrame {
                         JOptionPane.showMessageDialog(null, "发送失败，邮箱格式不正确！");
                     }
                 }
-
+                mouseLoading.stopLoading();
             }
         });
         editUserBtn.addActionListener(new ActionListener() {
@@ -212,6 +220,7 @@ public class MainForm extends JFrame {
         recoverBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 int i = JOptionPane.showConfirmDialog(null, "紧急恢复数据，一般发生系统错误后再使用，该操作存在风险！\n数据将恢复至上一次手动关闭之前的数据，确认恢复？", "紧急恢复", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     systemService.impData(SystemService.getTempDataFile());
@@ -219,20 +228,27 @@ public class MainForm extends JFrame {
                     authService.loginOut(false);
                     dispose();
                 }
+                mouseLoading.stopLoading();
             }
         });
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 editor.save();
+                mouseLoading.stopLoading();
             }
         });
         rightJPanel.registerKeyboardAction(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mouseLoading.startLoading();
                 editor.save();
+                mouseLoading.stopLoading();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        mouseLoading = new MouseLoading(this);
 
         pack();
         setVisible(true);
@@ -245,6 +261,10 @@ public class MainForm extends JFrame {
 
     public Editor getEditor() {
         return editor;
+    }
+
+    public MouseLoading getMouseLoading() {
+        return mouseLoading;
     }
 
     /**
