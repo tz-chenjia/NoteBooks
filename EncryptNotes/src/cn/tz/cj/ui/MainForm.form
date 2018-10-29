@@ -134,20 +134,20 @@
             <constraints/>
             <properties/>
           </component>
-          <component id="df5e9" class="javax.swing.JButton" binding="expDataBtn">
+          <component id="298a6" class="javax.swing.JButton" binding="impDataBtn">
             <constraints/>
             <properties>
-              <text value="数据导出"/>
+              <text value="数据导入"/>
             </properties>
           </component>
           <component id="e457c" class="javax.swing.JToolBar$Separator">
             <constraints/>
             <properties/>
           </component>
-          <component id="298a6" class="javax.swing.JButton" binding="impDataBtn">
+          <component id="df5e9" class="javax.swing.JButton" binding="expDataBtn">
             <constraints/>
             <properties>
-              <text value="数据导入"/>
+              <text value="数据导出"/>
             </properties>
           </component>
           <component id="bc899" class="javax.swing.JToolBar$Separator">
