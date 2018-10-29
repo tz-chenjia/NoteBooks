@@ -106,6 +106,7 @@ public class EditForm extends JFrame {
 
     private void onCancel() {
         // add your code here if necessary
+        editor.close();
         dispose();
     }
 

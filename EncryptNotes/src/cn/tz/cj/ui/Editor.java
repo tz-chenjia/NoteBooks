@@ -85,6 +85,7 @@ public class Editor {
     public void refresh(String noteBookName, String noteName, String htmlContent){
         noteBookName = noteBookName != null ? noteBookName : "";
         noteName = noteName != null ? noteName : "";
+        htmlContent = htmlContent != null ? htmlContent : "";
         this.oldNoteBookName = noteBookName;
         this.oldNoteName = noteName;
         this.noteBook.removeAllItems();
@@ -94,13 +95,21 @@ public class Editor {
         }
         this.noteBook.setSelectedItem(noteBookName);
         this.note.setText(noteName);
-        if(htmlContent != null && !htmlContent.equals("")) setHTMLContent(htmlContent);
+        setHTMLContent(htmlContent);
+    }
+
+    private void emptyHTMLContent(){
+        this.browser.executeJavaScript("$(\"div#summernote\").summernote(\"code\",\"\")");
     }
 
     private void setHTMLContent(String htmlContent){
-        do {
-            this.browser.executeJavaScript("$(\"div#summernote\").summernote(\"code\",\""+htmlContent+"\")");
-        }while (getHTMLContent().equals("GET_HTML_CONTENT_FAIL"));
+        if(htmlContent.trim().equals("")){
+            emptyHTMLContent();
+        }else {
+            do {
+                this.browser.executeJavaScript("$(\"div#summernote\").summernote(\"code\",\"" + htmlContent + "\")");
+            } while (getHTMLContent().equals("GET_HTML_CONTENT_FAIL"));
+        }
     }
 
     private String getHTMLContent(){
@@ -129,6 +138,12 @@ public class Editor {
                 JOptionPane.showMessageDialog(null, "保存成功");
             }
             nbTree.refresh(null, newNoteBookName, newNoteName);
+        }
+    }
+
+    public void close(){
+        if(browser != null){
+            browser.dispose();
         }
     }
 

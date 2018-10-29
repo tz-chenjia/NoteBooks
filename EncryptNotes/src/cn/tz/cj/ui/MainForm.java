@@ -65,7 +65,7 @@ public class MainForm extends JFrame {
         }
         setIconImage(ImageIconMananger.LOGO.getImage());
         setContentPane(mainJPanel);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
         Dimension size = new Dimension();
         size.setSize(1300, 800);
         setPreferredSize(size);
@@ -79,6 +79,7 @@ public class MainForm extends JFrame {
             public void windowClosing(WindowEvent e) {
                 int i = JOptionPane.showConfirmDialog(null, "感谢您的使用，确定退出 NoteBooks？", "退出确认", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
+                    editor.close();
                     System.exit(0);
                 }
             }
@@ -179,6 +180,7 @@ public class MainForm extends JFrame {
                 mouseLoading.startLoading();
                 systemService.tempSaveDataToLocal(); //关闭之前自动备份到本地
                 authService.loginOut(true);
+                editor.close();
                 dispose();
                 mouseLoading.stopLoading();
             }
