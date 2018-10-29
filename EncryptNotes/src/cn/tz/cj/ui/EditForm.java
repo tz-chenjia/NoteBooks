@@ -11,7 +11,6 @@ import java.awt.event.*;
 import java.io.File;
 
 public class EditForm extends JFrame {
-    private final String URL = ConfigsService.getConfPath() + "summer" + File.separator + "index.html";
 
     private JPanel mainJPanel;
     private JComboBox notebookComboBox;
@@ -28,14 +27,14 @@ public class EditForm extends JFrame {
 
     public EditForm(MainForm mainForm) {
         this.nbTree = mainForm.getTree();
-        setTitle("NoteBooks - 编辑");
+        setTitle("NoteBooks - 添加");
         setIconImage(ImageIconMananger.LOGO.getImage());
         initEditor(notebookComboBox, titleTextField);
         titleTextField.requestFocusInWindow();
         setContentPane(mainJPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension size = new Dimension();
-        size.setSize(1200, 700);
+        size.setSize(1250, 700);
         setPreferredSize(size);
 
         buttonOK.addActionListener(new ActionListener() {

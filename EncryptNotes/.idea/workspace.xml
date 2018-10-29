@@ -72,23 +72,24 @@
     <session id="-787095045">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.21" value="1" />
+          <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.33" value="3" />
           <entry key="project.open.time.34" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="4" />
-          <entry key="form" value="32" />
+          <entry key="class" value="15" />
+          <entry key="form" value="33" />
           <entry key="html" value="7" />
-          <entry key="java" value="404" />
+          <entry key="java" value="412" />
           <entry key="log" value="1" />
           <entry key="png" value="1" />
           <entry key="properties" value="10" />
@@ -97,11 +98,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="4" />
-          <entry key="GUI_DESIGNER_FORM" value="32" />
+          <entry key="CLASS" value="15" />
+          <entry key="GUI_DESIGNER_FORM" value="33" />
           <entry key="HTML" value="7" />
           <entry key="Image" value="1" />
-          <entry key="JAVA" value="404" />
+          <entry key="JAVA" value="412" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Properties" value="10" />
           <entry key="SQL" value="1" />
@@ -111,14 +112,14 @@
         <counts>
           <entry key="dummy" value="24" />
           <entry key="html" value="12" />
-          <entry key="java" value="23208" />
+          <entry key="java" value="23646" />
           <entry key="properties" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="12" />
-          <entry key="JAVA" value="23208" />
+          <entry key="JAVA" value="23646" />
           <entry key="PLAIN_TEXT" value="24" />
           <entry key="Properties" value="18" />
         </counts>
@@ -172,54 +173,42 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.java">
+        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/Editor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+            <state relative-caret-position="297">
+              <caret line="96" column="59" selection-start-line="96" selection-start-column="59" selection-end-line="96" selection-end-column="59" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1476#1608#0" expanded="true" />
-                <element signature="e#1607#1608#0" expanded="true" />
+                <element signature="e#1930#2120#0" expanded="true" />
+                <element signature="e#2119#2120#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.form">
-          <provider selected="true" editor-type-id="ui-designer" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/InputLengthLimit.java">
+        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="92">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/ImageIconMananger.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="10" column="111" selection-start-line="10" selection-start-column="111" selection-end-line="10" selection-end-column="111" />
+              <caret line="67" column="8" lean-forward="true" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form">
-          <provider selected="true" editor-type-id="ui-designer" />
+        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="409">
+              <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/DBConfigsDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="37" column="20" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="20" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditForm.form">
+          <provider selected="true" editor-type-id="ui-designer" />
         </entry>
       </file>
     </leaf>
@@ -285,7 +274,6 @@
         <option value="$PROJECT_DIR$/src/cn/tz/cj/bo/Auth.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/InputLengthLimit.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/tools/EncryptUtils.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/tools/JDBCUtils.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/NoteBookDao.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/NoteDao.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/UserDao.java" />
@@ -298,10 +286,8 @@
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/AuthService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.form" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.form" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/rule/EDBType.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/intf/INoteService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/BaseDao.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/SystemDao.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/intf/IAuthService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/service/ConfigsService.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/tools/email/SimpleMailSender.java" />
@@ -309,17 +295,20 @@
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginDialog.java" />
         <option value="$PROJECT_DIR$/configs/summer/index.html" />
         <option value="$PROJECT_DIR$/src/Entry.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/Editor.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/DBConfigsDialog.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/DBConfigsDialog.form" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/EditForm.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/EditUserDialog.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MouseLoading.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/NoteBookTree.java" />
-        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/ImageIconMananger.java" />
         <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/rule/EDBType.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/dao/SystemDao.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/tools/JDBCUtils.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/Editor.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java" />
+        <option value="$PROJECT_DIR$/src/cn/tz/cj/ui/EditForm.java" />
       </list>
     </option>
   </component>
@@ -329,11 +318,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="287" />
-    <option name="y" value="86" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
     <option name="width" value="1649" />
-    <option name="height" value="1047" />
+    <option name="height" value="1102" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -341,7 +330,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -358,6 +346,51 @@
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
               <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="configs" type="462c0819:PsiDirectoryNode" />
+              <item name="summer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="jxbrowser-6.14.jar" type="ab9368bb:PsiFileNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="jxbrowser-6.14.jar" type="ab9368bb:PsiFileNode" />
+              <item name="chromium" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="jxbrowser-6.14.jar" type="ab9368bb:PsiFileNode" />
+              <item name="chromium" type="462c0819:PsiDirectoryNode" />
+              <item name="javafx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="jxbrowser-6.14.jar" type="ab9368bb:PsiFileNode" />
+              <item name="chromium" type="462c0819:PsiDirectoryNode" />
+              <item name="swing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -365,13 +398,6 @@
               <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cj" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EncryptNotes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="cj" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
@@ -386,7 +412,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cj" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="DBConfigsDialog" type="e9f4de52:FormNode" />
+              <item name="EditForm" type="e9f4de52:FormNode" />
             </path>
             <path>
               <item name="EncryptNotes" type="b2602c69:ProjectViewProjectNode" />
@@ -430,6 +456,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -439,7 +466,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540650444355" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/configs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.20220588" />
@@ -456,10 +483,10 @@
       <recent name="cn.tz.cj.rule" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\libs" />
       <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\configs\images" />
       <recent name="F:\GitHub\notebook\svn\trunk\EncryptNotes\libs" />
       <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\src\cn\tz\cj\resource\images" />
-      <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\libs" />
       <recent name="G:\study\github\encryptNotes\svn\trunk\EncryptNotes\src\cn\tz\cj\tools" />
     </key>
   </component>
@@ -581,8 +608,8 @@
     <frame x="-9" y="-9" width="1938" height="1064" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7842835" visible="true" weight="0.3438841" />
-      <window_info id="Structure" order="1" sideWeight="0.21571648" side_tool="true" visible="true" weight="0.3438841" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.3927203" visible="true" weight="0.37124464" />
+      <window_info id="Structure" order="1" sideWeight="0.6072797" side_tool="true" weight="0.37142858" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
@@ -590,14 +617,14 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.5177778" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27888888" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17333333" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.27888888" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.32666665" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32622603" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -609,6 +636,35 @@
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info anchor="right" id="Coverage" order="8" side_tool="true" visible="true" weight="0.3299356" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.3927203" visible="true" weight="0.37142858" />
+      <window_info id="Structure" order="1" sideWeight="0.6072797" side_tool="true" visible="true" weight="0.37142858" />
+      <window_info id="Designer" order="2" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.5177778" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4434968" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.27888888" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32622603" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" visible="true" weight="0.3299356" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -627,7 +683,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditForm.java</url>
-          <line>102</line>
+          <line>101</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
@@ -699,78 +755,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/libs/djnativeswing-swt.jar!/chrriis/dj/nativeswing/swtimpl/components/JWebBrowser.class" />
-    <entry file="jar://$PROJECT_DIR$/libs/djnativeswing-swt.jar!/chrriis/dj/nativeswing/swtimpl/components/WebBrowserNavigationParameters.class" />
-    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/swing/BrowserView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/Browser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="1012" column="29" selection-start-line="1012" selection-start-column="29" selection-end-line="1012" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/JSValue.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/bo/Auth.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="40" column="5" lean-forward="true" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/dao/BaseDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="147" column="46" lean-forward="true" selection-start-line="147" selection-start-column="46" selection-end-line="147" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/dao/NoteBookDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/dao/NoteDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="94" column="5" lean-forward="true" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/dao/SystemDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="48" column="20" lean-forward="true" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/entity/Note.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/entity/NoteBook.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -789,13 +773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/rule/EDBType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -855,13 +832,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/service/SystemService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/tools/email/MailAuthenticator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -897,13 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/tools/JDBCUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/FileChooser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -916,16 +879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/service/AuthService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1081">
-          <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -944,9 +897,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/DBConfigsDialog.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="jar://E:/Java/jdk1.8.0_181/src.zip!/java/awt/Frame.java">
@@ -989,43 +939,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="71" column="25" selection-start-line="71" selection-end-line="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#10534#10535#0" expanded="true" />
-            <element signature="e#10569#10570#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="102" column="17" lean-forward="true" selection-start-line="102" selection-start-column="17" selection-end-line="102" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/Editor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="88" column="16" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
+        <state relative-caret-position="322">
           <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1476#1608#0" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/LoginForm.form">
+      <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/InputLengthLimit.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1044,6 +969,153 @@
     <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/rule/EDBType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/tools/JDBCUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1058">
+          <caret line="52" column="111" selection-start-line="52" selection-start-column="111" selection-end-line="52" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/service/SystemService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/service/AuthService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/dao/SystemDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/Browser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="167" column="13" selection-start-line="167" selection-start-column="13" selection-end-line="167" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/swing/BrowserView.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/javafx/DefaultNetworkDelegate.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/NetworkDelegate.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/swing/DefaultNetworkDelegate.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/NetworkService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="53" column="19" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/BrowserContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="96" column="25" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="25" />
+          <folding>
+            <element signature="e#2997#2998#0" expanded="true" />
+            <element signature="e#3026#3027#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/DirectProxyConfig.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/swing/DefaultDialogHandler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2137">
+          <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jxbrowser-6.14.jar!/com/teamdev/jxbrowser/chromium/swing/DefaultPopupHandler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="37" />
+          <folding>
+            <element signature="e#470#471#0" expanded="true" />
+            <element signature="e#504#505#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditForm.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/Editor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="96" column="59" selection-start-line="96" selection-start-column="59" selection-end-line="96" selection-end-column="59" />
+          <folding>
+            <element signature="e#1930#2120#0" expanded="true" />
+            <element signature="e#2119#2120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/MainForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="67" column="8" lean-forward="true" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tz/cj/ui/EditForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
@@ -1051,8 +1123,8 @@
         <settings>
           <artifact-editor>
             <show-content>
-              <type id="library" />
               <type id="artifact" />
+              <type id="library" />
             </show-content>
           </artifact-editor>
           <last-edited>NoteBooks:jar</last-edited>

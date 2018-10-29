@@ -6,12 +6,20 @@ import cn.tz.cj.service.NoteBookService;
 import cn.tz.cj.service.NoteService;
 import cn.tz.cj.service.intf.INoteBookService;
 import cn.tz.cj.service.intf.INoteService;
-import com.teamdev.jxbrowser.chromium.Browser;
-import com.teamdev.jxbrowser.chromium.JSValue;
+import com.teamdev.jxbrowser.chromium.*;
+import com.teamdev.jxbrowser.chromium.events.DisposeEvent;
+import com.teamdev.jxbrowser.chromium.events.DisposeListener;
+import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
+import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
 import com.teamdev.jxbrowser.chromium.swing.BrowserView;
+import com.teamdev.jxbrowser.chromium.swing.DefaultDialogHandler;
+import com.teamdev.jxbrowser.chromium.swing.DefaultNetworkDelegate;
+import com.teamdev.jxbrowser.chromium.swing.DefaultPopupHandler;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
+import java.net.URI;
 import java.util.List;
 
 public class Editor {
@@ -51,6 +59,26 @@ public class Editor {
 
     public void initEditor(boolean isNewAdd){
         this.isNewAdd = isNewAdd;
+        this.browserView.setDragAndDropEnabled(false);
+        this.browser.setPopupHandler(new DefaultPopupHandler(){
+            @Override
+            public PopupContainer handlePopup(PopupParams params) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop desktop = Desktop.getDesktop();
+                    if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                        try {
+                            desktop.browse(new URI(params.getURL()));
+                        } catch (Exception ex) {
+                            //return super.handlePopup(params);
+                        }
+                        return null;
+                    }
+                }else {
+                    return super.handlePopup(params);
+                }
+                return super.handlePopup(params);
+            }
+        });
         this.browser.loadURL(URL);
     }
 
@@ -66,7 +94,7 @@ public class Editor {
         }
         this.noteBook.setSelectedItem(noteBookName);
         this.note.setText(noteName);
-        setHTMLContent(htmlContent);
+        if(htmlContent != null && !htmlContent.equals("")) setHTMLContent(htmlContent);
     }
 
     private void setHTMLContent(String htmlContent){

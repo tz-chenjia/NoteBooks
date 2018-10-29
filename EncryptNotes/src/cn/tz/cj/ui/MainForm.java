@@ -65,7 +65,7 @@ public class MainForm extends JFrame {
         }
         setIconImage(ImageIconMananger.LOGO.getImage());
         setContentPane(mainJPanel);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
+        setExtendedState(JFrame.MAXIMIZED_BOTH);//最大化
         Dimension size = new Dimension();
         size.setSize(1300, 800);
         setPreferredSize(size);

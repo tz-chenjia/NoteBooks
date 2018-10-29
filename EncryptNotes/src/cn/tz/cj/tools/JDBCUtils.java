@@ -37,7 +37,7 @@ public class JDBCUtils {
                 url = "jdbc:db2://" + host + "[:" + port + "]/" + dbName;
                 break;
             case "sqlserver":
-                url = "jdbc:sqlserver://" + host + ":" + port + ";DatabaseName=" + dbName;
+                url = "jdbc:jtds:sqlserver://" + host + ":" + port + "/" + dbName;
                 break;
             case "oracle":
                 url = "jdbc:oracle:thin:@" + host + ":" + port + ":" + dbName;

@@ -3,26 +3,35 @@
  <head> 
   <meta charset="UTF-8"> 
   <title>Summernote</title> 
-  <script src="js/jquery.min.js"></script> 
-  <script src="js/bootstrap.min.js"></script> 
-  <link href="css/bootstrap.min.css" rel="stylesheet"> 
+  <script src="js/jquery.js"></script> 
+  <script src="js/bootstrap.js"></script> 
+  <link href="css/bootstrap.css" rel="stylesheet"> 
   <link href="summernote.css" rel="stylesheet"> 
   <script src="summernote.js"></script> 
   <script src="lang/summernote-zh-CN.js"></script> 
  </head> 
- <body onload="btnClick()"> 
+ <body> 
   <div id="summernote">
 
   </div> 
   <script>    $(document).ready(function() {$('#summernote').summernote({    		lang: 'zh-CN',toolbar: [
-          ['样式1', ['style']],
+          ['样式', ['style']],
+		  ['进退',['undo','redo']],
           ['字体', ['fontname','fontsize']],
           ['字体颜色', ['color']],
-          ['样式2', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript','clear']],
+          ['格式', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript','clear']],
           ['排列', ['ol', 'ul', 'paragraph','height']],
           ['表格', ['table']],
           ['插入', ['hr','link','picture']],
-          ['Misc', ['fullscreen']]
-      ]		});    });    function btnClick(){    	$(".btn-fullscreen").click();    	$(".btn-fullscreen").css("display","none");    	$(".btn-codeview").css("display","none");		$('.note-icon-video').parent().css("display","none");		$('.note-icon-question').parent().css("display","none");		$(".note-group-select-from-files").css("display","none");		$('.link-dialog .checkbox').css("display","none");    }  </script>
+          ['Misc', ['fullscreen']],
+		  ['帮助',['help']]
+		]});    
+		$(".btn-fullscreen").click();    	
+		$(".btn-fullscreen").css("display","none");   
+		$(".note-group-select-from-files").css("display","none");	
+		$('.link-dialog .checkbox').css("display","none");  
+		
+		
+		});    </script>
  </body>
 </html>

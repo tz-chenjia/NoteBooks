@@ -2,7 +2,7 @@ package cn.tz.cj.rule;
 
 public enum EDBType {
 
-    MYSQL("mysql", "com.mysql.jdbc.Driver", 3306), SQLSERVER("sqlserver", "com.microsoft.sqlserver.jdbc.SQLServerDriver", 1433),
+    MYSQL("mysql", "com.mysql.jdbc.Driver", 3306), SQLSERVER("sqlserver", "net.sourceforge.jtds.jdbc.Driver", 1433),
     ORACLE("oracle", "oracle.jdbc.driver.OracleDriver", 1521);
 
     private String type;
