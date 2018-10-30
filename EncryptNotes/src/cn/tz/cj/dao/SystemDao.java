@@ -4,8 +4,8 @@ import cn.tz.cj.entity.UserConfigs;
 import cn.tz.cj.rule.EDBType;
 import cn.tz.cj.service.ConfigsService;
 import cn.tz.cj.service.intf.IConfigsService;
+import cn.tz.cj.tools.DataSourceUtils;
 import cn.tz.cj.tools.GlobalExceptionHandling;
-import cn.tz.cj.tools.JDBCUtils;
 
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ public class SystemDao extends BaseDao {
 
     private boolean tableExists(String tableName) {
         boolean flag = false;
-        con = JDBCUtils.getConnection();
+        con = DataSourceUtils.getConnection();
         DatabaseMetaData meta = null;
         try {
             meta = con.getMetaData();
@@ -27,6 +27,8 @@ public class SystemDao extends BaseDao {
             flag = rs.next();
         } catch (SQLException e) {
             GlobalExceptionHandling.exceptionHanding(e);
+        } finally {
+            DataSourceUtils.close(con, null, null);
         }
         return flag;
     }

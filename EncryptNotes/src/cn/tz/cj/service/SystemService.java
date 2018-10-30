@@ -7,18 +7,17 @@ import cn.tz.cj.dao.SystemDao;
 import cn.tz.cj.entity.Note;
 import cn.tz.cj.entity.NoteBook;
 import cn.tz.cj.entity.UserConfigs;
-import cn.tz.cj.rule.EDBType;
 import cn.tz.cj.service.intf.IConfigsService;
 import cn.tz.cj.service.intf.ISystemService;
+import cn.tz.cj.tools.DataSourceUtils;
 import cn.tz.cj.tools.FileRWUtils;
-import cn.tz.cj.tools.JDBCUtils;
 
 import javax.swing.*;
 import java.io.File;
 import java.util.List;
 
 public class SystemService implements ISystemService {
-    private static final String TEMPDATAFILE = ConfigsService.getTempDataPath("notebooks.sql") ;
+    private static final String TEMPDATAFILE = ConfigsService.getTempDataPath("notebooks.sql");
 
     SystemDao systemDao = new SystemDao();
     NoteBookDao noteBookDao = new NoteBookDao();
@@ -31,8 +30,7 @@ public class SystemService implements ISystemService {
         UserConfigs configs = configsService.getUserConfigs();
         if (configs != null) {
             // 验证连接是否可用
-            boolean useDB = JDBCUtils.isUseDB(configs.getDbHost(), configs.getDbPort(), configs.getDbName(), configs.getDbUserName(), configs.getDbPassword(), EDBType.toEDBType(configs.getDbType()));
-            if (useDB) {
+            if (DataSourceUtils.init()) {
                 if (!systemDao.tablesExists()) {
                     systemDao.initDBTable();
                 }

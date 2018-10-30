@@ -40,4 +40,24 @@ public enum EDBType {
     public String getType() {
         return type;
     }
+
+    public static String buildDBUrl(String dbType, String host, String port, String dbName) {
+        String url;
+        switch (dbType) {
+            case "db2":
+                url = "jdbc:db2://" + host + "[:" + port + "]/" + dbName;
+                break;
+            case "sqlserver":
+                url = "jdbc:jtds:sqlserver://" + host + ":" + port + "/" + dbName;
+                break;
+            case "oracle":
+                url = "jdbc:oracle:thin:@" + host + ":" + port + ":" + dbName;
+                break;
+            default:
+                //mysql
+                url = "jdbc:mysql://" + host + ":" + port + "/" + dbName + "?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull";
+                break;
+        }
+        return url;
+    }
 }

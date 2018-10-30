@@ -1,7 +1,7 @@
 package cn.tz.cj.dao;
 
+import cn.tz.cj.tools.DataSourceUtils;
 import cn.tz.cj.tools.GlobalExceptionHandling;
-import cn.tz.cj.tools.JDBCUtils;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.sql.Connection;
@@ -34,7 +34,7 @@ public class BaseDao {
             T t = null;
 
             // 1. 获取连接
-            con = JDBCUtils.getConnection();
+            con = DataSourceUtils.getConnection();
             // 2. 创建stmt对象
             pstmt = con.prepareStatement(sql);
             // 3. 获取占位符参数的个数， 并设置每个参数的值
@@ -72,7 +72,7 @@ public class BaseDao {
         } catch (Exception e) {
             GlobalExceptionHandling.exceptionHanding(e);
         } finally {
-            JDBCUtils.close(con, pstmt, rs);
+            DataSourceUtils.close(con, pstmt, rs);
         }
         return list;
     }
@@ -91,7 +91,7 @@ public class BaseDao {
             Map<String, Object> t = null;
 
             // 1. 获取连接
-            con = JDBCUtils.getConnection();
+            con = DataSourceUtils.getConnection();
             // 2. 创建stmt对象
             pstmt = con.prepareStatement(sql);
             // 3. 获取占位符参数的个数， 并设置每个参数的值
@@ -129,7 +129,7 @@ public class BaseDao {
         } catch (Exception e) {
             GlobalExceptionHandling.exceptionHanding(e);
         } finally {
-            JDBCUtils.close(con, pstmt, rs);
+            DataSourceUtils.close(con, pstmt, rs);
         }
         return list;
     }
@@ -143,7 +143,7 @@ public class BaseDao {
     public void update(String sql, Object[] paramsValue) {
         try {
             // 获取连接
-            con = JDBCUtils.getConnection();
+            con = DataSourceUtils.getConnection();
             // 创建执行命令的stmt对象
             pstmt = con.prepareStatement(sql);
             // 参数元数据： 得到占位符参数的个数
@@ -161,7 +161,7 @@ public class BaseDao {
         } catch (Exception e) {
             GlobalExceptionHandling.exceptionHanding(e);
         } finally {
-            JDBCUtils.close(con, pstmt, null);
+            DataSourceUtils.close(con, pstmt, null);
         }
     }
 }
