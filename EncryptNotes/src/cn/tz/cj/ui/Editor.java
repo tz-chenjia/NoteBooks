@@ -6,15 +6,13 @@ import cn.tz.cj.service.NoteBookService;
 import cn.tz.cj.service.NoteService;
 import cn.tz.cj.service.intf.INoteBookService;
 import cn.tz.cj.service.intf.INoteService;
-import com.teamdev.jxbrowser.chromium.*;
-import com.teamdev.jxbrowser.chromium.events.DisposeEvent;
-import com.teamdev.jxbrowser.chromium.events.DisposeListener;
-import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
-import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
+import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.JSValue;
+import com.teamdev.jxbrowser.chromium.PopupContainer;
+import com.teamdev.jxbrowser.chromium.PopupParams;
 import com.teamdev.jxbrowser.chromium.swing.BrowserView;
-import com.teamdev.jxbrowser.chromium.swing.DefaultDialogHandler;
-import com.teamdev.jxbrowser.chromium.swing.DefaultNetworkDelegate;
 import com.teamdev.jxbrowser.chromium.swing.DefaultPopupHandler;
+import org.apache.commons.text.StringEscapeUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +41,7 @@ public class Editor {
     private String oldNoteBookName;
     private String oldNoteName;
 
-    public Editor(NoteBookTree nbTree, JComboBox noteBook, JTextField note){
+    public Editor(NoteBookTree nbTree, JComboBox noteBook, JTextField note) {
         this.nbTree = nbTree;
         this.noteBook = noteBook;
         this.note = note;
@@ -57,10 +55,10 @@ public class Editor {
         return browserView;
     }
 
-    public void initEditor(boolean isNewAdd){
+    public void initEditor(boolean isNewAdd) {
         this.isNewAdd = isNewAdd;
         this.browserView.setDragAndDropEnabled(false);
-        this.browser.setPopupHandler(new DefaultPopupHandler(){
+        this.browser.setPopupHandler(new DefaultPopupHandler() {
             @Override
             public PopupContainer handlePopup(PopupParams params) {
                 if (Desktop.isDesktopSupported()) {
@@ -73,7 +71,7 @@ public class Editor {
                         }
                         return null;
                     }
-                }else {
+                } else {
                     return super.handlePopup(params);
                 }
                 return super.handlePopup(params);
@@ -82,7 +80,7 @@ public class Editor {
         this.browser.loadURL(URL);
     }
 
-    public void refresh(String noteBookName, String noteName, String htmlContent){
+    public void refresh(String noteBookName, String noteName, String htmlContent) {
         noteBookName = noteBookName != null ? noteBookName : "";
         noteName = noteName != null ? noteName : "";
         htmlContent = htmlContent != null ? htmlContent.trim() : "";
@@ -98,40 +96,42 @@ public class Editor {
         setHTMLContent(htmlContent);
     }
 
-    private void emptyHTMLContent(){
+    private void emptyHTMLContent() {
         this.browser.executeJavaScript("$(\"div#summernote\").summernote(\"code\",\"\")");
     }
 
-    private void setHTMLContent(String htmlContent){
-        System.out.println("set  "+htmlContent);
+    private void setHTMLContent(String htmlContent) {
         //this.browser.executeJavaScript("$(\".note-editable\").html(\"" + htmlContent + "\")");
         this.browser.executeJavaScript("$(\"div#summernote\").summernote(\"code\",\"" + htmlContent + "\")");
     }
 
-    private String getHTMLContent(){
+    private String getHTMLContent() {
         //JSValue jsValue = this.browser.executeJavaScriptAndReturnValue("$(\".note-editable\").html()");
         JSValue jsValue = this.browser.executeJavaScriptAndReturnValue("$(\"div#summernote\").summernote(\"code\")");
-        String stringValue = jsValue.getStringValue().replace("\"","\\\"");
+        //String stringValue = jsValue.getStringValue().replace("\\","\\\\").replace("\"","\\\"").replace("\r","\\\n").replace("\n","\\\n");
+        String stringValue = StringEscapeUtils.escapeJava(jsValue.getStringValue());
         return stringValue;
     }
 
-    public void save(){
+    public void save() {
         String newNoteName = note.getText();
-        String newNoteBookName = noteBook.getSelectedItem() == null ?"": noteBook.getSelectedItem().toString();
+        String newNoteBookName = noteBook.getSelectedItem() == null ? "" : noteBook.getSelectedItem().toString();
         String htmlContent = getHTMLContent().trim();
-        if(!newNoteBookName.trim().equals("") && !newNoteName.trim().equals("")){
-            if(isNewAdd){
-                noteService.addNote(newNoteBookName,newNoteName,htmlContent);
-            }else {
-                noteService.updateNote(oldNoteBookName,oldNoteName,newNoteBookName,newNoteName,htmlContent);
+        if (!newNoteBookName.trim().equals("") && !newNoteName.trim().equals("")) {
+            if (isNewAdd) {
+                noteService.addNote(newNoteBookName, newNoteName, htmlContent);
+            } else {
+                noteService.updateNote(oldNoteBookName, oldNoteName, newNoteBookName, newNoteName, htmlContent);
                 JOptionPane.showMessageDialog(null, "保存成功");
             }
             nbTree.refresh(null, newNoteBookName, newNoteName);
+        } else if (newNoteName.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "保存失败，笔记名称不能为空");
         }
     }
 
-    public void close(){
-        if(browser != null){
+    public void close() {
+        if (browser != null) {
             browser.dispose();
         }
     }
