@@ -85,7 +85,7 @@ public class Editor {
     public void refresh(String noteBookName, String noteName, String htmlContent){
         noteBookName = noteBookName != null ? noteBookName : "";
         noteName = noteName != null ? noteName : "";
-        htmlContent = htmlContent != null ? htmlContent : "";
+        htmlContent = htmlContent != null ? htmlContent.trim() : "";
         this.oldNoteBookName = noteBookName;
         this.oldNoteName = noteName;
         this.noteBook.removeAllItems();
@@ -103,33 +103,22 @@ public class Editor {
     }
 
     private void setHTMLContent(String htmlContent){
-        if(htmlContent.trim().equals("")){
-            emptyHTMLContent();
-        }else {
-            do {
-                this.browser.executeJavaScript("$(\"div#summernote\").summernote(\"code\",\"" + htmlContent + "\")");
-            } while (getHTMLContent().equals("GET_HTML_CONTENT_FAIL"));
-        }
+        System.out.println("set  "+htmlContent);
+        //this.browser.executeJavaScript("$(\".note-editable\").html(\"" + htmlContent + "\")");
+        this.browser.executeJavaScript("$(\"div#summernote\").summernote(\"code\",\"" + htmlContent + "\")");
     }
 
     private String getHTMLContent(){
+        //JSValue jsValue = this.browser.executeJavaScriptAndReturnValue("$(\".note-editable\").html()");
         JSValue jsValue = this.browser.executeJavaScriptAndReturnValue("$(\"div#summernote\").summernote(\"code\")");
-        String stringValue;
-        try {
-            stringValue = jsValue.getStringValue().replace("\"","\\\"");
-        }catch (IllegalStateException e){
-            stringValue = "GET_HTML_CONTENT_FAIL";
-        }
+        String stringValue = jsValue.getStringValue().replace("\"","\\\"");
         return stringValue;
     }
 
     public void save(){
         String newNoteName = note.getText();
         String newNoteBookName = noteBook.getSelectedItem() == null ?"": noteBook.getSelectedItem().toString();
-        String htmlContent = "";
-        do{
-            htmlContent = getHTMLContent();
-        }while (htmlContent.equals("GET_HTML_CONTENT_FAIL"));
+        String htmlContent = getHTMLContent().trim();
         if(!newNoteBookName.trim().equals("") && !newNoteName.trim().equals("")){
             if(isNewAdd){
                 noteService.addNote(newNoteBookName,newNoteName,htmlContent);
