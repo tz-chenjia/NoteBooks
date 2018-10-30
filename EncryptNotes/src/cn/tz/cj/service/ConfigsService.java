@@ -39,8 +39,12 @@ public class ConfigsService implements IConfigsService {
         p.setProperty("maxActive", "10");
         p.setProperty("maxWait", "3000");
         p.setProperty("minIdle", "3");
+        p.setProperty("testWhileIdle", "true");
+        p.setProperty("testOnBorrow", "false");
+        p.setProperty("testOnReturn", "false");
         p.setProperty("connectionErrorRetryAttempts", "0");
         p.setProperty("breakAfterAcquireFailure", "true");
+        p.setProperty("validationQuery",configs.getDbType().equals("oracle") ? "SELECT 1 FROM DUAL":"SELECT 1");
         FileRWUtils.writeProperties(new File(getTempDataPath(USER_PROPERTIES)), p);
     }
 

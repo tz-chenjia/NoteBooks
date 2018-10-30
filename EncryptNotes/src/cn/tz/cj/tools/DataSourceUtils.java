@@ -6,8 +6,6 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,11 +20,11 @@ public class DataSourceUtils {
 
     private static IConfigsService configsService = new ConfigsService();
 
-    public static boolean init(){
+    public static boolean init() {
         Properties info = configsService.getDBProperties();
         try {
             dataSource = DruidDataSourceFactory.createDataSource(info);
-            if(getConnection() == null){
+            if (getConnection() == null) {
                 return false;
             }//测试连接
             return true;
@@ -35,7 +33,7 @@ public class DataSourceUtils {
         }
     }
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
@@ -45,26 +43,26 @@ public class DataSourceUtils {
         return conn;
     }
 
-    public static void close(Connection conn, Statement stmt, ResultSet rs){
-        if(rs != null){
+    public static void close(Connection conn, Statement stmt, ResultSet rs) {
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
-        if(stmt != null){
+        if (stmt != null) {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
-        if(conn != null){
+        if (conn != null) {
             try {
                 conn.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
     }
