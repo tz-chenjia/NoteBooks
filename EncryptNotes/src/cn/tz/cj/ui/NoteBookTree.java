@@ -101,9 +101,9 @@ public class NoteBookTree extends JTree {
         }
         TreeModel treeModel = new DefaultTreeModel(rootNode);
         this.setModel(treeModel);
-        //if (key != null && !key.trim().equals("")) {
-        expandAll(this, new TreePath(rootNode), true);
-        //}
+        if (key != null && !key.trim().equals("")) {
+            expandAll(this, new TreePath(rootNode), true);
+        }
     }
 
     private void bindEvent() {

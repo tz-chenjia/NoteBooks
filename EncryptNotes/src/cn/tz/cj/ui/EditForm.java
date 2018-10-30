@@ -34,7 +34,7 @@ public class EditForm extends JFrame {
         setContentPane(mainJPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension size = new Dimension();
-        size.setSize(1250, 700);
+        size.setSize(1300, 700);
         setPreferredSize(size);
 
         buttonOK.addActionListener(new ActionListener() {
