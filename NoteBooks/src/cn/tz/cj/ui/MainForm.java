@@ -79,6 +79,7 @@ public class MainForm extends JFrame {
             public void windowClosing(WindowEvent e) {
                 int i = JOptionPane.showConfirmDialog(null, "感谢您的使用，确定退出 NoteBooks？", "退出确认", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
+                    authService.loginOut(true);
                     editor.close();
                     System.exit(0);
                 }
@@ -178,7 +179,6 @@ public class MainForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mouseLoading.startLoading();
-                systemService.tempSaveDataToLocal(); //关闭之前自动备份到本地
                 authService.loginOut(true);
                 editor.close();
                 dispose();
