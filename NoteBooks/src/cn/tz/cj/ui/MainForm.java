@@ -74,12 +74,14 @@ public class MainForm extends JFrame {
         initEditor(noteBookComboBox,noteTextField);
         setBtnIcon();
         refreshNoteTools();
+        recoverBtn.setVisible(false);
+        recoverSeparator.setVisible(false);
         super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 int i = JOptionPane.showConfirmDialog(null, "感谢您的使用，确定退出 NoteBooks？", "退出确认", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    authService.loginOut(true);
+                    authService.loginOut(false);
                     editor.close();
                     System.exit(0);
                 }
@@ -179,7 +181,7 @@ public class MainForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mouseLoading.startLoading();
-                authService.loginOut(true);
+                authService.loginOut(false);
                 editor.close();
                 dispose();
                 mouseLoading.stopLoading();
